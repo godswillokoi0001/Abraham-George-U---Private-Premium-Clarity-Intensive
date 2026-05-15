@@ -29,457 +29,310 @@ tailwind.config = {
         display: ['Bebas Neue', 'sans-serif'],
         heading: ['Bebas Neue', 'sans-serif'],
         body: ['Poppins', 'sans-serif'],
+      },
+      backgroundImage: {
+        'gradient-gold': 'linear-gradient(135deg, #FCD34D 0%, #F59E0B 45%, #D97706 100%)',
+        'gradient-btn': 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+        'gradient-hero': 'radial-gradient(ellipse 55% 70% at 15% 60%, rgba(245,158,11,0.07) 0%, transparent 65%), radial-gradient(ellipse 45% 50% at 85% 20%, rgba(245,158,11,0.05) 0%, transparent 60%), linear-gradient(170deg, #0A0A0A 0%, #0F0F0D 50%, #0D0D0D 100%)',
+        'gradient-cta': 'radial-gradient(ellipse 65% 65% at 50% 50%, rgba(245,158,11,0.1) 0%, transparent 65%), radial-gradient(ellipse 35% 35% at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 50%), linear-gradient(160deg, #090806 0%, #0F0E0A 30%, #0D0D0D 100%)',
+      },
+      keyframes: {
+        'pulse-dot': {
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%': { opacity: '0.5', transform: 'scale(0.8)' },
+        },
+        'fade-up-in': {
+          '0%': { opacity: '0', transform: 'translateY(28px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        }
+      },
+      animation: {
+        'pulse-dot': 'pulse-dot 1.8s ease-in-out infinite',
       }
     }
   }
 }
 </script>
 <style>
-/* ═══════════════════════════════════════
-   RESET & BASE
-═══════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body {
-  background-color: #0D0D0D;
-  color: #E5E7EB;
-  font-family: 'Poppins', sans-serif;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
-h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
-  letter-spacing: 0.06em;
-}
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: #080808; }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#F59E0B,#D97706); border-radius: 2px; }
 
-/* ═══════════════════════════════════════
-   SCROLLBAR
-═══════════════════════════════════════ */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #080808; }
-::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#F59E0B,#D97706); border-radius: 2px; }
-
-/* ═══════════════════════════════════════
-   NOISE OVERLAY — subtle film grain
-═══════════════════════════════════════ */
-.noise-overlay {
-  position: fixed; inset: 0; opacity: 0.02; pointer-events: none; z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 256px 256px;
-}
-
-/* ═══════════════════════════════════════
-   GLOW SYSTEM
-═══════════════════════════════════════ */
-.glow-orange      { box-shadow: 0 0 50px rgba(245,158,11,0.3), 0 0 100px rgba(245,158,11,0.12); }
-.glow-orange-sm   { box-shadow: 0 0 24px rgba(245,158,11,0.2); }
-.glow-orange-btn  { box-shadow: 0 6px 40px rgba(245,158,11,0.45), 0 2px 8px rgba(0,0,0,0.4); }
-.text-glow        { text-shadow: 0 0 60px rgba(245,158,11,0.55), 0 0 20px rgba(245,158,11,0.3); }
-
-/* ═══════════════════════════════════════
-   GRADIENT TEXT
-═══════════════════════════════════════ */
-.gradient-text {
-  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 45%, #D97706 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ═══════════════════════════════════════
-   DIVIDERS
-═══════════════════════════════════════ */
-.divider-orange {
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.5) 35%, rgba(245,158,11,0.5) 65%, transparent 100%);
-}
-.divider-subtle {
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
-}
-
-/* ═══════════════════════════════════════
-   SECTION LABEL
-═══════════════════════════════════════ */
-.section-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #F59E0B;
-}
-
-/* ═══════════════════════════════════════
-   GLASS CARDS
-═══════════════════════════════════════ */
-.glass-card {
-  background: rgba(255,255,255,0.025);
-  border: 1px solid rgba(255,255,255,0.07);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-.glass-card-orange {
-  background: rgba(245,158,11,0.06);
-  border: 1px solid rgba(245,158,11,0.22);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-/* ═══════════════════════════════════════
-   BORDER GRADIENT CARD
-═══════════════════════════════════════ */
-.border-gradient {
-  border: 1px solid transparent;
-  background:
-    linear-gradient(#121212, #121212) padding-box,
-    linear-gradient(145deg, rgba(245,158,11,0.6), rgba(245,158,11,0.05) 50%, rgba(217,119,6,0.4)) border-box;
-}
-
-/* ═══════════════════════════════════════
-   CTA BUTTON
-═══════════════════════════════════════ */
-.btn-primary {
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%);
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-.btn-primary:hover::before  { opacity: 1; }
-.btn-primary:hover          { transform: translateY(-3px); box-shadow: 0 10px 50px rgba(245,158,11,0.55), 0 0 0 1px rgba(245,158,11,0.35); }
-.btn-primary:active         { transform: translateY(-1px); }
-.btn-primary span           { position: relative; z-index: 1; }
-.btn-primary svg            { position: relative; z-index: 1; }
-
-/* ═══════════════════════════════════════
-   NAV
-═══════════════════════════════════════ */
-.nav-bar {
-  background: rgba(10,10,10,0.88);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  transition: border-color 0.3s ease, background 0.3s ease;
-}
-.nav-bar.scrolled {
-  border-bottom-color: rgba(245,158,11,0.18);
-  background: rgba(8,8,8,0.96);
-}
-
-/* ═══════════════════════════════════════
-   HERO BACKGROUND
-═══════════════════════════════════════ */
-.hero-bg {
-  background:
-    radial-gradient(ellipse 55% 70% at 15% 60%, rgba(245,158,11,0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 45% 50% at 85% 20%, rgba(245,158,11,0.05) 0%, transparent 60%),
-    linear-gradient(170deg, #0A0A0A 0%, #0F0F0D 50%, #0D0D0D 100%);
-}
-
-/* ═══════════════════════════════════════
-   HERO PORTRAIT PANEL
-═══════════════════════════════════════ */
-.hero-panel {
-  background: linear-gradient(145deg, #F59E0B 0%, #E08A00 55%, #92400E 100%);
-  position: relative;
-  overflow: hidden;
-}
-.hero-panel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.55) 100%);
-  z-index: 1;
-}
-.hero-panel-chevron {
-  position: absolute;
-  right: -20px;
-  top: 20%;
-  bottom: 20%;
-  width: 60px;
-  background: #0D0D0D;
-  clip-path: polygon(100% 0, 100% 100%, 0% 50%);
-  z-index: 5;
-}
-
-/* ═══════════════════════════════════════
-   PORTRAIT (About section)
-═══════════════════════════════════════ */
-.portrait-outer {
-  position: relative;
-}
-.portrait-outer::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  background: linear-gradient(145deg, #F59E0B 0%, transparent 50%, #D97706 100%);
-  border-radius: 24px;
-  z-index: 0;
-}
-.portrait-inner {
-  position: relative;
-  z-index: 1;
-  border-radius: 22px;
-  overflow: hidden;
-  background: linear-gradient(145deg, #B45309 0%, #F59E0B 50%, #78350F 100%);
-}
-
-/* ═══════════════════════════════════════
-   CHECK ITEM HOVER
-═══════════════════════════════════════ */
-.check-item {
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-  border-left: 2px solid transparent;
-}
-.check-item:hover {
-  border-left-color: rgba(245,158,11,0.7);
-  background: rgba(245,158,11,0.04);
-  transform: translateX(5px);
-}
-
-/* ═══════════════════════════════════════
-   TRANSFORMATION CARDS
-═══════════════════════════════════════ */
-.transform-before {
-  background: linear-gradient(145deg, #101010, #0C0C0C);
-  border: 1px solid rgba(255,255,255,0.055);
-}
-.transform-after {
-  background: linear-gradient(145deg, #1A1100, #121000);
-  border: 1px solid rgba(245,158,11,0.28);
-}
-
-/* ═══════════════════════════════════════
-   PROCESS CONNECTOR LINE
-═══════════════════════════════════════ */
-.process-step { position: relative; }
-.process-step:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: 23px;
-  top: 56px;
-  bottom: -16px;
-  width: 1px;
-  background: linear-gradient(180deg, rgba(245,158,11,0.35), rgba(245,158,11,0.03));
-  pointer-events: none;
-}
-
-/* ═══════════════════════════════════════
-   SECTION BACKGROUNDS
-═══════════════════════════════════════ */
-.section-dark    { background: linear-gradient(180deg, #0D0D0D 0%, #101010 100%); }
-.section-deeper  { background: linear-gradient(180deg, #0A0A0A 0%, #0D0D0D 100%); }
-.section-darkest { background: #080808; }
-
-/* ═══════════════════════════════════════
-   SCROLL ANIMATIONS
-═══════════════════════════════════════ */
-.fade-up {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.fade-in {
-  opacity: 0;
-  transition: opacity 0.9s ease;
-}
-.fade-up.visible,
-.fade-in.visible { opacity: 1; transform: translateY(0); }
-
-.d100 { transition-delay: 0.1s; }
-.d150 { transition-delay: 0.15s; }
-.d200 { transition-delay: 0.2s; }
-.d300 { transition-delay: 0.3s; }
-.d400 { transition-delay: 0.4s; }
-.d500 { transition-delay: 0.5s; }
-.d600 { transition-delay: 0.6s; }
-
-/* ═══════════════════════════════════════
-   SLIDER
-═══════════════════════════════════════ */
-.slider-track { transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-
-/* ═══════════════════════════════════════
-   STAR RATING
-═══════════════════════════════════════ */
-.stars { display: flex; gap: 3px; }
-.stars svg { width: 14px; height: 14px; fill: #F59E0B; }
-
-/* ═══════════════════════════════════════
-   TRUST PILLS (hero)
-═══════════════════════════════════════ */
-.trust-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(245,158,11,0.07);
-  border: 1px solid rgba(245,158,11,0.2);
-  border-radius: 100px;
-  padding: 6px 14px 6px 10px;
-}
-
-/* ═══════════════════════════════════════
-   MOBILE FIXES
-═══════════════════════════════════════ */
-@media (max-width: 1024px) {
-  .hero-bg { min-height: auto; }
-}
-
-@media (max-width: 768px) {
-  .hero-bg {
-    padding-top: 70px;
-    padding-bottom: 60px;
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 45%, #D97706 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .hero-bg .max-w-7xl {
-    padding-top: 60px !important;
-    padding-bottom: 50px !important;
+  /* Text glow */
+  .text-glow { text-shadow: 0 0 60px rgba(245,158,11,0.55), 0 0 20px rgba(245,158,11,0.3); }
+
+  /* Glow utilities */
+  .glow-orange      { box-shadow: 0 0 50px rgba(245,158,11,0.3), 0 0 100px rgba(245,158,11,0.12); }
+  .glow-orange-sm   { box-shadow: 0 0 24px rgba(245,158,11,0.2); }
+  .glow-orange-btn  { box-shadow: 0 6px 40px rgba(245,158,11,0.45), 0 2px 8px rgba(0,0,0,0.4); }
+
+  /* Dividers */
+  .divider-orange {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.5) 35%, rgba(245,158,11,0.5) 65%, transparent 100%);
+  }
+  .divider-subtle {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
   }
 
-  .section-dark,
-  .section-deeper,
-  .section-darkest,
-  .cta-strip,
-  .final-cta-bg {
-    padding-top: 4rem !important;
-    padding-bottom: 4rem !important;
+  /* Section label */
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #F59E0B;
   }
 
-  .section-head {
-    text-align: center;
+  /* Glass cards */
+  .glass-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.07);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .glass-card-orange {
+    background: rgba(245,158,11,0.06);
+    border: 1px solid rgba(245,158,11,0.22);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
-  .section-head h2 {
-    font-size: clamp(2rem, 7vw, 2.8rem);
-    line-height: 1.1;
-  }
-
-  .glass-card,
-  .glass-card-orange,
+  /* Border gradient card */
   .border-gradient {
-    padding: 1.75rem !important;
+    border: 1px solid transparent;
+    background:
+      linear-gradient(#121212, #121212) padding-box,
+      linear-gradient(145deg, rgba(245,158,11,0.6), rgba(245,158,11,0.05) 50%, rgba(217,119,6,0.4)) border-box;
   }
 
-  .grid.grid-cols-2 {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+  /* CTA Button */
+  .btn-primary {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .btn-primary:hover::before { opacity: 1; }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 50px rgba(245,158,11,0.55), 0 0 0 1px rgba(245,158,11,0.35); }
+  .btn-primary:active { transform: translateY(-1px); }
+  .btn-primary span, .btn-primary svg { position: relative; z-index: 1; }
+
+  /* Nav */
+  .nav-bar {
+    background: rgba(10,10,10,0.88);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .nav-bar.scrolled {
+    border-bottom-color: rgba(245,158,11,0.18);
+    background: rgba(8,8,8,0.96);
   }
 
-  .hero-bg .btn-primary,
-  .cta-strip .btn-primary,
-  .final-cta-bg .btn-primary {
-    width: 100%;
-    justify-content: center;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  /* Hero bg */
+  .hero-bg {
+    background:
+      radial-gradient(ellipse 55% 70% at 15% 60%, rgba(245,158,11,0.07) 0%, transparent 65%),
+      radial-gradient(ellipse 45% 50% at 85% 20%, rgba(245,158,11,0.05) 0%, transparent 60%),
+      linear-gradient(170deg, #0A0A0A 0%, #0F0F0D 50%, #0D0D0D 100%);
   }
 
-  .final-cta-bg .grid.grid-cols-3 {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+  /* Hero panel */
+  .hero-panel {
+    background: linear-gradient(145deg, #F59E0B 0%, #E08A00 55%, #92400E 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.55) 100%);
+    z-index: 1;
+  }
+  .hero-panel-chevron {
+    position: absolute;
+    right: -20px;
+    top: 20%;
+    bottom: 20%;
+    width: 60px;
+    background: #0D0D0D;
+    clip-path: polygon(100% 0, 100% 100%, 0% 50%);
+    z-index: 5;
   }
 
-  .portrait-outer {
-    margin: 0 auto;
-    max-width: 280px;
+  /* Portrait */
+  .portrait-outer { position: relative; }
+  .portrait-outer::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(145deg, #F59E0B 0%, transparent 50%, #D97706 100%);
+    border-radius: 24px;
+    z-index: 0;
+  }
+  .portrait-inner {
+    position: relative;
+    z-index: 1;
+    border-radius: 22px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #B45309 0%, #F59E0B 50%, #78350F 100%);
   }
 
-  .process-step {
-    flex-direction: column;
-    gap: 1rem;
+  /* Check item hover */
+  .check-item {
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    border-left: 2px solid transparent;
+  }
+  .check-item:hover {
+    border-left-color: rgba(245,158,11,0.7);
+    background: rgba(245,158,11,0.04);
+    transform: translateX(5px);
   }
 
+  /* Transform cards */
+  .transform-before {
+    background: linear-gradient(145deg, #101010, #0C0C0C);
+    border: 1px solid rgba(255,255,255,0.055);
+  }
+  .transform-after {
+    background: linear-gradient(145deg, #1A1100, #121000);
+    border: 1px solid rgba(245,158,11,0.28);
+  }
+
+  /* Process connector */
+  .process-step { position: relative; }
   .process-step:not(:last-child)::after {
-    left: 14px;
+    content: '';
+    position: absolute;
+    left: 23px;
     top: 56px;
     bottom: -16px;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(245,158,11,0.35), rgba(245,158,11,0.03));
+    pointer-events: none;
   }
 
+  /* Section backgrounds */
+  .section-dark    { background: linear-gradient(180deg, #0D0D0D 0%, #101010 100%); }
+  .section-deeper  { background: linear-gradient(180deg, #0A0A0A 0%, #0D0D0D 100%); }
+  .section-darkest { background: #080808; }
+
+  /* Scroll animations */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .fade-in { opacity: 0; transition: opacity 0.9s ease; }
+  .fade-up.visible, .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .d100 { transition-delay: 0.1s; }
+  .d150 { transition-delay: 0.15s; }
+  .d200 { transition-delay: 0.2s; }
+  .d300 { transition-delay: 0.3s; }
+  .d400 { transition-delay: 0.4s; }
+  .d500 { transition-delay: 0.5s; }
+  .d600 { transition-delay: 0.6s; }
+
+  /* Slider */
+  .slider-track { transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+  /* Stars */
+  .stars { display: flex; gap: 3px; }
+  .stars svg { width: 14px; height: 14px; fill: #F59E0B; }
+
+  /* Trust pill */
   .trust-pill {
-    flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .trust-pill span {
-    white-space: nowrap;
-  }
-
-  .hero-panel-chevron,
-  .hero-bg .absolute > div {
-    display: none;
-  }
-
-  .nav-bar {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-
-  .nav-bar .btn-primary {
     display: inline-flex;
-    padding: 0.75rem 1rem;
-    font-size: 0.85rem;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245,158,11,0.07);
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 100px;
+    padding: 6px 14px 6px 10px;
   }
-}
 
-/* ═══════════════════════════════════════
-   MID-CTA STRIP
-═══════════════════════════════════════ */
-.cta-strip {
-  background: linear-gradient(90deg, #0D0D0D 0%, #141008 50%, #0D0D0D 100%);
-}
+  /* CTA strip */
+  .cta-strip { background: linear-gradient(90deg, #0D0D0D 0%, #141008 50%, #0D0D0D 100%); }
 
-/* ═══════════════════════════════════════
-   SECTION HEAD BLOCK
-═══════════════════════════════════════ */
-.section-head { text-align: center; }
-.section-head h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  color: #fff;
-  letter-spacing: 0.04em;
-  line-height: 1;
-}
+  /* Section head */
+  .section-head { text-align: center; }
+  .section-head h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #fff;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
 
-/* ═══════════════════════════════════════
-   PULSE DOT
-═══════════════════════════════════════ */
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.5; transform: scale(0.8); }
-}
-.pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
+  /* Pulse dot */
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.8); }
+  }
+  .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
 
-/* ═══════════════════════════════════════
-   CARD HOVER LIFT
-═══════════════════════════════════════ */
-.card-lift {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.card-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,158,11,0.12);
-}
+  /* Card hover lift */
+  .card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .card-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,158,11,0.12); }
 
-/* ═══════════════════════════════════════
-   FINAL CTA BG
-═══════════════════════════════════════ */
-.final-cta-bg {
-  background:
-    radial-gradient(ellipse 65% 65% at 50% 50%, rgba(245,158,11,0.1) 0%, transparent 65%),
-    radial-gradient(ellipse 35% 35% at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 50%),
-    linear-gradient(160deg, #090806 0%, #0F0E0A 30%, #0D0D0D 100%);
-}
+  /* Final CTA bg */
+  .final-cta-bg {
+    background:
+      radial-gradient(ellipse 65% 65% at 50% 50%, rgba(245,158,11,0.1) 0%, transparent 65%),
+      radial-gradient(ellipse 35% 35% at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 50%),
+      linear-gradient(160deg, #090806 0%, #0F0E0A 30%, #0D0D0D 100%);
+  }
+
+  /* Noise overlay */
+  .noise-overlay {
+    position: fixed; inset: 0; opacity: 0.02; pointer-events: none; z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+  }
+
+  /* Heading letter-spacing */
+  h1, h2, h3, h4, h5, h6 { letter-spacing: 0.06em; }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .hero-bg { padding-top: 70px; padding-bottom: 60px; }
+    .section-head h2 { font-size: clamp(2rem, 7vw, 2.8rem); line-height: 1.1; }
+    .grid.grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    .portrait-outer { margin: 0 auto; max-width: 280px; }
+    .process-step { flex-direction: column; gap: 1rem; }
+    .process-step:not(:last-child)::after { left: 14px; top: 56px; bottom: -16px; }
+    .hero-panel-chevron { display: none; }
+    .nav-bar { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .nav-bar .btn-primary { padding: 0.75rem 1rem; font-size: 0.85rem; }
+  }
 </style>
 </head>
-<body>
+<body class="bg-brand-bg text-brand-text font-body overflow-x-hidden">
 <div class="noise-overlay"></div>
 
 <!-- ══════════════════════════════════════════
@@ -488,7 +341,7 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 <nav id="mainNav" class="nav-bar fixed top-0 left-0 right-0 z-50">
   <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <img src="/images/logo white.png" alt="Strategist AG" class="w-24">
+      <img src="/images/logo white.png" alt="" class="w-24">
     </div>
     <a href="#apply" class="btn-primary hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-black font-heading text-sm tracking-wide">
       <span>Secure Your Slot</span>
@@ -504,29 +357,32 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 
   <!-- Ambient glow blobs -->
   <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute rounded-full" style="top:10%;left:5%;width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,0.06),transparent 70%);"></div>
-    <div class="absolute rounded-full" style="bottom:0;right:0;width:600px;height:600px;background:radial-gradient(circle,rgba(245,158,11,0.04),transparent 65%);"></div>
+    <div class="absolute top-[10%] left-[5%] w-[500px] h-[500px] rounded-full" style="background:radial-gradient(circle,rgba(245,158,11,0.06),transparent 70%);"></div>
+    <div class="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full" style="background:radial-gradient(circle,rgba(245,158,11,0.04),transparent 65%);"></div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-5 md:px-8 w-full relative pt-24 pb-20" style="z-index:2;">
-    <div class="grid lg:grid-cols-12 gap-8 lg:gap-0 items-center" style="min-height:calc(100vh - 180px);">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 w-full relative z-[2] pt-[100px] pb-[80px]">
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-0 items-center min-h-[calc(100vh-180px)]">
 
-      <!-- LEFT — Text (7 cols) -->
+      <!-- LEFT — Text content -->
       <div class="lg:col-span-7 space-y-8 lg:pr-16">
 
+        <!-- Label -->
         <div class="fade-up">
-          <div class="section-label">PRIVATE PREMIUM CLARITY INTENSIVE With Abraham George U. — Strategist AG</div>
+          <div class="section-label">...PRIVATE PREMIUM CLARITY INTENSIVE With Abraham George U. — Strategist AG</div>
         </div>
 
-        <div class="fade-up d100">
-          <h1 class="font-heading leading-tight">
-            <span class="text-white block" style="font-size:clamp(2.4rem,4vw,3.4rem);letter-spacing:0.03em;">You Are Not Confused Because</span>
-            <span class="gradient-text text-glow block" style="font-size:clamp(3.4rem,6vw,5rem);letter-spacing:0.05em;line-height:1.0;">You Lack Potential.</span>
-            <span class="gradient-text text-glow block" style="font-size:clamp(3.4rem,6vw,5rem);letter-spacing:0.05em;line-height:1.0;">You Cannot Yet See Clearly.</span>
-            <span class="text-white block mt-2" style="font-size:clamp(1.8rem,3vw,2.4rem);letter-spacing:0.04em;">A Precision-Guided One-on-One Experience</span>
+        <!-- Headline -->
+        <div class="fade-up d100 space-y-0">
+          <h1 class="font-heading leading-tight tracking-tight">
+            <span class="text-white block" style="font-size:clamp(2.4rem,4vw,3.4rem); letter-spacing:0.03em;">You Are Not Confused Because</span>
+            <span class="gradient-text text-glow block" style="font-size:clamp(3.4rem,6vw,5rem); letter-spacing:0.05em; line-height:1.0;">You Lack Potential.</span>
+            <span class="gradient-text text-glow block" style="font-size:clamp(3.4rem,6vw,5rem); letter-spacing:0.05em; line-height:1.0;">You Cannot Yet See Clearly.</span>
+            <span class="text-white block mt-2" style="font-size:clamp(1.8rem,3vw,2.4rem); letter-spacing:0.04em;">A Precision-Guided One-on-One Experience</span>
           </h1>
         </div>
 
+        <!-- Pain points card -->
         <div class="fade-up d200 glass-card rounded-2xl p-7 max-w-xl">
           <p class="font-heading text-white text-lg mb-5 tracking-wide">This is not motivational speaking. This is not generic coaching.</p>
           <p class="font-body text-brand-text leading-relaxed mb-5 text-[0.97rem]">The Private Premium Clarity Intensive is a deeply personalised one-on-one engagement designed to help intentional individuals uncover blind spots, eliminate mental clutter, gain practical clarity, and move forward with precision.</p>
@@ -534,6 +390,7 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
           <p class="font-body text-brand-text leading-relaxed text-[0.97rem]">Most people do not struggle because they are incapable. They struggle because they are mentally crowded, emotionally burdened, strategically unclear, and unable to identify what is truly holding them back.</p>
         </div>
 
+        <!-- CTA block -->
         <div class="fade-up d300 space-y-5">
           <a href="#apply" class="btn-primary inline-flex items-center gap-3 px-9 py-5 rounded-2xl text-black font-heading tracking-wide text-[1.15rem]">
             <span>APPLY FOR THE PPCI</span>
@@ -541,7 +398,7 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
           </a>
           <div>
             <div class="trust-pill">
-              <span class="pulse-dot w-2 h-2 rounded-full flex-shrink-0 bg-amber-400"></span>
+              <span class="pulse-dot w-2 h-2 rounded-full flex-shrink-0 bg-brand-orange"></span>
               <span class="font-heading text-amber-400 tracking-widest uppercase text-[0.68rem]">Limited Private Sessions</span>
               <span class="text-brand-muted font-body text-[0.75rem]">·</span>
               <span class="font-heading text-white text-[0.82rem]">Released Monthly</span>
@@ -550,12 +407,13 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
         </div>
       </div>
 
-      <!-- RIGHT — Portrait (5 cols) -->
+      <!-- RIGHT — Portrait -->
       <div class="lg:col-span-5 fade-in d200 flex justify-center lg:justify-end">
         <div class="relative w-full max-w-[580px] lg:max-w-none">
 
+          <!-- Portrait card -->
           <div class="relative rounded-3xl overflow-hidden hero-panel w-full max-w-[580px] lg:max-w-[520px] mx-auto" style="aspect-ratio:3/4;">
-            <img src="/images/pix.png" alt="Portrait of Abraham George U." class="absolute inset-0 w-full h-full object-cover">
+            <img src="/images/pix.png" alt="Portrait of Abraham George U." class="absolute inset-0 w-full h-full object-cover"/>
             <div class="absolute inset-0 z-20" style="background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.5) 85%);"></div>
 
             <!-- Name badge -->
@@ -573,433 +431,47 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
           </div>
 
           <!-- Outer glow halo -->
-          <div class="absolute pointer-events-none -inset-8 rounded-3xl" style="background:radial-gradient(ellipse at center,rgba(245,158,11,0.12),transparent 70%);"></div>
+          <div class="absolute pointer-events-none rounded-3xl glow-orange" style="inset:-30px;"></div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
+
 
 <!-- ══════════════════════════════════════════
      SECTION 2 — WHAT IS THE PPCI
 ══════════════════════════════════════════ -->
-<section class="section-dark py-28 px-5 md:px-8">
-  <div class="max-w-7xl mx-auto">
+<section class="section-dark py-24 md:py-32">
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
 
     <div class="section-head mb-16 fade-up">
-      <div class="section-label mb-4">What It Is</div>
-      <h2 style="font-size:clamp(2.8rem,5vw,4.2rem);">The Private Premium<br><span class="gradient-text">Clarity Intensive</span></h2>
-      <p class="font-body text-brand-muted mt-5 max-w-2xl mx-auto leading-relaxed text-[0.97rem]">A rare, deeply personalised one-on-one engagement reserved for individuals who are serious about breaking through — not just feeling better, but thinking differently.</p>
+      <div class="section-label mb-4">What You Are Stepping Into</div>
+      <h2 class="text-[clamp(2.5rem,5vw,4rem)]">The PPCI Is Not A Session.<br>It Is A <span class="gradient-text">Transformation.</span></h2>
+      <div class="divider-orange w-32 mx-auto mt-6"></div>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-      <div class="border-gradient rounded-2xl p-8 card-lift fade-up d100">
-        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 glow-orange-sm" style="background:rgba(245,158,11,0.12);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <!-- Card 1 -->
+      <div class="fade-up d100 border-gradient rounded-2xl p-7 card-lift">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-amber-500/10 border border-amber-500/20">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
         </div>
-        <h3 class="font-heading text-white text-2xl mb-3">Deep Diagnostic</h3>
-        <p class="font-body text-brand-muted leading-relaxed text-sm">We go beyond surface symptoms. Abraham uses a precision diagnostic method to identify the real source of your stagnation, confusion, or misalignment.</p>
+        <h3 class="font-heading text-white text-2xl mb-3 tracking-wide">Deep Clarity Work</h3>
+        <p class="font-body text-brand-muted leading-relaxed text-sm">We go beneath the surface. Beyond the symptoms. Into the root of what is actually holding you back — and we build a clear map forward from there.</p>
       </div>
 
-      <div class="border-gradient rounded-2xl p-8 card-lift fade-up d200">
-        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 glow-orange-sm" style="background:rgba(245,158,11,0.12);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      <!-- Card 2 -->
+      <div class="fade-up d200 border-gradient rounded-2xl p-7 card-lift">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-amber-500/10 border border-amber-500/20">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         </div>
-        <h3 class="font-heading text-white text-2xl mb-3">Strategic Clarity</h3>
-        <p class="font-body text-brand-muted leading-relaxed text-sm">You will leave with a clear mental map — what to focus on, what to release, and the specific next moves that are aligned with who you truly are.</p>
+        <h3 class="font-heading text-white text-2xl mb-3 tracking-wide">Precision Strategy</h3>
+        <p class="font-body text-brand-muted leading-relaxed text-sm">No generic frameworks. No one-size-fits-all models. You receive a strategy built specifically around your life, your goals, and your unique internal landscape.</p>
       </div>
 
-      <div class="border-gradient rounded-2xl p-8 card-lift fade-up d300">
-        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 glow-orange-sm" style="background:rgba(245,158,11,0.12);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        </div>
-        <h3 class="font-heading text-white text-2xl mb-3">Precision Action</h3>
-        <p class="font-body text-brand-muted leading-relaxed text-sm">No vague advice. No recycled frameworks. You receive a precise, personalised action path crafted specifically for your season, capacity, and goals.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 3 — WHO IS THIS FOR
-══════════════════════════════════════════ -->
-<section class="section-deeper py-28 px-5 md:px-8">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-
-      <div class="fade-up">
-        <div class="section-label mb-4">Who This Is For</div>
-        <h2 class="font-heading text-white mb-6" style="font-size:clamp(2.4rem,4vw,3.6rem);line-height:1.05;">This Is For The<br><span class="gradient-text">Intentional Few</span></h2>
-        <p class="font-body text-brand-muted leading-relaxed mb-8 text-[0.97rem]">The PPCI is not for everyone. It is designed for a specific type of person — one who is ready to stop managing their confusion and start dismantling it permanently.</p>
-
-        <div class="space-y-3">
-          <div class="check-item rounded-xl px-5 py-4 flex items-start gap-4">
-            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(245,158,11,0.15);">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-            </div>
-            <p class="font-body text-brand-text text-sm leading-relaxed">You are a high-capacity individual who feels stuck despite your efforts and achievements.</p>
-          </div>
-          <div class="check-item rounded-xl px-5 py-4 flex items-start gap-4">
-            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(245,158,11,0.15);">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-            </div>
-            <p class="font-body text-brand-text text-sm leading-relaxed">You are facing a significant decision, transition, or crossroads and need sharp, honest guidance.</p>
-          </div>
-          <div class="check-item rounded-xl px-5 py-4 flex items-start gap-4">
-            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(245,158,11,0.15);">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-            </div>
-            <p class="font-body text-brand-text text-sm leading-relaxed">You are an entrepreneur, professional, or leader who needs clarity — not cheerleading.</p>
-          </div>
-          <div class="check-item rounded-xl px-5 py-4 flex items-start gap-4">
-            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(245,158,11,0.15);">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-            </div>
-            <p class="font-body text-brand-text text-sm leading-relaxed">You are willing to be honest, challenged, and to do the real work required for transformation.</p>
-          </div>
-          <div class="check-item rounded-xl px-5 py-4 flex items-start gap-4">
-            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(245,158,11,0.15);">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-            </div>
-            <p class="font-body text-brand-text text-sm leading-relaxed">You are ready to invest in your mental clarity as the foundation for everything else you want to build.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Transformation cards -->
-      <div class="fade-up d200 space-y-5">
-        <p class="section-label mb-6">The Transformation</p>
-
-        <div class="transform-before rounded-2xl p-7">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(255,255,255,0.04);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-            </div>
-            <span class="font-heading text-brand-muted tracking-widest uppercase text-xs">Before The PPCI</span>
-          </div>
-          <ul class="space-y-3">
-            <li class="font-body text-brand-muted text-sm flex items-start gap-2"><span class="text-brand-muted mt-1 flex-shrink-0">—</span>Mentally crowded with too many ideas, fears, and unprocessed emotions</li>
-            <li class="font-body text-brand-muted text-sm flex items-start gap-2"><span class="text-brand-muted mt-1 flex-shrink-0">—</span>Strategically scattered — busy but not productive, active but not advancing</li>
-            <li class="font-body text-brand-muted text-sm flex items-start gap-2"><span class="text-brand-muted mt-1 flex-shrink-0">—</span>Emotionally drained by decisions you keep postponing</li>
-            <li class="font-body text-brand-muted text-sm flex items-start gap-2"><span class="text-brand-muted mt-1 flex-shrink-0">—</span>Uncertain about direction despite knowing you are capable of more</li>
-          </ul>
-        </div>
-
-        <div class="transform-after rounded-2xl p-7 glow-orange-sm">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:rgba(245,158,11,0.12);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-            </div>
-            <span class="font-heading text-amber-400 tracking-widest uppercase text-xs">After The PPCI</span>
-          </div>
-          <ul class="space-y-3">
-            <li class="font-body text-brand-text text-sm flex items-start gap-2"><span class="text-amber-400 mt-1 flex-shrink-0">→</span>Mental clarity that cuts through noise and reveals what actually matters</li>
-            <li class="font-body text-brand-text text-sm flex items-start gap-2"><span class="text-amber-400 mt-1 flex-shrink-0">→</span>A precise, personalised path forward — not generic advice but your specific next move</li>
-            <li class="font-body text-brand-text text-sm flex items-start gap-2"><span class="text-amber-400 mt-1 flex-shrink-0">→</span>Emotional resolution that frees up mental bandwidth for real progress</li>
-            <li class="font-body text-brand-text text-sm flex items-start gap-2"><span class="text-amber-400 mt-1 flex-shrink-0">→</span>Renewed confidence anchored in self-knowledge — not motivation</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     MID CTA STRIP
-══════════════════════════════════════════ -->
-<section class="cta-strip py-20 px-5 md:px-8">
-  <div class="max-w-3xl mx-auto text-center fade-up">
-    <div class="divider-orange mb-10"></div>
-    <p class="font-heading text-white mb-3" style="font-size:clamp(1.6rem,3vw,2.2rem);">Clarity Is Not A Luxury. It Is The Foundation.</p>
-    <p class="font-body text-brand-muted mb-8 text-[0.95rem] leading-relaxed">Every great decision, every meaningful result, every real breakthrough begins with one thing — knowing exactly where you are, why you are there, and where you are truly going.</p>
-    <a href="#apply" class="btn-primary inline-flex items-center gap-3 px-9 py-5 rounded-2xl text-black font-heading tracking-wide text-[1.1rem]">
-      <span>APPLY FOR THE PPCI</span>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
-    </a>
-    <div class="divider-orange mt-10"></div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 4 — ABOUT ABRAHAM
-══════════════════════════════════════════ -->
-<section class="section-darkest py-28 px-5 md:px-8">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-
-      <!-- Portrait -->
-      <div class="fade-in flex justify-center lg:justify-start">
-        <div class="portrait-outer w-full max-w-sm">
-          <div class="portrait-inner">
-            <img src="/images/pix.png" alt="Abraham George U." class="w-full object-cover" style="aspect-ratio:3/4;">
-          </div>
-        </div>
-      </div>
-
-      <!-- Text -->
-      <div class="fade-up d200 space-y-6">
-        <div class="section-label">Meet Your Guide</div>
-        <h2 class="font-heading text-white" style="font-size:clamp(2.4rem,4vw,3.6rem);line-height:1.05;">Abraham George U.<br><span class="gradient-text">Clarity Architect</span></h2>
-
-        <div class="glass-card-orange rounded-2xl p-6">
-          <p class="font-body text-brand-text leading-relaxed text-[0.95rem]">Abraham George U. is not a motivational speaker. He is a Clarity Architect — a strategist trained to identify what is genuinely holding high-capacity individuals back and to help them move forward with precision and confidence.</p>
-        </div>
-
-        <p class="font-body text-brand-muted leading-relaxed text-[0.95rem]">With years of experience working with entrepreneurs, professionals, and leaders across multiple industries, Abraham has developed a unique methodology that blends strategic thinking, psychological insight, and practical wisdom.</p>
-
-        <p class="font-body text-brand-muted leading-relaxed text-[0.95rem]">His approach is direct, honest, and deeply personalised. He does not tell you what you want to hear. He tells you what you need to hear — and he shows you how to act on it.</p>
-
-        <div class="grid grid-cols-3 gap-4 pt-2">
-          <div class="glass-card rounded-xl p-4 text-center">
-            <div class="font-heading text-amber-400 text-3xl">500+</div>
-            <div class="font-body text-brand-muted text-xs mt-1">Individuals Guided</div>
-          </div>
-          <div class="glass-card rounded-xl p-4 text-center">
-            <div class="font-heading text-amber-400 text-3xl">8+</div>
-            <div class="font-body text-brand-muted text-xs mt-1">Years Experience</div>
-          </div>
-          <div class="glass-card rounded-xl p-4 text-center">
-            <div class="font-heading text-amber-400 text-3xl">12+</div>
-            <div class="font-body text-brand-muted text-xs mt-1">Industries Served</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 5 — THE PROCESS
-══════════════════════════════════════════ -->
-<section class="section-dark py-28 px-5 md:px-8">
-  <div class="max-w-4xl mx-auto">
-
-    <div class="section-head mb-16 fade-up">
-      <div class="section-label mb-4">How It Works</div>
-      <h2 style="font-size:clamp(2.4rem,4vw,3.6rem);">The PPCI <span class="gradient-text">Process</span></h2>
-      <p class="font-body text-brand-muted mt-5 max-w-xl mx-auto text-[0.95rem] leading-relaxed">Every session follows a precision-engineered sequence designed to produce maximum clarity in minimum time.</p>
-    </div>
-
-    <div class="space-y-4">
-
-      <div class="process-step flex gap-6 fade-up d100">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-heading text-black text-lg glow-orange-sm" style="background:linear-gradient(135deg,#F59E0B,#D97706);">01</div>
-        <div class="glass-card rounded-2xl p-6 flex-1 mb-4">
-          <h3 class="font-heading text-white text-xl mb-2">Application & Screening</h3>
-          <p class="font-body text-brand-muted text-sm leading-relaxed">You complete a focused application. This ensures the PPCI is the right fit for your current season and that Abraham can prepare specifically for your situation.</p>
-        </div>
-      </div>
-
-      <div class="process-step flex gap-6 fade-up d200">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-heading text-black text-lg glow-orange-sm" style="background:linear-gradient(135deg,#F59E0B,#D97706);">02</div>
-        <div class="glass-card rounded-2xl p-6 flex-1 mb-4">
-          <h3 class="font-heading text-white text-xl mb-2">Pre-Session Deep Dive</h3>
-          <p class="font-body text-brand-muted text-sm leading-relaxed">Before your session, Abraham reviews your context thoroughly. He identifies patterns, blind spots, and pressure points so your time together is laser-focused.</p>
-        </div>
-      </div>
-
-      <div class="process-step flex gap-6 fade-up d300">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-heading text-black text-lg glow-orange-sm" style="background:linear-gradient(135deg,#F59E0B,#D97706);">03</div>
-        <div class="glass-card rounded-2xl p-6 flex-1 mb-4">
-          <h3 class="font-heading text-white text-xl mb-2">The Clarity Intensive Session</h3>
-          <p class="font-body text-brand-muted text-sm leading-relaxed">A private, focused session where Abraham guides you through a structured process of uncovering, confronting, and resolving the core issues that have been holding you back.</p>
-        </div>
-      </div>
-
-      <div class="process-step flex gap-6 fade-up d400">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-heading text-black text-lg glow-orange-sm" style="background:linear-gradient(135deg,#F59E0B,#D97706);">04</div>
-        <div class="glass-card rounded-2xl p-6 flex-1 mb-4">
-          <h3 class="font-heading text-white text-xl mb-2">Precision Action Blueprint</h3>
-          <p class="font-body text-brand-muted text-sm leading-relaxed">You receive a written clarity summary and personalised action blueprint — your specific next steps, priorities, and decisions, documented and delivered to you.</p>
-        </div>
-      </div>
-
-      <div class="process-step flex gap-6 fade-up d500">
-        <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-heading text-black text-lg glow-orange-sm" style="background:linear-gradient(135deg,#F59E0B,#D97706);">05</div>
-        <div class="glass-card rounded-2xl p-6 flex-1">
-          <h3 class="font-heading text-white text-xl mb-2">Post-Session Integration</h3>
-          <p class="font-body text-brand-muted text-sm leading-relaxed">A brief follow-up touchpoint to ensure you are integrating your clarity and moving forward with confidence — not falling back into old patterns.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 6 — TESTIMONIALS
-══════════════════════════════════════════ -->
-<section class="section-deeper py-28 px-5 md:px-8">
-  <div class="max-w-7xl mx-auto">
-
-    <div class="section-head mb-16 fade-up">
-      <div class="section-label mb-4">Testimonials</div>
-      <h2 style="font-size:clamp(2.4rem,4vw,3.6rem);">What Clients <span class="gradient-text">Say</span></h2>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <div class="glass-card rounded-2xl p-7 card-lift fade-up d100">
-        <div class="stars mb-4">
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <p class="font-body text-brand-text text-sm leading-relaxed mb-6">"I came in thinking I had a business problem. I left realising I had a clarity problem. Abraham saw through everything I had been telling myself and showed me the truth — with compassion and precision. One session changed my entire trajectory."</p>
-        <div class="divider-subtle mb-5"></div>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full flex items-center justify-center font-heading text-black text-sm" style="background:linear-gradient(135deg,#F59E0B,#D97706);">TK</div>
-          <div>
-            <div class="font-heading text-white text-sm">Taiwo K.</div>
-            <div class="font-body text-brand-muted text-xs">Founder, Lagos</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass-card rounded-2xl p-7 card-lift fade-up d200">
-        <div class="stars mb-4">
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <p class="font-body text-brand-text text-sm leading-relaxed mb-6">"I had been going in circles for over a year. After the PPCI, I made three major decisions in one week that I had been postponing for months. The clarity was immediate and undeniable. This is unlike anything else I have experienced."</p>
-        <div class="divider-subtle mb-5"></div>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full flex items-center justify-center font-heading text-black text-sm" style="background:linear-gradient(135deg,#F59E0B,#D97706);">RA</div>
-          <div>
-            <div class="font-heading text-white text-sm">Rachel A.</div>
-            <div class="font-body text-brand-muted text-xs">Senior Executive, Abuja</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass-card rounded-2xl p-7 card-lift fade-up d300">
-        <div class="stars mb-4">
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <p class="font-body text-brand-text text-sm leading-relaxed mb-6">"Abraham does not coddle you. He does not tell you what you want to hear. He tells you the truth — and he does it in a way that empowers rather than condemns. My business has grown 40% since our session. I credit the clarity."</p>
-        <div class="divider-subtle mb-5"></div>
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full flex items-center justify-center font-heading text-black text-sm" style="background:linear-gradient(135deg,#F59E0B,#D97706);">EM</div>
-          <div>
-            <div class="font-heading text-white text-sm">Emmanuel M.</div>
-            <div class="font-body text-brand-muted text-xs">CEO, Port Harcourt</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SECTION 7 — FINAL CTA / APPLY
-══════════════════════════════════════════ -->
-<section id="apply" class="final-cta-bg py-32 px-5 md:px-8">
-  <div class="max-w-4xl mx-auto">
-
-    <div class="text-center mb-16 fade-up">
-      <div class="section-label mb-5">Limited Availability</div>
-      <h2 class="font-heading text-white mb-6" style="font-size:clamp(2.8rem,5vw,4.5rem);line-height:1.0;">
-        Your Next Level<br>Begins With<br><span class="gradient-text text-glow">Clarity.</span>
-      </h2>
-      <p class="font-body text-brand-muted max-w-xl mx-auto leading-relaxed text-[0.97rem]">Sessions are strictly limited and released monthly. If you are ready to stop circling the same problems and start moving with precision — apply now.</p>
-    </div>
-
-    <!-- Stats -->
-    <div class="grid grid-cols-3 gap-6 mb-16 fade-up d200">
-      <div class="glass-card-orange rounded-2xl p-6 text-center">
-        <div class="font-heading text-amber-400 text-4xl mb-1">100%</div>
-        <div class="font-body text-brand-muted text-xs leading-relaxed">Private & Confidential</div>
-      </div>
-      <div class="glass-card-orange rounded-2xl p-6 text-center">
-        <div class="font-heading text-amber-400 text-4xl mb-1">1-on-1</div>
-        <div class="font-body text-brand-muted text-xs leading-relaxed">Direct With Abraham</div>
-      </div>
-      <div class="glass-card-orange rounded-2xl p-6 text-center">
-        <div class="font-heading text-amber-400 text-4xl mb-1">Limited</div>
-        <div class="font-body text-brand-muted text-xs leading-relaxed">Monthly Slots Only</div>
-      </div>
-    </div>
-
-    <!-- Application form card -->
-    <div class="border-gradient rounded-3xl p-10 fade-up d300">
-      <h3 class="font-heading text-white text-3xl mb-2 text-center">Apply For The PPCI</h3>
-      <p class="font-body text-brand-muted text-sm text-center mb-8">Complete the form below. Abraham reviews every application personally.</p>
-
-      <div class="space-y-4">
-        <div class="grid md:grid-cols-2 gap-4">
-          <div>
-            <label class="font-body text-brand-muted text-xs mb-1.5 block tracking-wider uppercase">Full Name</label>
-            <input type="text" placeholder="Your full name" class="w-full glass-card rounded-xl px-4 py-3.5 font-body text-white text-sm outline-none focus:border-amber-400/50 bg-transparent placeholder:text-brand-muted">
-          </div>
-          <div>
-            <label class="font-body text-brand-muted text-xs mb-1.5 block tracking-wider uppercase">Email Address</label>
-            <input type="email" placeholder="your@email.com" class="w-full glass-card rounded-xl px-4 py-3.5 font-body text-white text-sm outline-none focus:border-amber-400/50 bg-transparent placeholder:text-brand-muted">
-          </div>
-        </div>
-        <div>
-          <label class="font-body text-brand-muted text-xs mb-1.5 block tracking-wider uppercase">Your Current Role / Occupation</label>
-          <input type="text" placeholder="e.g. Entrepreneur, CEO, Professional" class="w-full glass-card rounded-xl px-4 py-3.5 font-body text-white text-sm outline-none bg-transparent placeholder:text-brand-muted">
-        </div>
-        <div>
-          <label class="font-body text-brand-muted text-xs mb-1.5 block tracking-wider uppercase">What Is Your Primary Challenge Right Now?</label>
-          <textarea rows="4" placeholder="Describe what you are facing — be honest and specific." class="w-full glass-card rounded-xl px-4 py-3.5 font-body text-white text-sm outline-none bg-transparent placeholder:text-brand-muted resize-none"></textarea>
-        </div>
-        <div>
-          <label class="font-body text-brand-muted text-xs mb-1.5 block tracking-wider uppercase">Why Do You Believe The PPCI Is Right For You Now?</label>
-          <textarea rows="3" placeholder="What makes this the right moment?" class="w-full glass-card rounded-xl px-4 py-3.5 font-body text-white text-sm outline-none bg-transparent placeholder:text-brand-muted resize-none"></textarea>
-        </div>
-
-        <div class="pt-2">
-          <button class="btn-primary w-full flex items-center justify-center gap-3 py-5 rounded-2xl text-black font-heading tracking-wide text-[1.1rem]">
-            <span>SUBMIT YOUR APPLICATION</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
-          </button>
-          <p class="font-body text-brand-muted text-xs text-center mt-4">Your application is confidential. Abraham will respond within 48 hours.</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════ -->
-<footer class="section-darkest py-10 px-5 md:px-8 border-t" style="border-color:rgba(255,255,255,0.04);">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-    <img src="/images/logo white.png" alt="Strategist AG" class="w-20">
-    <p class="font-body text-brand-muted text-xs text-center">© 2025 Strategist AG — Abraham George U. All rights reserved.</p>
-    <p class="font-body text-brand-muted text-xs">Private Premium Clarity Intensive</p>
-  </div>
-</footer>
-
-<script>
-// Nav scroll class
-const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-// Scroll animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-document.querySelectorAll('.fade-up, .fade-in').forEach(el => observer.observe(el));
-</script>
-</body>
-</html>
+      <!-- Card 3 -->
+      <div class="fade-up d300 border-gradient rounded-2xl p-7 card-lift">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-amber-500/10 border border-amber-500/20">
+          <svg wid
