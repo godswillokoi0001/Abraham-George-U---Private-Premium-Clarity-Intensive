@@ -29,310 +29,457 @@ tailwind.config = {
         display: ['Bebas Neue', 'sans-serif'],
         heading: ['Bebas Neue', 'sans-serif'],
         body: ['Poppins', 'sans-serif'],
-      },
-      backgroundImage: {
-        'gradient-gold': 'linear-gradient(135deg, #FCD34D 0%, #F59E0B 45%, #D97706 100%)',
-        'gradient-btn': 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
-        'gradient-hero': 'radial-gradient(ellipse 55% 70% at 15% 60%, rgba(245,158,11,0.07) 0%, transparent 65%), radial-gradient(ellipse 45% 50% at 85% 20%, rgba(245,158,11,0.05) 0%, transparent 60%), linear-gradient(170deg, #0A0A0A 0%, #0F0F0D 50%, #0D0D0D 100%)',
-        'gradient-cta': 'radial-gradient(ellipse 65% 65% at 50% 50%, rgba(245,158,11,0.1) 0%, transparent 65%), radial-gradient(ellipse 35% 35% at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 50%), linear-gradient(160deg, #090806 0%, #0F0E0A 30%, #0D0D0D 100%)',
-      },
-      keyframes: {
-        'pulse-dot': {
-          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
-          '50%': { opacity: '0.5', transform: 'scale(0.8)' },
-        },
-        'fade-up-in': {
-          '0%': { opacity: '0', transform: 'translateY(28px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        }
-      },
-      animation: {
-        'pulse-dot': 'pulse-dot 1.8s ease-in-out infinite',
       }
     }
   }
 }
 </script>
 <style>
-  html { scroll-behavior: smooth; }
-  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background-color: #0D0D0D;
+  color: #E5E7EB;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-track { background: #080808; }
-  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#F59E0B,#D97706); border-radius: 2px; }
+h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
+  letter-spacing: 0.06em;
+}
 
-  /* Gradient text */
-  .gradient-text {
-    background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 45%, #D97706 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+/* ═══════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════ */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#F59E0B,#D97706); border-radius: 2px; }
 
-  /* Text glow */
-  .text-glow { text-shadow: 0 0 60px rgba(245,158,11,0.55), 0 0 20px rgba(245,158,11,0.3); }
+/* ═══════════════════════════════════════
+   NOISE OVERLAY — subtle film grain
+═══════════════════════════════════════ */
+.noise-overlay {
+  position: fixed; inset: 0; opacity: 0.02; pointer-events: none; z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
 
-  /* Glow utilities */
-  .glow-orange      { box-shadow: 0 0 50px rgba(245,158,11,0.3), 0 0 100px rgba(245,158,11,0.12); }
-  .glow-orange-sm   { box-shadow: 0 0 24px rgba(245,158,11,0.2); }
-  .glow-orange-btn  { box-shadow: 0 6px 40px rgba(245,158,11,0.45), 0 2px 8px rgba(0,0,0,0.4); }
+/* ═══════════════════════════════════════
+   GLOW SYSTEM
+═══════════════════════════════════════ */
+.glow-orange      { box-shadow: 0 0 50px rgba(245,158,11,0.3), 0 0 100px rgba(245,158,11,0.12); }
+.glow-orange-sm   { box-shadow: 0 0 24px rgba(245,158,11,0.2); }
+.glow-orange-btn  { box-shadow: 0 6px 40px rgba(245,158,11,0.45), 0 2px 8px rgba(0,0,0,0.4); }
+.text-glow        { text-shadow: 0 0 60px rgba(245,158,11,0.55), 0 0 20px rgba(245,158,11,0.3); }
 
-  /* Dividers */
-  .divider-orange {
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.5) 35%, rgba(245,158,11,0.5) 65%, transparent 100%);
-  }
-  .divider-subtle {
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
-  }
+/* ═══════════════════════════════════════
+   GRADIENT TEXT
+═══════════════════════════════════════ */
+.gradient-text {
+  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 45%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-  /* Section label */
-  .section-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #F59E0B;
-  }
+/* ═══════════════════════════════════════
+   DIVIDERS
+═══════════════════════════════════════ */
+.divider-orange {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.5) 35%, rgba(245,158,11,0.5) 65%, transparent 100%);
+}
+.divider-subtle {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+}
 
-  /* Glass cards */
-  .glass-card {
-    background: rgba(255,255,255,0.025);
-    border: 1px solid rgba(255,255,255,0.07);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-  }
-  .glass-card-orange {
-    background: rgba(245,158,11,0.06);
-    border: 1px solid rgba(245,158,11,0.22);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-  }
+/* ═══════════════════════════════════════
+   SECTION LABEL
+═══════════════════════════════════════ */
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #F59E0B;
+}
 
-  /* Border gradient card */
-  .border-gradient {
-    border: 1px solid transparent;
-    background:
-      linear-gradient(#121212, #121212) padding-box,
-      linear-gradient(145deg, rgba(245,158,11,0.6), rgba(245,158,11,0.05) 50%, rgba(217,119,6,0.4)) border-box;
-  }
+/* ═══════════════════════════════════════
+   GLASS CARDS
+═══════════════════════════════════════ */
+.glass-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.glass-card-orange {
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.22);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
 
-  /* CTA Button */
-  .btn-primary {
-    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%);
-    opacity: 0;
-    transition: opacity 0.25s ease;
-  }
-  .btn-primary:hover::before { opacity: 1; }
-  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 50px rgba(245,158,11,0.55), 0 0 0 1px rgba(245,158,11,0.35); }
-  .btn-primary:active { transform: translateY(-1px); }
-  .btn-primary span, .btn-primary svg { position: relative; z-index: 1; }
+/* ═══════════════════════════════════════
+   BORDER GRADIENT CARD
+═══════════════════════════════════════ */
+.border-gradient {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#121212, #121212) padding-box,
+    linear-gradient(145deg, rgba(245,158,11,0.6), rgba(245,158,11,0.05) 50%, rgba(217,119,6,0.4)) border-box;
+}
 
-  /* Nav */
-  .nav-bar {
-    background: rgba(10,10,10,0.88);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    transition: border-color 0.3s ease, background 0.3s ease;
-  }
-  .nav-bar.scrolled {
-    border-bottom-color: rgba(245,158,11,0.18);
-    background: rgba(8,8,8,0.96);
-  }
+/* ═══════════════════════════════════════
+   CTA BUTTON
+═══════════════════════════════════════ */
+.btn-primary {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.btn-primary:hover::before  { opacity: 1; }
+.btn-primary:hover          { transform: translateY(-3px); box-shadow: 0 10px 50px rgba(245,158,11,0.55), 0 0 0 1px rgba(245,158,11,0.35); }
+.btn-primary:active         { transform: translateY(-1px); }
+.btn-primary span           { position: relative; z-index: 1; }
+.btn-primary svg            { position: relative; z-index: 1; }
 
-  /* Hero bg */
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+.nav-bar {
+  background: rgba(10,10,10,0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.nav-bar.scrolled {
+  border-bottom-color: rgba(245,158,11,0.18);
+  background: rgba(8,8,8,0.96);
+}
+
+/* ═══════════════════════════════════════
+   HERO BACKGROUND
+═══════════════════════════════════════ */
+.hero-bg {
+  background:
+    radial-gradient(ellipse 55% 70% at 15% 60%, rgba(245,158,11,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 50% at 85% 20%, rgba(245,158,11,0.05) 0%, transparent 60%),
+    linear-gradient(170deg, #0A0A0A 0%, #0F0F0D 50%, #0D0D0D 100%);
+}
+
+/* ═══════════════════════════════════════
+   HERO PORTRAIT PANEL
+═══════════════════════════════════════ */
+.hero-panel {
+  background: linear-gradient(145deg, #F59E0B 0%, #E08A00 55%, #92400E 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.55) 100%);
+  z-index: 1;
+}
+.hero-panel-chevron {
+  position: absolute;
+  right: -20px;
+  top: 20%;
+  bottom: 20%;
+  width: 60px;
+  background: #0D0D0D;
+  clip-path: polygon(100% 0, 100% 100%, 0% 50%);
+  z-index: 5;
+}
+
+/* ═══════════════════════════════════════
+   PORTRAIT (About section)
+═══════════════════════════════════════ */
+.portrait-outer {
+  position: relative;
+}
+.portrait-outer::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  background: linear-gradient(145deg, #F59E0B 0%, transparent 50%, #D97706 100%);
+  border-radius: 24px;
+  z-index: 0;
+}
+.portrait-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #B45309 0%, #F59E0B 50%, #78350F 100%);
+}
+
+/* ═══════════════════════════════════════
+   CHECK ITEM HOVER
+═══════════════════════════════════════ */
+.check-item {
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  border-left: 2px solid transparent;
+}
+.check-item:hover {
+  border-left-color: rgba(245,158,11,0.7);
+  background: rgba(245,158,11,0.04);
+  transform: translateX(5px);
+}
+
+/* ═══════════════════════════════════════
+   TRANSFORMATION CARDS
+═══════════════════════════════════════ */
+.transform-before {
+  background: linear-gradient(145deg, #101010, #0C0C0C);
+  border: 1px solid rgba(255,255,255,0.055);
+}
+.transform-after {
+  background: linear-gradient(145deg, #1A1100, #121000);
+  border: 1px solid rgba(245,158,11,0.28);
+}
+
+/* ═══════════════════════════════════════
+   PROCESS CONNECTOR LINE
+═══════════════════════════════════════ */
+.process-step { position: relative; }
+.process-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 56px;
+  bottom: -16px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(245,158,11,0.35), rgba(245,158,11,0.03));
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════
+   SECTION BACKGROUNDS
+═══════════════════════════════════════ */
+.section-dark    { background: linear-gradient(180deg, #0D0D0D 0%, #101010 100%); }
+.section-deeper  { background: linear-gradient(180deg, #0A0A0A 0%, #0D0D0D 100%); }
+.section-darkest { background: #080808; }
+
+/* ═══════════════════════════════════════
+   SCROLL ANIMATIONS
+═══════════════════════════════════════ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.fade-up.visible,
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+.d100 { transition-delay: 0.1s; }
+.d150 { transition-delay: 0.15s; }
+.d200 { transition-delay: 0.2s; }
+.d300 { transition-delay: 0.3s; }
+.d400 { transition-delay: 0.4s; }
+.d500 { transition-delay: 0.5s; }
+.d600 { transition-delay: 0.6s; }
+
+/* ═══════════════════════════════════════
+   SLIDER
+═══════════════════════════════════════ */
+.slider-track { transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+/* ═══════════════════════════════════════
+   STAR RATING
+═══════════════════════════════════════ */
+.stars { display: flex; gap: 3px; }
+.stars svg { width: 14px; height: 14px; fill: #F59E0B; }
+
+/* ═══════════════════════════════════════
+   TRUST PILLS (hero)
+═══════════════════════════════════════ */
+.trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 100px;
+  padding: 6px 14px 6px 10px;
+}
+
+/* ═══════════════════════════════════════
+   MOBILE FIXES
+═══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-bg { min-height: auto; }
+}
+
+@media (max-width: 768px) {
   .hero-bg {
-    background:
-      radial-gradient(ellipse 55% 70% at 15% 60%, rgba(245,158,11,0.07) 0%, transparent 65%),
-      radial-gradient(ellipse 45% 50% at 85% 20%, rgba(245,158,11,0.05) 0%, transparent 60%),
-      linear-gradient(170deg, #0A0A0A 0%, #0F0F0D 50%, #0D0D0D 100%);
+    padding-top: 70px;
+    padding-bottom: 60px;
   }
 
-  /* Hero panel */
-  .hero-panel {
-    background: linear-gradient(145deg, #F59E0B 0%, #E08A00 55%, #92400E 100%);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.55) 100%);
-    z-index: 1;
-  }
-  .hero-panel-chevron {
-    position: absolute;
-    right: -20px;
-    top: 20%;
-    bottom: 20%;
-    width: 60px;
-    background: #0D0D0D;
-    clip-path: polygon(100% 0, 100% 100%, 0% 50%);
-    z-index: 5;
+  .hero-bg .max-w-7xl {
+    padding-top: 60px !important;
+    padding-bottom: 50px !important;
   }
 
-  /* Portrait */
-  .portrait-outer { position: relative; }
-  .portrait-outer::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    background: linear-gradient(145deg, #F59E0B 0%, transparent 50%, #D97706 100%);
-    border-radius: 24px;
-    z-index: 0;
-  }
-  .portrait-inner {
-    position: relative;
-    z-index: 1;
-    border-radius: 22px;
-    overflow: hidden;
-    background: linear-gradient(145deg, #B45309 0%, #F59E0B 50%, #78350F 100%);
+  .section-dark,
+  .section-deeper,
+  .section-darkest,
+  .cta-strip,
+  .final-cta-bg {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
   }
 
-  /* Check item hover */
-  .check-item {
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    border-left: 2px solid transparent;
-  }
-  .check-item:hover {
-    border-left-color: rgba(245,158,11,0.7);
-    background: rgba(245,158,11,0.04);
-    transform: translateX(5px);
+  .section-head {
+    text-align: center;
   }
 
-  /* Transform cards */
-  .transform-before {
-    background: linear-gradient(145deg, #101010, #0C0C0C);
-    border: 1px solid rgba(255,255,255,0.055);
-  }
-  .transform-after {
-    background: linear-gradient(145deg, #1A1100, #121000);
-    border: 1px solid rgba(245,158,11,0.28);
+  .section-head h2 {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+    line-height: 1.1;
   }
 
-  /* Process connector */
-  .process-step { position: relative; }
+  .glass-card,
+  .glass-card-orange,
+  .border-gradient {
+    padding: 1.75rem !important;
+  }
+
+  .grid.grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .hero-bg .btn-primary,
+  .cta-strip .btn-primary,
+  .final-cta-bg .btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .final-cta-bg .grid.grid-cols-3 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .portrait-outer {
+    margin: 0 auto;
+    max-width: 280px;
+  }
+
+  .process-step {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .process-step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 23px;
+    left: 14px;
     top: 56px;
     bottom: -16px;
-    width: 1px;
-    background: linear-gradient(180deg, rgba(245,158,11,0.35), rgba(245,158,11,0.03));
-    pointer-events: none;
   }
 
-  /* Section backgrounds */
-  .section-dark    { background: linear-gradient(180deg, #0D0D0D 0%, #101010 100%); }
-  .section-deeper  { background: linear-gradient(180deg, #0A0A0A 0%, #0D0D0D 100%); }
-  .section-darkest { background: #080808; }
-
-  /* Scroll animations */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .fade-in { opacity: 0; transition: opacity 0.9s ease; }
-  .fade-up.visible, .fade-in.visible { opacity: 1; transform: translateY(0); }
-  .d100 { transition-delay: 0.1s; }
-  .d150 { transition-delay: 0.15s; }
-  .d200 { transition-delay: 0.2s; }
-  .d300 { transition-delay: 0.3s; }
-  .d400 { transition-delay: 0.4s; }
-  .d500 { transition-delay: 0.5s; }
-  .d600 { transition-delay: 0.6s; }
-
-  /* Slider */
-  .slider-track { transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-
-  /* Stars */
-  .stars { display: flex; gap: 3px; }
-  .stars svg { width: 14px; height: 14px; fill: #F59E0B; }
-
-  /* Trust pill */
   .trust-pill {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .trust-pill span {
+    white-space: nowrap;
+  }
+
+  .hero-panel-chevron,
+  .hero-bg .absolute > div {
+    display: none;
+  }
+
+  .nav-bar {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .nav-bar .btn-primary {
     display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(245,158,11,0.07);
-    border: 1px solid rgba(245,158,11,0.2);
-    border-radius: 100px;
-    padding: 6px 14px 6px 10px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
   }
+}
 
-  /* CTA strip */
-  .cta-strip { background: linear-gradient(90deg, #0D0D0D 0%, #141008 50%, #0D0D0D 100%); }
+/* ═══════════════════════════════════════
+   MID-CTA STRIP
+═══════════════════════════════════════ */
+.cta-strip {
+  background: linear-gradient(90deg, #0D0D0D 0%, #141008 50%, #0D0D0D 100%);
+}
 
-  /* Section head */
-  .section-head { text-align: center; }
-  .section-head h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    color: #fff;
-    letter-spacing: 0.04em;
-    line-height: 1;
-  }
+/* ═══════════════════════════════════════
+   SECTION HEAD BLOCK
+═══════════════════════════════════════ */
+.section-head { text-align: center; }
+.section-head h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #fff;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
 
-  /* Pulse dot */
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.5; transform: scale(0.8); }
-  }
-  .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
+/* ═══════════════════════════════════════
+   PULSE DOT
+═══════════════════════════════════════ */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+.pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
 
-  /* Card hover lift */
-  .card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
-  .card-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,158,11,0.12); }
+/* ═══════════════════════════════════════
+   CARD HOVER LIFT
+═══════════════════════════════════════ */
+.card-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,158,11,0.12);
+}
 
-  /* Final CTA bg */
-  .final-cta-bg {
-    background:
-      radial-gradient(ellipse 65% 65% at 50% 50%, rgba(245,158,11,0.1) 0%, transparent 65%),
-      radial-gradient(ellipse 35% 35% at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 50%),
-      linear-gradient(160deg, #090806 0%, #0F0E0A 30%, #0D0D0D 100%);
-  }
-
-  /* Noise overlay */
-  .noise-overlay {
-    position: fixed; inset: 0; opacity: 0.02; pointer-events: none; z-index: 9999;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-size: 256px 256px;
-  }
-
-  /* Heading letter-spacing */
-  h1, h2, h3, h4, h5, h6 { letter-spacing: 0.06em; }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .hero-bg { padding-top: 70px; padding-bottom: 60px; }
-    .section-head h2 { font-size: clamp(2rem, 7vw, 2.8rem); line-height: 1.1; }
-    .grid.grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-    .portrait-outer { margin: 0 auto; max-width: 280px; }
-    .process-step { flex-direction: column; gap: 1rem; }
-    .process-step:not(:last-child)::after { left: 14px; top: 56px; bottom: -16px; }
-    .hero-panel-chevron { display: none; }
-    .nav-bar { padding-left: 0.75rem; padding-right: 0.75rem; }
-    .nav-bar .btn-primary { padding: 0.75rem 1rem; font-size: 0.85rem; }
-  }
+/* ═══════════════════════════════════════
+   FINAL CTA BG
+═══════════════════════════════════════ */
+.final-cta-bg {
+  background:
+    radial-gradient(ellipse 65% 65% at 50% 50%, rgba(245,158,11,0.1) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 35% at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 50%),
+    linear-gradient(160deg, #090806 0%, #0F0E0A 30%, #0D0D0D 100%);
+}
 </style>
 </head>
-<body class="bg-brand-bg text-brand-text font-body overflow-x-hidden">
+<body>
 <div class="noise-overlay"></div>
 
 <!-- ══════════════════════════════════════════
@@ -340,15 +487,27 @@ tailwind.config = {
 ══════════════════════════════════════════ -->
 <nav id="mainNav" class="nav-bar fixed top-0 left-0 right-0 z-50">
   <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between">
+
+    <!-- Logo -->
     <div class="flex items-center gap-3">
-      <img src="/images/logo white.png" alt="" class="w-24">
+      
+
+
+
+<img src="/images/logo white.png" alt="" srcset="" class="w-24">
+
+
+
     </div>
-    <a href="#apply" class="btn-primary hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-black font-heading text-sm tracking-wide">
+
+    <!-- Nav CTA -->
+    <a href="#apply" class="btn-primary hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-black font-heading font-700 text-sm tracking-wide">
       <span>Secure Your Slot</span>
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
     </a>
   </div>
 </nav>
+
 
 <!-- ══════════════════════════════════════════
      SECTION 1 — HERO
@@ -357,15 +516,15 @@ tailwind.config = {
 
   <!-- Ambient glow blobs -->
   <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-[10%] left-[5%] w-[500px] h-[500px] rounded-full" style="background:radial-gradient(circle,rgba(245,158,11,0.06),transparent 70%);"></div>
-    <div class="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full" style="background:radial-gradient(circle,rgba(245,158,11,0.04),transparent 65%);"></div>
+    <div style="position:absolute;top:10%;left:5%;width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,0.06),transparent 70%);border-radius:50%;"></div>
+    <div style="position:absolute;bottom:0;right:0;width:600px;height:600px;background:radial-gradient(circle,rgba(245,158,11,0.04),transparent 65%);border-radius:50%;"></div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-5 md:px-8 w-full relative z-[2] pt-[100px] pb-[80px]">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 w-full relative" style="z-index:2; padding-top:100px; padding-bottom:80px;">
     <div class="grid lg:grid-cols-12 gap-8 lg:gap-0 items-center min-h-[calc(100vh-180px)]">
 
-      <!-- LEFT — Text content -->
-      <div class="lg:col-span-7 space-y-8 lg:pr-16">
+        <!-- LEFT — Text content (7 cols) -->
+      <div class="lg:col-span-7  space-y-8 lg:pr-16">
 
         <!-- Label -->
         <div class="fade-up">
@@ -374,7 +533,7 @@ tailwind.config = {
 
         <!-- Headline -->
         <div class="fade-up d100 space-y-0">
-          <h1 class="font-heading leading-tight tracking-tight">
+          <h1 class="font-heading font-900 leading-tight tracking-tight">
             <span class="text-white block" style="font-size:clamp(2.4rem,4vw,3.4rem); letter-spacing:0.03em;">You Are Not Confused Because</span>
             <span class="gradient-text text-glow block" style="font-size:clamp(3.4rem,6vw,5rem); letter-spacing:0.05em; line-height:1.0;">You Lack Potential.</span>
             <span class="gradient-text text-glow block" style="font-size:clamp(3.4rem,6vw,5rem); letter-spacing:0.05em; line-height:1.0;">You Cannot Yet See Clearly.</span>
@@ -384,55 +543,104 @@ tailwind.config = {
 
         <!-- Pain points card -->
         <div class="fade-up d200 glass-card rounded-2xl p-7 max-w-xl">
-          <p class="font-heading text-white text-lg mb-5 tracking-wide">This is not motivational speaking. This is not generic coaching.</p>
-          <p class="font-body text-brand-text leading-relaxed mb-5 text-[0.97rem]">The Private Premium Clarity Intensive is a deeply personalised one-on-one engagement designed to help intentional individuals uncover blind spots, eliminate mental clutter, gain practical clarity, and move forward with precision.</p>
+          <p class="font-heading font-700 text-white text-lg mb-5 tracking-wide">This is not motivational speaking. This is not generic coaching.</p>
+          <p class="font-body text-brand-text leading-relaxed mb-5" style="font-size:0.97rem;">The Private Premium Clarity Intensive is a deeply personalised one-on-one engagement designed to help intentional individuals uncover blind spots, eliminate mental clutter, gain practical clarity, and move forward with precision.</p>
           <div class="divider-subtle mb-6"></div>
-          <p class="font-body text-brand-text leading-relaxed text-[0.97rem]">Most people do not struggle because they are incapable. They struggle because they are mentally crowded, emotionally burdened, strategically unclear, and unable to identify what is truly holding them back.</p>
+          <p class="font-body text-brand-text leading-relaxed" style="font-size:0.97rem;">Most people do not struggle because they are incapable. They struggle because they are mentally crowded, emotionally burdened, strategically unclear, and unable to identify what is truly holding them back.</p>
         </div>
 
         <!-- CTA block -->
         <div class="fade-up d300 space-y-5">
-          <a href="#apply" class="btn-primary inline-flex items-center gap-3 px-9 py-5 rounded-2xl text-black font-heading tracking-wide text-[1.15rem]">
+          <a href="#apply" class="btn-primary inline-flex items-center gap-3 px-9 py-5 rounded-2xl text-black font-heading font-800 tracking-wide" style="font-size:1.15rem;">
             <span>APPLY FOR THE PPCI</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
           </a>
           <div>
             <div class="trust-pill">
-              <span class="pulse-dot w-2 h-2 rounded-full flex-shrink-0 bg-brand-orange"></span>
-              <span class="font-heading text-amber-400 tracking-widest uppercase text-[0.68rem]">Limited Private Sessions</span>
-              <span class="text-brand-muted font-body text-[0.75rem]">·</span>
-              <span class="font-heading text-white text-[0.82rem]">Released Monthly</span>
+              <span class="pulse-dot w-2 h-2 rounded-full flex-shrink-0" style="background:#F59E0B;"></span>
+              <span class="font-heading font-700 text-amber-400 tracking-widest uppercase" style="font-size:0.68rem;">Limited Private Sessions</span>
+              <span class="text-brand-muted font-body" style="font-size:0.75rem;">·</span>
+              <span class="font-heading font-600 text-white" style="font-size:0.82rem;">Released Monthly</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT — Portrait -->
+      <!-- RIGHT — Portrait (5 cols) -->
       <div class="lg:col-span-5 fade-in d200 flex justify-center lg:justify-end">
         <div class="relative w-full max-w-[580px] lg:max-w-none">
 
           <!-- Portrait card -->
           <div class="relative rounded-3xl overflow-hidden hero-panel w-full max-w-[580px] lg:max-w-[520px] mx-auto" style="aspect-ratio:3/4;">
-            <img src="/images/pix.png" alt="Portrait of Abraham George U." class="absolute inset-0 w-full h-full object-cover"/>
+              <!-- Portrait image -->
+              <img src="/images/pix.png" alt="Portrait of Abraham George U." class="absolute inset-0 w-full h-full object-cover" />
             <div class="absolute inset-0 z-20" style="background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.5) 85%);"></div>
 
             <!-- Name badge -->
             <div class="absolute bottom-5 left-5 right-5 z-30 flex items-center justify-between">
-              <div class="rounded-xl px-4 py-3 flex items-center gap-3" style="background:rgba(245,158,11,0.9);">
+              <div class="glass-card rounded-xl px-4 py-3 flex items-center gap-3" style="background:rgba(245,158,11,0.9);border:none;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 <div>
-                  <div class="font-heading text-black leading-none text-[0.82rem]">Abraham George U.</div>
-                  <div class="font-body text-black/70 mt-0.5 text-[0.7rem]">Clarity Architect</div>
+                  <div class="font-heading font-800 text-black leading-none" style="font-size:0.82rem;">Abraham George U.</div>
+                  <div class="font-body text-black/70 mt-0.5" style="font-size:0.7rem;">Clarity Architect</div>
                 </div>
               </div>
             </div>
 
+            <!-- Chevron page-edge on desktop -->
             <div class="hero-panel-chevron hidden lg:block"></div>
           </div>
 
           <!-- Outer glow halo -->
-          <div class="absolute pointer-events-none rounded-3xl glow-orange" style="inset:-30px;"></div>
+          <div class="absolute pointer-events-none" style="inset:-30px;border-radius:50%;background:radial-gradient(ellipse 75% 75% at 50% 55%,rgba(245,158,11,0.14),transparent);z-index:0;"></div>
         </div>
+      </div>
+
+      
+
+    </div>
+  </div>
+
+  <!-- Bottom fade into next section -->
+  <div class="absolute bottom-0 left-0 right-0 pointer-events-none" style="height:120px;background:linear-gradient(0deg,#0D0D0D,transparent);z-index:3;"></div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — WHAT THIS REALLY IS
+══════════════════════════════════════════ -->
+<section class="section-dark relative overflow-hidden" style="padding:7rem 0;">
+  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 55% 45% at 50% 50%,rgba(245,158,11,0.04),transparent 70%);"></div>
+
+  <div class="max-w-3xl mx-auto px-5 md:px-8">
+
+    <div class="fade-up section-head mb-14">
+      <div class="section-label mb-4">What Is The Private Premium Clarity Intensive?</div>
+      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">WHAT THIS REALLY IS</h2>
+      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+    </div>
+
+    <div class="fade-up d200 border-gradient rounded-3xl relative" style="padding:3rem 3rem;">
+      <!-- Top connector line -->
+      <div class="absolute top-0 left-14 w-px" style="height:32px;transform:translateY(-100%);background:linear-gradient(0deg,#F59E0B,transparent);"></div>
+
+      <p class="font-body text-brand-text leading-loose mb-6" style="font-size:1.05rem;">
+        The PPCI is an exclusive one-on-one virtual session with Strategist AG designed for people who know they are capable of more but cannot clearly identify what is stopping them from moving forward.
+      </p>
+      <div class="divider-subtle mb-6"></div>
+      <p class="font-body text-brand-text leading-loose mb-6" style="font-size:1.05rem;">
+        During this experience, hidden patterns are uncovered, internal conflicts are named, scattered thoughts become structured, and clarity becomes actionable.
+      </p>
+      <div class="divider-subtle mb-6"></div>
+      <p class="font-body text-brand-text leading-loose mb-8" style="font-size:1.05rem;">
+        The goal is not simply to make you “feel better.” The goal is to help you see clearly enough to move differently.
+      </p>
+
+      <div class="glass-card-orange rounded-2xl p-6">
+        <p class="font-heading font-700 text-white leading-snug" style="font-size:1.2rem;">
+          "This is strategic clarity work — not generic coaching."
+        </p>
+        <p class="font-body text-amber-400/60 mt-2 tracking-widest uppercase" style="font-size:0.7rem;font-weight:600;">— Abraham George U., Clarity Architect</p>
       </div>
     </div>
   </div>
@@ -440,38 +648,729 @@ tailwind.config = {
 
 
 <!-- ══════════════════════════════════════════
-     SECTION 2 — WHAT IS THE PPCI
+     SECTION 3 — WHO THIS IS FOR
 ══════════════════════════════════════════ -->
-<section class="section-dark py-24 md:py-32">
-  <div class="max-w-7xl mx-auto px-5 md:px-8">
+<section class="section-deeper relative overflow-hidden" style="padding:7rem 0;">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
 
-    <div class="section-head mb-16 fade-up">
-      <div class="section-label mb-4">What You Are Stepping Into</div>
-      <h2 class="text-[clamp(2.5rem,5vw,4rem)]">The PPCI Is Not A Session.<br>It Is A <span class="gradient-text">Transformation.</span></h2>
-      <div class="divider-orange w-32 mx-auto mt-6"></div>
+    <div class="fade-up section-head mb-14">
+      <div class="section-label mb-4">Ideal Profile</div>
+      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">WHO THIS IS FOR</h2>
+      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
 
-      <!-- Card 1 -->
-      <div class="fade-up d100 border-gradient rounded-2xl p-7 card-lift">
-        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-amber-500/10 border border-amber-500/20">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      <div class="fade-up d100 glass-card card-lift rounded-2xl p-6 check-item">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <h3 class="font-heading text-white text-2xl mb-3 tracking-wide">Deep Clarity Work</h3>
-        <p class="font-body text-brand-muted leading-relaxed text-sm">We go beneath the surface. Beyond the symptoms. Into the root of what is actually holding you back — and we build a clear map forward from there.</p>
+        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You feel stuck despite your potential.</p>
       </div>
 
-      <!-- Card 2 -->
-      <div class="fade-up d200 border-gradient rounded-2xl p-7 card-lift">
-        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-amber-500/10 border border-amber-500/20">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <div class="fade-up d200 glass-card card-lift rounded-2xl p-6 check-item">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <h3 class="font-heading text-white text-2xl mb-3 tracking-wide">Precision Strategy</h3>
-        <p class="font-body text-brand-muted leading-relaxed text-sm">No generic frameworks. No one-size-fits-all models. You receive a strategy built specifically around your life, your goals, and your unique internal landscape.</p>
+        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You have ideas but struggle with execution.</p>
       </div>
 
-      <!-- Card 3 -->
-      <div class="fade-up d300 border-gradient rounded-2xl p-7 card-lift">
-        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 bg-amber-500/10 border border-amber-500/20">
-          <svg wid
+      <div class="fade-up d300 glass-card card-lift rounded-2xl p-6 check-item">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You are mentally overwhelmed by too many directions.</p>
+      </div>
+
+      <div class="fade-up d100 glass-card card-lift rounded-2xl p-6 check-item">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You know you are capable of more but cannot explain why results are inconsistent.</p>
+      </div>
+
+      <div class="fade-up d200 glass-card card-lift rounded-2xl p-6 check-item">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You struggle with positioning yourself properly.</p>
+      </div>
+
+      <div class="fade-up d300 glass-card card-lift rounded-2xl p-6 check-item">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You feel unclear about your next move in life, business, leadership, visibility, or personal growth.</p>
+      </div>
+
+      <div class="fade-up d400 glass-card card-lift rounded-2xl p-6 check-item">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You are tired of surface-level advice that changes nothing.</p>
+      </div>
+
+      <!-- YOU card -->
+      <div class="fade-up d500 glass-card-orange card-lift rounded-2xl p-6 flex items-center justify-center">
+        <div class="text-center">
+          <div class="gradient-text text-glow font-display mb-2" style="font-size:3.5rem;">YOU.</div>
+          <p class="font-heading font-600 text-white tracking-widest uppercase" style="font-size:0.72rem;">This is for you.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 — WHO THIS IS NOT FOR
+══════════════════════════════════════════ -->
+<section class="section-darkest relative overflow-hidden" style="padding:7rem 0;">
+  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 50% 40% at 50% 100%,rgba(245,158,11,0.03),transparent);"></div>
+
+  <div class="max-w-4xl mx-auto px-5 md:px-8">
+
+    <div class="fade-up section-head mb-14">
+      <div class="section-label mb-4">Exclusivity Filter</div>
+      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">WHO THIS IS <span class="gradient-text">NOT</span> FOR</h2>
+      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+    </div>
+
+    <div class="fade-up d200 space-y-3 max-w-2xl mx-auto">
+
+      <div class="flex items-start gap-5 rounded-2xl px-6 py-5" style="background:rgba(255,255,255,0.018);border:1px solid rgba(255,255,255,0.04);">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">Window shoppers.</p>
+      </div>
+
+      <div class="flex items-start gap-5 rounded-2xl px-6 py-5" style="background:rgba(255,255,255,0.018);border:1px solid rgba(255,255,255,0.04);">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">People looking for quick motivation.</p>
+      </div>
+
+      <div class="flex items-start gap-5 rounded-2xl px-6 py-5" style="background:rgba(255,255,255,0.018);border:1px solid rgba(255,255,255,0.04);">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">Individuals unwilling to execute.</p>
+      </div>
+
+      <div class="flex items-start gap-5 rounded-2xl px-6 py-5" style="background:rgba(255,255,255,0.018);border:1px solid rgba(255,255,255,0.04);">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">People comfortable remaining where they are.</p>
+      </div>
+
+      <div class="flex items-start gap-5 rounded-2xl px-6 py-5" style="background:rgba(255,255,255,0.018);border:1px solid rgba(255,255,255,0.04);">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">Those unwilling to confront uncomfortable truths.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     MID-PAGE CTA STRIP
+══════════════════════════════════════════ -->
+<div class="cta-strip" style="padding:4rem 0;">
+  <div class="divider-orange mb-10"></div>
+  <div class="text-center px-5">
+    <p class="font-heading font-700 text-white mb-6" style="font-size:1.15rem;">Slots fill fast. There is no waitlist.</p>
+    <a href="#apply" class="btn-primary inline-flex items-center gap-3 px-9 py-5 rounded-2xl text-black font-heading font-800 tracking-wide" style="font-size:1.15rem;">
+      <span>Claim Your Private Slot</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+  </div>
+  <div class="divider-orange mt-10"></div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 — WHAT HAPPENS INSIDE
+══════════════════════════════════════════ -->
+<section class="section-dark relative overflow-hidden" style="padding:7rem 0;">
+  <div class="absolute pointer-events-none" style="top:5%;right:-3%;width:380px;height:380px;background:radial-gradient(circle,rgba(245,158,11,0.06),transparent 70%);border-radius:50%;"></div>
+
+  <div class="max-w-4xl mx-auto px-5 md:px-8">
+
+    <div class="fade-up section-head mb-14">
+      <div class="section-label mb-4">The Session Architecture</div>
+      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">WHAT HAPPENS INSIDE THE SESSION</h2>
+      <p class="font-body text-brand-muted mt-4 mx-auto" style="font-size:1rem;max-width:480px;line-height:1.7;">A live private virtual call between you and Strategist AG where clarity, direction, and execution are built together.</p>
+      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+    </div>
+
+    <div class="space-y-4">
+
+      <div class="fade-up d100 process-step flex gap-6 items-start">
+        <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-display text-xl relative z-10" style="background:linear-gradient(135deg,#F59E0B,#D97706);">01</div>
+        <div class="border-gradient rounded-2xl p-6 flex-1">
+          <h3 class="font-heading font-800 text-white mb-2 tracking-wide" style="font-size:1.1rem;">Live Private Diagnostic Session</h3>
+          <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">The session takes place as a live private virtual call between you and Strategist AG, focused entirely on your real situation — not a script, not a repeatable formula.</p>
+        </div>
+      </div>
+
+      <div class="fade-up d200 process-step flex gap-6 items-start">
+        <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-display text-xl relative z-10" style="background:linear-gradient(135deg,#F59E0B,#D97706);">02</div>
+        <div class="border-gradient rounded-2xl p-6 flex-1">
+          <h3 class="font-heading font-800 text-white mb-2 tracking-wide" style="font-size:1.1rem;">Hidden Patterns Revealed</h3>
+          <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">Through psychologically grounded conversation and precision questioning, deeper issues beneath the surface are uncovered and named clearly.</p>
+        </div>
+      </div>
+
+      <div class="fade-up d300 process-step flex gap-6 items-start">
+        <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-display text-xl relative z-10" style="background:linear-gradient(135deg,#F59E0B,#D97706);">03</div>
+        <div class="border-gradient rounded-2xl p-6 flex-1">
+          <h3 class="font-heading font-800 text-white mb-2 tracking-wide" style="font-size:1.1rem;">Clarity That Becomes Practical</h3>
+          <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">You leave with a clearer understanding of what has truly been holding you back and strategic direction tailored specifically to your situation.</p>
+        </div>
+      </div>
+
+      <div class="fade-up d400 process-step flex gap-6 items-start">
+        <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-display text-xl relative z-10" style="background:linear-gradient(135deg,#F59E0B,#D97706);">04</div>
+        <div class="border-gradient rounded-2xl p-6 flex-1">
+          <h3 class="font-heading font-800 text-white mb-2 tracking-wide" style="font-size:1.1rem;">Practical Next Steps</h3>
+          <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">You receive practical next steps you can begin implementing immediately, plus personalised assignments and curated resources designed for your growth.</p>
+        </div>
+      </div>
+
+      <div class="fade-up d500 process-step flex gap-6 items-start">
+        <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-display text-xl relative z-10" style="background:linear-gradient(135deg,#F59E0B,#D97706);">05</div>
+        <div class="border-gradient rounded-2xl p-6 flex-1">
+          <h3 class="font-heading font-800 text-white mb-2 tracking-wide" style="font-size:1.1rem;">Follow-Up Access</h3>
+          <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">Every session includes follow-up access for interval-based clarity support, so the insights continue to land and the momentum stays active.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 6 — THE TRANSFORMATION
+══════════════════════════════════════════ -->
+<section class="section-deeper relative overflow-hidden" style="padding:7rem 0;">
+  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 55% 45% at 50% 50%,rgba(245,158,11,0.05),transparent 70%);"></div>
+
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+
+    <div class="fade-up section-head mb-14">
+      <div class="section-label mb-4">Before & After</div>
+      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">THE TRANSFORMATION</h2>
+      <p class="font-body text-brand-muted mt-4 mx-auto" style="font-size:1rem;max-width:420px;line-height:1.7;">This is what changes when clarity replaces confusion.</p>
+      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+    </div>
+
+    <!-- Mobile arrow -->
+    <div class="flex md:hidden justify-center mb-4" aria-hidden="true">
+      <div class="w-10 h-10 rounded-full flex items-center justify-center glow-orange" style="background:linear-gradient(135deg,#F59E0B,#D97706);transform:rotate(90deg);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 lg:gap-10 max-w-5xl mx-auto relative items-stretch">
+
+      <!-- BEFORE -->
+      <div class="fade-up d100 transform-before rounded-3xl p-8 md:p-10">
+        <div class="mb-8">
+          <span class="px-4 py-2 rounded-full font-heading font-700 tracking-widest uppercase" style="background:rgba(255,255,255,0.05);color:#9CA3AF;border:1px solid rgba(255,255,255,0.09);font-size:0.7rem;">BEFORE</span>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Busy but not productive. Moving but not advancing.</p></div>
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Mentally crowded, emotionally burdened, strategically unclear.</p></div>
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Ideas without execution, direction without discipline.</p></div>
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Feeling stuck despite capability and clarity gaps.</p></div>
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Confused by too much noise and too little structure.</p></div>
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Effort without proportional progress.</p></div>
+        </div>
+      </div>
+
+      <!-- Desktop arrow -->
+      <div class="hidden md:flex absolute items-center justify-center" style="left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;">
+        <div class="w-11 h-11 rounded-full flex items-center justify-center glow-orange" style="background:linear-gradient(135deg,#F59E0B,#D97706);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
+      </div>
+
+      <!-- AFTER -->
+      <div class="fade-up d200 transform-after rounded-3xl p-8 md:p-10">
+        <div class="mb-8">
+          <span class="gradient-text px-4 py-2 rounded-full font-heading font-700 tracking-widest uppercase" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);font-size:0.7rem;">AFTER</span>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Clear alignment between capability and visible results, where potential starts producing evidence.</p></div>
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Structured thinking where priorities are simplified, filtered, and execution-ready.</p></div>
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Precise direction where every next step feels intentional, grounded, and obvious.</p></div>
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Confident articulation where ideas, identity, and value are expressed with clarity and impact.</p></div>
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Mental order and emotional lightness that restores focus, energy, and consistency.</p></div>
+          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Execution power where ideas consistently translate into action, outcomes, and growth.</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — ABOUT STRATEGIST AG
+══════════════════════════════════════════ -->
+<section class="section-dark relative overflow-hidden" style="padding:7rem 0;">
+  <div class="absolute pointer-events-none" style="top:0;left:-8%;width:480px;height:480px;background:radial-gradient(circle,rgba(245,158,11,0.05),transparent 70%);border-radius:50%;"></div>
+
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+
+    <div class="fade-up section-head mb-14">
+      <div class="section-label mb-4">ABOUT ABRAHAM GEORGE U.</div>
+      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">Meet Strategist AG: Abraham George U.</h2>
+      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-10 items-start">
+
+      <!-- Portrait -->
+      <div class="lg:col-span-2 fade-in d100 flex justify-center lg:justify-start">
+        <div class="portrait-outer" style="width:clamp(200px,30vw,260px);">
+          <div class="portrait-inner">
+            <div class="w-full" style="aspect-ratio:3/4;">
+                <img src="/images/pix.png" alt="Portrait of Abraham George U." class="w-full h-full object-cover rounded-3xl">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <div class="lg:col-span-3 fade-up d200 space-y-6">
+        <div>
+          <h3 class="font-display text-white tracking-wide" style="font-size:clamp(2.2rem,4vw,3rem);">Abraham George U.</h3>
+          <p class="gradient-text font-heading font-700 mt-1 tracking-wider" style="font-size:1.1rem;">Clarity Architect · Strategist AG</p>
+        </div>
+
+        <p class="font-body text-brand-text leading-loose" style="font-size:1rem;">
+          Strategist AG is a Clarity Architect, mindset remodeling teacher/strategist, and human development thinker committed to helping intentional individuals, brands, institutions and organisations move from potential to precision-driven performance, structured execution, and measurable transformation.
+        </p>
+        <p class="font-body text-brand-muted leading-loose" style="font-size:0.95rem;">
+          Through private sessions, Abraham helps people uncover the exact blocks that are holding them back, remove mental clutter, and build a strategic path that makes progress inevitable.
+        </p>
+
+        <div class="grid grid-cols-1 gap-4">
+          <div class="glass-card rounded-2xl p-5">
+            <p class="font-heading font-700 text-white mb-3">Credentials & Leadership</p>
+            <ul class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem; list-style:none; padding-left:0;">
+              <li>Certified Advanced Protégé, John C. Maxwell Leadership</li>
+              <li>Founder, Mindora LTD</li>
+              <li>Convener, LinkedIn Local Lafia</li>
+              <li>Founder, Great Minds Hub</li>
+            </ul>
+          </div>
+          <div class="glass-card rounded-2xl p-5">
+            <p class="font-heading font-700 text-white mb-3">Strategic Partnerships</p>
+            <ul class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem; list-style:none; padding-left:0;">
+              <li>Strategic Advisor, Delaws Casual LTD</li>
+              <li>Afrikaan Creative Space</li>
+              <li>Ogbonge Designs</li>
+              <li>Smotiva</li>
+              <li>The Thriving Network</li>
+              <li>Former Board Director, Rotaract of Rotary International</li>
+              <li>Most Inspiring Personality, Federal University of Lafia (SRC)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="glass-card-orange rounded-2xl p-5">
+          <p class="font-heading font-700 text-white leading-snug" style="font-size:1.1rem;">"Clarity is not a feeling. It's a structure. When you build the right structure inside your mind, everything outside begins to move."</p>
+          <p class="font-body mt-2" style="color:rgba(251,191,36,0.6);font-size:0.72rem;">— Abraham George U.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 8 — TESTIMONIALS
+══════════════════════════════════════════ -->
+<section class="section-deeper relative overflow-hidden" style="padding:7rem 0;">
+
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
+
+    <div class="fade-up section-head mb-14">
+      <div class="section-label mb-4">Real People. Real Transformation.</div>
+      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">SOCIAL PROOF</h2>
+      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+    </div>
+
+    <div class="fade-up d100 glass-card rounded-3xl p-8 mb-10">
+      <h3 class="font-heading font-700 text-white mb-4" style="font-size:1.2rem;">Examples Of Transformation</h3>
+      <ul class="font-body text-brand-text leading-relaxed space-y-3" style="font-size:0.95rem;">
+        <li>• A creative professional who learned to communicate his value with clarity and confidence.</li>
+        <li>• A coach who repositioned her visibility and credibility strategically.</li>
+        <li>• A media strategist who moved from being overlooked to becoming intentional and authoritative in his industry.</li>
+      </ul>
+    </div>
+
+    <div class="fade-up d150 glass-card rounded-3xl p-7 mb-10 card-lift">
+      <div class="font-heading font-700 text-white mb-4" style="font-size:1.1rem;">Video Testimonial</div>
+      <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">See a short story from a private session that shows the clarity, direction, and execution shift available through the PPCI.</p>
+    </div>
+
+    <div class="relative overflow-hidden" id="testimonialSlider">
+      <div class="slider-track flex gap-5" id="sliderTrack">
+
+        <!-- Card 1 -->
+        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 glass-card rounded-3xl p-7 card-lift">
+          <div class="stars mb-5">
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="font-body text-brand-text italic leading-relaxed mb-6" style="font-size:0.93rem;">"I left that session completely different. In under two hours, Abraham helped me see patterns in my business that I had been blind to for over a year. I had clarity I didn't know was possible."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-heading font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">TK</div>
+            <div>
+              <div class="font-heading font-700 text-white" style="font-size:0.85rem;">Tunde K.</div>
+              <div class="font-body text-brand-muted" style="font-size:0.78rem;">Founder & CEO</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 glass-card rounded-3xl p-7 card-lift">
+          <div class="stars mb-5">
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="font-body text-brand-text italic leading-relaxed mb-6" style="font-size:0.93rem;">"The depth of the conversation is what surprised me most. He doesn't give you surface answers — he pulls you into the real issue. I came in confused and left with a level of strategic certainty I've never experienced before."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-heading font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">AO</div>
+            <div>
+              <div class="font-heading font-700 text-white" style="font-size:0.85rem;">Adaeze O.</div>
+              <div class="font-body text-brand-muted" style="font-size:0.78rem;">Brand Strategist</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 glass-card rounded-3xl p-7 card-lift">
+          <div class="stars mb-5">
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="font-body text-brand-text italic leading-relaxed mb-6" style="font-size:0.93rem;">"Straight to the point. No fluff. No filler. He identified in 15 minutes what I had been struggling to understand for months. The session paid for itself ten times over in the first week."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-heading font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">KM</div>
+            <div>
+              <div class="font-heading font-700 text-white" style="font-size:0.85rem;">Kolade M.</div>
+              <div class="font-body text-brand-muted" style="font-size:0.78rem;">Tech Entrepreneur</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 glass-card rounded-3xl p-7 card-lift">
+          <div class="stars mb-5">
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="font-body text-brand-text italic leading-relaxed mb-6" style="font-size:0.93rem;">"This isn't coaching. This is a different category entirely. Abraham doesn't motivate — he illuminates. After our session, I finally understood the real architecture of my delay. Game-changing."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-heading font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">NN</div>
+            <div>
+              <div class="font-heading font-700 text-white" style="font-size:0.85rem;">Ngozi N.</div>
+              <div class="font-body text-brand-muted" style="font-size:0.78rem;">Executive Leader</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center justify-center gap-4 mt-8">
+        <button id="prevSlide" class="w-11 h-11 rounded-full glass-card flex items-center justify-center transition-colors hover:border-amber-500/50" style="border:1px solid rgba(255,255,255,0.08);" aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div id="sliderDots" class="flex gap-2 items-center"></div>
+        <button id="nextSlide" class="w-11 h-11 rounded-full glass-card flex items-center justify-center transition-colors hover:border-amber-500/50" style="border:1px solid rgba(255,255,255,0.08);" aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 9 — WHY TRUST THIS PROCESS
+══════════════════════════════════════════ -->
+<section class="section-dark relative overflow-hidden" style="padding:7rem 0;">
+
+  <div class="max-w-3xl mx-auto px-5 md:px-8">
+
+    <div class="fade-up section-head mb-14">
+      <div class="section-label mb-4">The Foundation</div>
+      <h2 style="font-size:clamp(2.8rem,6vw,4rem); line-height:1;">WHY THE PPCI IS DIFFERENT</h2>
+      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+    </div>
+
+    <div class="space-y-5 fade-up d200">
+
+      <div class="border-gradient rounded-2xl p-7">
+        <div class="flex items-start gap-5">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.09);border:1px solid rgba(245,158,11,0.18);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <h4 class="font-heading font-700 text-white mb-2" style="font-size:1.05rem;">Deeply Personal, Not Mass-Produced</h4>
+            <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">Only a limited number of sessions are released monthly because the experience is deeply personal, intentionally immersive, and built around you.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-gradient rounded-2xl p-7">
+        <div class="flex items-start gap-5">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.09);border:1px solid rgba(245,158,11,0.18);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div>
+            <h4 class="font-heading font-700 text-white mb-2" style="font-size:1.05rem;">Focus On Clarity That Changes Movement</h4>
+            <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">The focus is not on access to information. The focus is on unlocking clarity that changes how you move permanently.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-gradient rounded-2xl p-7">
+        <div class="flex items-start gap-5">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.09);border:1px solid rgba(245,158,11,0.18);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <h4 class="font-heading font-700 text-white mb-2" style="font-size:1.05rem;">Private. Exclusive. One-on-One.</h4>
+            <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">This is not group coaching. This is private, confidential clarity work designed to give you the space needed to uncover real blocks and move with precision.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-gradient rounded-2xl p-7">
+        <div class="flex items-start gap-5">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.09);border:1px solid rgba(245,158,11,0.18);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div>
+            <h4 class="font-heading font-700 text-white mb-2" style="font-size:1.05rem;">The Transformation Is The Evidence</h4>
+            <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">The proof is not in the access or the stories alone — it's in the transformation of thinking, decisions, and execution.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 10 — FINAL CTA
+══════════════════════════════════════════ -->
+<section id="apply" class="final-cta-bg relative overflow-hidden" style="padding:8rem 0;">
+  <!-- Top divider -->
+  <div class="absolute top-0 left-0 right-0"><div class="divider-orange"></div></div>
+
+  <!-- Ambient blobs -->
+  <div class="absolute pointer-events-none" style="top:15%;left:8%;width:200px;height:200px;background:radial-gradient(circle,rgba(245,158,11,0.07),transparent);border-radius:50%;filter:blur(30px);"></div>
+  <div class="absolute pointer-events-none" style="bottom:15%;right:8%;width:260px;height:260px;background:radial-gradient(circle,rgba(245,158,11,0.05),transparent);border-radius:50%;filter:blur(40px);"></div>
+
+  <div class="max-w-4xl mx-auto px-5 md:px-8 relative text-center" style="z-index:1;">
+    <div class="fade-up space-y-7">
+
+      <div class="section-label">This Is The Moment</div>
+
+      <h2 class="font-display text-white tracking-wide leading-none" style="font-size:clamp(2rem,6vw,7rem);">
+        YOU ALREADY KNOW<br/>
+        <span class="gradient-text text-glow">THERE IS MORE IN YOU.</span>
+      </h2>
+
+      <div class="divider-orange max-w-xs mx-auto"></div>
+
+      <p class="font-body text-brand-text leading-loose mx-auto" style="font-size:clamp(1rem,2vw,1.2rem);max-width:560px;">
+        The question is whether you are finally ready to confront what has been stopping you from wielding it with precision.
+      </p>
+      <p class="font-body text-brand-muted leading-relaxed mx-auto" style="font-size:1rem;max-width:460px;">
+        Apply below only if you are serious about clarity that gives precise direction and execution, that transmutes into success. Limited slots available monthly.
+      </p>
+
+      <div class="pt-3">
+        <a href="#apply" class="btn-primary inline-flex flex-col sm:flex-row items-center gap-3 px-10 py-6 rounded-2xl text-black font-heading font-800 tracking-wide glow-orange-btn" style="font-size:1.3rem;">
+          <span>APPLY FOR THE PRIVATE PREMIUM CLARITY INTENSIVE</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <p class="font-body text-brand-muted mt-4 tracking-widest uppercase" style="font-size:0.68rem;">Limited Monthly Slots · Private Access Only</p>
+      </div>
+
+      <!-- Trust signals -->
+      <div class="grid grid-cols-3 gap-4 pt-6 max-w-sm mx-auto">
+        <div class="text-center">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2" style="background:rgba(245,158,11,0.1);">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <p class="font-body text-brand-muted" style="font-size:0.75rem;">100% Private</p>
+        </div>
+        <div class="text-center">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2" style="background:rgba(245,158,11,0.1);">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <p class="font-body text-brand-muted" style="font-size:0.75rem;">1-on-1 Only</p>
+        </div>
+        <div class="text-center">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2" style="background:rgba(245,158,11,0.1);">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <p class="font-body text-brand-muted" style="font-size:0.75rem;">Results-Driven</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom divider -->
+  <div class="absolute bottom-0 left-0 right-0"><div class="divider-orange"></div></div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer style="background:#070707;border-top:1px solid rgba(255,255,255,0.04);">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-9 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <img src="/images/logo white.png" alt="" srcset="" class="w-24">
+      
+    </div>
+    <p class="font-body text-brand-muted" style="font-size:0.82rem;">© 2025 Strategist AG · Abraham George U. · All Rights Reserved</p>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+/* ── SCROLL REVEAL ── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up, .fade-in').forEach(el => revealObserver.observe(el));
+
+/* ── NAV SCROLL ── */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+/* ── SMOOTH SCROLL ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = target.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
+  });
+});
+
+/* ── TESTIMONIAL SLIDER ── */
+(function() {
+  const track   = document.getElementById('sliderTrack');
+  const dotsEl  = document.getElementById('sliderDots');
+  const cards   = Array.from(track.children);
+  let current   = 0;
+  let perView   = 1;
+
+  function calcPerView() {
+    return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+  }
+
+  function totalPages() {
+    return Math.ceil(cards.length / perView);
+  }
+
+  function setCardWidths() {
+    perView = calcPerView();
+    const gap = 20;
+    const containerW = track.parentElement.offsetWidth;
+    const cardW = (containerW - gap * (perView - 1)) / perView;
+    cards.forEach(c => { c.style.width = cardW + 'px'; });
+  }
+
+  function buildDots() {
+    dotsEl.innerHTML = '';
+    for (let i = 0; i < totalPages(); i++) {
+      const d = document.createElement('button');
+      d.style.cssText = `height:6px;border-radius:3px;transition:all 0.3s ease;background:${i===0?'#F59E0B':'rgba(255,255,255,0.18)'};width:${i===0?'20px':'6px'};border:none;cursor:pointer;`;
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function updateDots() {
+    Array.from(dotsEl.children).forEach((d, i) => {
+      d.style.background = i === current ? '#F59E0B' : 'rgba(255,255,255,0.18)';
+      d.style.width      = i === current ? '20px' : '6px';
+    });
+  }
+
+  function goTo(idx) {
+    current = Math.max(0, Math.min(idx, totalPages() - 1));
+    const gap = 20;
+    const cardW = cards[0].offsetWidth;
+    track.style.transform = `translateX(-${current * (cardW + gap) * perView}px)`;
+    updateDots();
+  }
+
+  document.getElementById('prevSlide').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextSlide').addEventListener('click', () => goTo(current + 1));
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      setCardWidths();
+      buildDots();
+      goTo(0);
+    }, 120);
+  });
+
+  setCardWidths();
+  buildDots();
+})();
+</script>
+</body>
+</html>
