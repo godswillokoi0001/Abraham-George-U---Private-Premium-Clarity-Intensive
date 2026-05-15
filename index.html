@@ -863,62 +863,167 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 <!-- ══════════════════════════════════════════
      SECTION 5 — WHAT HAPPENS INSIDE
 ══════════════════════════════════════════ -->
-<section class="section-dark relative overflow-hidden" style="padding:7rem 0;">
-  <div class="absolute pointer-events-none" style="top:5%;right:-3%;width:380px;height:380px;background:radial-gradient(circle,rgba(245,158,11,0.06),transparent 70%);border-radius:50%;"></div>
+<section class="relative overflow-hidden bg-[#0D0D0D] py-20 lg:py-28">
 
-  <div class="max-w-4xl mx-auto px-5 md:px-8">
+  <!-- ambient glow -->
+  <div class="absolute pointer-events-none top-10 right-[-100px] w-[380px] h-[380px] rounded-full bg-[radial-gradient(circle,rgba(245,158,11,0.06),transparent_70%)]"></div>
 
-    <div class="fade-up section-head mb-14">
-      <div class="section-label mb-4">The Session Architecture</div>
-      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">WHAT HAPPENS INSIDE THE SESSION</h2>
-      <p class="font-body text-brand-muted mt-4 mx-auto" style="font-size:1rem;max-width:480px;line-height:1.7;">A live private virtual call between you and Strategist AG where clarity, direction, and execution are built together.</p>
-      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+
+    <!-- HEADER -->
+    <div class="text-center mb-16 space-y-4">
+
+      <div class="text-xs md:text-sm uppercase tracking-[0.3em] text-amber-400 font-semibold">
+        The Session Architecture
+      </div>
+
+      <h2 class="text-white font-semibold leading-tight text-[clamp(2.2rem,5vw,3.6rem)]">
+        WHAT HAPPENS INSIDE THE SESSION
+      </h2>
+
+      <p class="text-gray-400 mx-auto max-w-xl leading-relaxed text-sm md:text-base">
+        A live private virtual call between you and Strategist AG where clarity, direction, and execution are built together.
+      </p>
+
+      <div class="w-24 h-px bg-amber-400/60 mx-auto"></div>
+
     </div>
 
-    <div class="space-y-4">
+    <!-- STEPS WRAPPER -->
+    <div class="space-y-6 relative">
 
-      <div class="fade-up d100 process-step flex gap-6 items-start">
-        <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-display text-xl relative z-10" style="background:linear-gradient(135deg,#F59E0B,#D97706);">01</div>
-        <div class="border-gradient rounded-2xl p-6 flex-1">
-          <h3 class="font-heading font-800 text-white mb-2 tracking-wide" style="font-size:1.1rem;">Live Private Diagnostic Session</h3>
-          <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">The session takes place as a live private virtual call between you and Strategist AG, focused entirely on your real situation — not a script, not a repeatable formula.</p>
+      <!-- vertical line (desktop only progression feel) -->
+      <div class="hidden md:block absolute left-6 top-0 bottom-0 w-px bg-white/10"></div>
+
+      <!-- STEP 1 -->
+      <div class="relative flex flex-col md:flex-row gap-5 md:gap-8">
+
+        <div class="flex items-start md:items-center gap-5 md:w-full">
+
+          <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-semibold bg-gradient-to-br from-amber-400 to-amber-600 relative z-10">
+            01
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex-1 backdrop-blur-xl">
+
+            <h3 class="text-white font-semibold mb-2 text-base md:text-lg tracking-wide">
+              Live Private Diagnostic Session
+            </h3>
+
+            <p class="text-gray-400 leading-relaxed text-sm md:text-[0.95rem]">
+              The session takes place as a live private virtual call between you and Strategist AG, focused entirely on your real situation — not a script, not a repeatable formula.
+            </p>
+
+          </div>
+
         </div>
+
       </div>
 
-      <div class="fade-up d200 process-step flex gap-6 items-start">
-        <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-display text-xl relative z-10" style="background:linear-gradient(135deg,#F59E0B,#D97706);">02</div>
-        <div class="border-gradient rounded-2xl p-6 flex-1">
-          <h3 class="font-heading font-800 text-white mb-2 tracking-wide" style="font-size:1.1rem;">Hidden Patterns Revealed</h3>
-          <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">Through psychologically grounded conversation and precision questioning, deeper issues beneath the surface are uncovered and named clearly.</p>
+      <!-- STEP 2 -->
+      <div class="relative flex flex-col md:flex-row gap-5 md:gap-8">
+
+        <div class="flex items-start md:items-center gap-5 md:w-full">
+
+          <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-semibold bg-gradient-to-br from-amber-400 to-amber-600 relative z-10">
+            02
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex-1 backdrop-blur-xl">
+
+            <h3 class="text-white font-semibold mb-2 text-base md:text-lg tracking-wide">
+              Hidden Patterns Revealed
+            </h3>
+
+            <p class="text-gray-400 leading-relaxed text-sm md:text-[0.95rem]">
+              Through psychologically grounded conversation and precision questioning, deeper issues beneath the surface are uncovered and named clearly.
+            </p>
+
+          </div>
+
         </div>
+
       </div>
 
-      <div class="fade-up d300 process-step flex gap-6 items-start">
-        <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-display text-xl relative z-10" style="background:linear-gradient(135deg,#F59E0B,#D97706);">03</div>
-        <div class="border-gradient rounded-2xl p-6 flex-1">
-          <h3 class="font-heading font-800 text-white mb-2 tracking-wide" style="font-size:1.1rem;">Clarity That Becomes Practical</h3>
-          <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">You leave with a clearer understanding of what has truly been holding you back and strategic direction tailored specifically to your situation.</p>
+      <!-- STEP 3 -->
+      <div class="relative flex flex-col md:flex-row gap-5 md:gap-8">
+
+        <div class="flex items-start md:items-center gap-5 md:w-full">
+
+          <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-semibold bg-gradient-to-br from-amber-400 to-amber-600 relative z-10">
+            03
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex-1 backdrop-blur-xl">
+
+            <h3 class="text-white font-semibold mb-2 text-base md:text-lg tracking-wide">
+              Clarity That Becomes Practical
+            </h3>
+
+            <p class="text-gray-400 leading-relaxed text-sm md:text-[0.95rem]">
+              You leave with a clearer understanding of what has truly been holding you back and strategic direction tailored specifically to your situation.
+            </p>
+
+          </div>
+
         </div>
+
       </div>
 
-      <div class="fade-up d400 process-step flex gap-6 items-start">
-        <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-display text-xl relative z-10" style="background:linear-gradient(135deg,#F59E0B,#D97706);">04</div>
-        <div class="border-gradient rounded-2xl p-6 flex-1">
-          <h3 class="font-heading font-800 text-white mb-2 tracking-wide" style="font-size:1.1rem;">Practical Next Steps</h3>
-          <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">You receive practical next steps you can begin implementing immediately, plus personalised assignments and curated resources designed for your growth.</p>
+      <!-- STEP 4 -->
+      <div class="relative flex flex-col md:flex-row gap-5 md:gap-8">
+
+        <div class="flex items-start md:items-center gap-5 md:w-full">
+
+          <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-semibold bg-gradient-to-br from-amber-400 to-amber-600 relative z-10">
+            04
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex-1 backdrop-blur-xl">
+
+            <h3 class="text-white font-semibold mb-2 text-base md:text-lg tracking-wide">
+              Practical Next Steps
+            </h3>
+
+            <p class="text-gray-400 leading-relaxed text-sm md:text-[0.95rem]">
+              You receive practical next steps you can begin implementing immediately, plus personalised assignments and curated resources designed for your growth.
+            </p>
+
+          </div>
+
         </div>
+
       </div>
 
-      <div class="fade-up d500 process-step flex gap-6 items-start">
-        <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-display text-xl relative z-10" style="background:linear-gradient(135deg,#F59E0B,#D97706);">05</div>
-        <div class="border-gradient rounded-2xl p-6 flex-1">
-          <h3 class="font-heading font-800 text-white mb-2 tracking-wide" style="font-size:1.1rem;">Follow-Up Access</h3>
-          <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">Every session includes follow-up access for interval-based clarity support, so the insights continue to land and the momentum stays active.</p>
+      <!-- STEP 5 -->
+      <div class="relative flex flex-col md:flex-row gap-5 md:gap-8">
+
+        <div class="flex items-start md:items-center gap-5 md:w-full">
+
+          <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-semibold bg-gradient-to-br from-amber-400 to-amber-600 relative z-10">
+            05
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex-1 backdrop-blur-xl">
+
+            <h3 class="text-white font-semibold mb-2 text-base md:text-lg tracking-wide">
+              Follow-Up Access
+            </h3>
+
+            <p class="text-gray-400 leading-relaxed text-sm md:text-[0.95rem]">
+              Every session includes follow-up access for interval-based clarity support, so the insights continue to land and the momentum stays active.
+            </p>
+
+          </div>
+
         </div>
+
       </div>
 
     </div>
+
   </div>
+
 </section>
 
 
