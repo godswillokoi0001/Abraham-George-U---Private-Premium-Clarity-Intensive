@@ -1050,47 +1050,208 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6 lg:gap-10 max-w-5xl mx-auto relative items-stretch">
+   <div class="relative max-w-7xl mx-auto">
 
-      <!-- BEFORE -->
-      <div class="fade-up d100 transform-before rounded-3xl p-8 md:p-10">
-        <div class="mb-8">
-          <span class="px-4 py-2 rounded-full font-heading font-700 tracking-widest uppercase" style="background:rgba(255,255,255,0.05);color:#9CA3AF;border:1px solid rgba(255,255,255,0.09);font-size:0.7rem;">BEFORE</span>
+  <!-- CENTER LINE -->
+  <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent -translate-x-1/2"></div>
+
+  <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-stretch">
+
+    <!-- BEFORE -->
+    <div class="fade-up d100 relative group">
+
+      <!-- glow -->
+      <div class="absolute -inset-2 rounded-[2rem] bg-white/[0.02] blur-2xl opacity-60"></div>
+
+      <div class="relative h-full rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-2xl overflow-hidden">
+
+        <!-- top line -->
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+
+        <!-- label -->
+        <div class="px-8 pt-8 md:px-10 md:pt-10">
+
+          <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full"
+            style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+
+            <div class="w-2 h-2 rounded-full bg-gray-500"></div>
+
+            <span class="font-heading font-700 tracking-[0.25em] uppercase text-[#9CA3AF]"
+              style="font-size:0.72rem;">
+              BEFORE
+            </span>
+
+          </div>
         </div>
-        <div class="space-y-4">
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Busy but not productive. Moving but not advancing.</p></div>
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Mentally crowded, emotionally burdened, strategically unclear.</p></div>
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Ideas without execution, direction without discipline.</p></div>
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Feeling stuck despite capability and clarity gaps.</p></div>
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Confused by too much noise and too little structure.</p></div>
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div><p class="font-body text-brand-muted" style="font-size:0.93rem;">Effort without proportional progress.</p></div>
+
+        <!-- content -->
+        <div class="p-8 md:p-10 pt-7">
+
+          <div class="space-y-5">
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div>
+              <p class="font-body text-brand-muted leading-relaxed"
+                style="font-size:0.97rem;">
+                Busy but not productive. Moving but not advancing.
+              </p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div>
+              <p class="font-body text-brand-muted leading-relaxed"
+                style="font-size:0.97rem;">
+                Mentally crowded, emotionally burdened, strategically unclear.
+              </p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div>
+              <p class="font-body text-brand-muted leading-relaxed"
+                style="font-size:0.97rem;">
+                Ideas without execution, direction without discipline.
+              </p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div>
+              <p class="font-body text-brand-muted leading-relaxed"
+                style="font-size:0.97rem;">
+                Feeling stuck despite capability and clarity gaps.
+              </p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div>
+              <p class="font-body text-brand-muted leading-relaxed"
+                style="font-size:0.97rem;">
+                Confused by too much noise and too little structure.
+              </p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full bg-gray-600 mt-2.5 flex-shrink-0"></div>
+              <p class="font-body text-brand-muted leading-relaxed"
+                style="font-size:0.97rem;">
+                Effort without proportional progress.
+              </p>
+            </div>
+
+          </div>
         </div>
+
       </div>
+    </div>
 
-      <!-- Desktop arrow -->
-      <div class="hidden md:flex absolute items-center justify-center" style="left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;">
-        <div class="w-11 h-11 rounded-full flex items-center justify-center glow-orange" style="background:linear-gradient(135deg,#F59E0B,#D97706);">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
+    <!-- AFTER -->
+    <div class="fade-up d200 relative group">
+
+      <!-- glow -->
+      <div class="absolute -inset-2 rounded-[2rem] bg-amber-500/10 blur-2xl opacity-80"></div>
+
+      <div class="relative h-full rounded-[2rem] border border-amber-500/20 bg-gradient-to-br from-amber-500/[0.08] to-transparent backdrop-blur-2xl overflow-hidden">
+
+        <!-- top line -->
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-amber-400/40 to-transparent"></div>
+
+        <!-- label -->
+        <div class="px-8 pt-8 md:px-10 md:pt-10">
+
+          <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full"
+            style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);">
+
+            <div class="w-2 h-2 rounded-full bg-amber-400"></div>
+
+            <span class="gradient-text font-heading font-700 tracking-[0.25em] uppercase"
+              style="font-size:0.72rem;">
+              AFTER
+            </span>
+
+          </div>
         </div>
+
+        <!-- content -->
+        <div class="p-8 md:p-10 pt-7">
+
+          <div class="space-y-5">
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full mt-2.5 flex-shrink-0 bg-amber-400"></div>
+              <p class="font-body text-brand-text leading-relaxed"
+                style="font-size:0.97rem;">
+                Clear alignment between capability and visible results, where potential starts producing evidence.
+              </p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full mt-2.5 flex-shrink-0 bg-amber-400"></div>
+              <p class="font-body text-brand-text leading-relaxed"
+                style="font-size:0.97rem;">
+                Structured thinking where priorities are simplified, filtered, and execution-ready.
+              </p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full mt-2.5 flex-shrink-0 bg-amber-400"></div>
+              <p class="font-body text-brand-text leading-relaxed"
+                style="font-size:0.97rem;">
+                Precise direction where every next step feels intentional, grounded, and obvious.
+              </p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full mt-2.5 flex-shrink-0 bg-amber-400"></div>
+              <p class="font-body text-brand-text leading-relaxed"
+                style="font-size:0.97rem;">
+                Confident articulation where ideas, identity, and value are expressed with clarity and impact.
+              </p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full mt-2.5 flex-shrink-0 bg-amber-400"></div>
+              <p class="font-body text-brand-text leading-relaxed"
+                style="font-size:0.97rem;">
+                Mental order and emotional lightness that restores focus, energy, and consistency.
+              </p>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-2 h-2 rounded-full mt-2.5 flex-shrink-0 bg-amber-400"></div>
+              <p class="font-body text-brand-text leading-relaxed"
+                style="font-size:0.97rem;">
+                Execution power where ideas consistently translate into action, outcomes, and growth.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
       </div>
+    </div>
 
-      <!-- AFTER -->
-      <div class="fade-up d200 transform-after rounded-3xl p-8 md:p-10">
-        <div class="mb-8">
-          <span class="gradient-text px-4 py-2 rounded-full font-heading font-700 tracking-widest uppercase" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);font-size:0.7rem; text-white">AFTER</span>
-        </div>
-        <div class="space-y-4">
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Clear alignment between capability and visible results, where potential starts producing evidence.</p></div>
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Structured thinking where priorities are simplified, filtered, and execution-ready.</p></div>
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Precise direction where every next step feels intentional, grounded, and obvious.</p></div>
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Confident articulation where ideas, identity, and value are expressed with clarity and impact.</p></div>
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Mental order and emotional lightness that restores focus, energy, and consistency.</p></div>
-          <div class="flex items-start gap-3"><div class="w-1.5 h-1.5 rounded-full mt-2.5 flex-shrink-0" style="background:#F59E0B;"></div><p class="font-body text-brand-text" style="font-size:0.93rem;">Execution power where ideas consistently translate into action, outcomes, and growth.</p></div>
-        </div>
+  </div>
+
+  <!-- CENTER CONNECTOR -->
+  <div class="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+
+    <div class="relative">
+
+      <div class="absolute inset-0 rounded-full bg-amber-500/30 blur-xl scale-150"></div>
+
+      <div class="relative w-16 h-16 rounded-full flex items-center justify-center border border-amber-400/30"
+        style="background:linear-gradient(135deg,#F59E0B,#D97706);">
+
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3">
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+
       </div>
 
     </div>
+
   </div>
+
+</div>
 </section>
 
 <!-- ══════════════════════════════════════════
