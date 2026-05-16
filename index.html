@@ -1047,11 +1047,13 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 
 <div class="relative max-w-7xl mx-auto">
 
+  <!-- OUTER CONTAINER -->
   <div class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-2xl">
 
     <!-- TOP HEADER -->
-    <div class="grid grid-cols-[1fr_auto_1fr]">
+    <div class="grid grid-cols-2">
 
+      <!-- BEFORE -->
       <div class="px-3 md:px-8 py-4 md:py-6 border-b border-white/10 border-r border-white/10 flex justify-center">
         <div class="inline-flex items-center gap-2 md:gap-3 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
           style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
@@ -1066,22 +1068,8 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
         </div>
       </div>
 
-      <!-- CENTER -->
-      <div class="w-[40px] md:w-[90px] border-b border-white/10 flex items-center justify-center relative">
-
-        <div class="absolute inset-y-0 left-1/2 w-px bg-white/10 -translate-x-1/2"></div>
-
-        <div class="relative z-10 w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center border border-amber-400/30"
-          style="background:linear-gradient(135deg,#F59E0B,#D97706);">
-
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3">
-            <path d="m9 18 6-6-6-6"/>
-          </svg>
-
-        </div>
-      </div>
-
-      <div class="px-3 md:px-8 py-4 md:py-6 border-b border-white/10 border-l border-white/10 flex justify-center">
+      <!-- AFTER -->
+      <div class="px-3 md:px-8 py-4 md:py-6 border-b border-white/10 flex justify-center">
 
         <div class="inline-flex items-center gap-2 md:gap-3 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
           style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);">
@@ -1101,39 +1089,28 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
     <!-- ROWS -->
     <div class="divide-y divide-white/10">
 
-      <!-- ROW TEMPLATE -->
-      <div class="grid grid-cols-[1fr_auto_1fr] min-h-[90px] md:min-h-[120px]">
+      <!-- ROW 1 -->
+      <div class="grid grid-cols-2 min-h-[85px] md:min-h-[120px]">
 
+        <!-- BEFORE -->
         <div class="p-3 md:p-7 border-r border-white/10 flex items-center">
           <div class="flex items-start gap-2 md:gap-3">
             <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-gray-600 mt-2 shrink-0"></div>
 
             <p class="font-body text-brand-muted leading-snug md:leading-relaxed"
-              style="font-size:clamp(0.72rem,3vw,0.95rem);">
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
               Busy but not productive. Moving but not advancing.
             </p>
           </div>
         </div>
 
-        <!-- CENTER -->
-        <div class="relative w-[40px] md:w-[90px] flex items-center justify-center">
-
-          <div class="absolute inset-y-0 left-1/2 w-px bg-white/10 -translate-x-1/2"></div>
-
-          <div class="relative z-10 w-8 h-8 md:w-10 md:h-10 rounded-full border border-amber-400/20 bg-amber-500/10 flex items-center justify-center">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="3">
-              <path d="m9 18 6-6-6-6"/>
-            </svg>
-          </div>
-
-        </div>
-
-        <div class="p-3 md:p-7 border-l border-white/10 flex items-center bg-amber-500/[0.02]">
+        <!-- AFTER -->
+        <div class="p-3 md:p-7 flex items-center bg-amber-500/[0.02]">
           <div class="flex items-start gap-2 md:gap-3">
             <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-amber-400 mt-2 shrink-0"></div>
 
             <p class="font-body text-brand-text leading-snug md:leading-relaxed"
-              style="font-size:clamp(0.72rem,3vw,0.95rem);">
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
               Clear alignment between capability and visible results, where potential starts producing evidence.
             </p>
           </div>
@@ -1141,7 +1118,140 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 
       </div>
 
-      <!-- Repeat same pattern for other rows -->
+      <!-- ROW 2 -->
+      <div class="grid grid-cols-2 min-h-[85px] md:min-h-[120px]">
+
+        <div class="p-3 md:p-7 border-r border-white/10 flex items-center">
+          <div class="flex items-start gap-2 md:gap-3">
+            <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-gray-600 mt-2 shrink-0"></div>
+
+            <p class="font-body text-brand-muted leading-snug md:leading-relaxed"
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
+              Mentally crowded, emotionally burdened, strategically unclear.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-3 md:p-7 flex items-center bg-amber-500/[0.02]">
+          <div class="flex items-start gap-2 md:gap-3">
+            <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+
+            <p class="font-body text-brand-text leading-snug md:leading-relaxed"
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
+              Structured thinking where priorities are simplified, filtered, and execution-ready.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ROW 3 -->
+      <div class="grid grid-cols-2 min-h-[85px] md:min-h-[120px]">
+
+        <div class="p-3 md:p-7 border-r border-white/10 flex items-center">
+          <div class="flex items-start gap-2 md:gap-3">
+            <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-gray-600 mt-2 shrink-0"></div>
+
+            <p class="font-body text-brand-muted leading-snug md:leading-relaxed"
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
+              Ideas without execution, direction without discipline.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-3 md:p-7 flex items-center bg-amber-500/[0.02]">
+          <div class="flex items-start gap-2 md:gap-3">
+            <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+
+            <p class="font-body text-brand-text leading-snug md:leading-relaxed"
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
+              Precise direction where every next step feels intentional, grounded, and obvious.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ROW 4 -->
+      <div class="grid grid-cols-2 min-h-[85px] md:min-h-[120px]">
+
+        <div class="p-3 md:p-7 border-r border-white/10 flex items-center">
+          <div class="flex items-start gap-2 md:gap-3">
+            <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-gray-600 mt-2 shrink-0"></div>
+
+            <p class="font-body text-brand-muted leading-snug md:leading-relaxed"
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
+              Feeling stuck despite capability and clarity gaps.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-3 md:p-7 flex items-center bg-amber-500/[0.02]">
+          <div class="flex items-start gap-2 md:gap-3">
+            <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+
+            <p class="font-body text-brand-text leading-snug md:leading-relaxed"
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
+              Confident articulation where ideas, identity, and value are expressed with clarity and impact.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ROW 5 -->
+      <div class="grid grid-cols-2 min-h-[85px] md:min-h-[120px]">
+
+        <div class="p-3 md:p-7 border-r border-white/10 flex items-center">
+          <div class="flex items-start gap-2 md:gap-3">
+            <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-gray-600 mt-2 shrink-0"></div>
+
+            <p class="font-body text-brand-muted leading-snug md:leading-relaxed"
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
+              Confused by too much noise and too little structure.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-3 md:p-7 flex items-center bg-amber-500/[0.02]">
+          <div class="flex items-start gap-2 md:gap-3">
+            <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+
+            <p class="font-body text-brand-text leading-snug md:leading-relaxed"
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
+              Mental order and emotional lightness that restores focus, energy, and consistency.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ROW 6 -->
+      <div class="grid grid-cols-2 min-h-[85px] md:min-h-[120px]">
+
+        <div class="p-3 md:p-7 border-r border-white/10 flex items-center">
+          <div class="flex items-start gap-2 md:gap-3">
+            <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-gray-600 mt-2 shrink-0"></div>
+
+            <p class="font-body text-brand-muted leading-snug md:leading-relaxed"
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
+              Effort without proportional progress.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-3 md:p-7 flex items-center bg-amber-500/[0.02]">
+          <div class="flex items-start gap-2 md:gap-3">
+            <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+
+            <p class="font-body text-brand-text leading-snug md:leading-relaxed"
+              style="font-size:clamp(0.72rem,2.8vw,0.95rem);">
+              Execution power where ideas consistently translate into action, outcomes, and growth.
+            </p>
+          </div>
+        </div>
+
+      </div>
 
     </div>
 
