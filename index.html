@@ -7,7 +7,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet"/>
 <script>
 tailwind.config = {
   theme: {
@@ -41,47 +41,86 @@ tailwind.config = {
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
-  background-color: #0D0D0D;
+  background-color: #080808;
   color: #E5E7EB;
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: none;
 }
 
-h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
-  letter-spacing: 0.06em;
+/* ═══════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════ */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: #F59E0B;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, opacity 0.2s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(245,158,11,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease-out, width 0.25s, height 0.25s, border-color 0.25s;
+}
+.cursor-ring.hovering {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(245,158,11,0.9);
+}
+body:hover .cursor-dot { opacity: 1; }
+@media (max-width: 768px) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none; }
 }
 
 /* ═══════════════════════════════════════
    SCROLLBAR
 ═══════════════════════════════════════ */
 ::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #080808; }
-::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#F59E0B,#D97706); border-radius: 2px; }
+::-webkit-scrollbar-track { background: #050505; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#F59E0B,#92400E); border-radius: 2px; }
 
 /* ═══════════════════════════════════════
-   NOISE OVERLAY — subtle film grain
+   SELECTION COLOR
+═══════════════════════════════════════ */
+::selection { background: rgba(245,158,11,0.25); color: #FDE68A; }
+
+/* ═══════════════════════════════════════
+   NOISE TEXTURE OVERLAY
 ═══════════════════════════════════════ */
 .noise-overlay {
-  position: fixed; inset: 0; opacity: 0.02; pointer-events: none; z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 256px 256px;
+  position: fixed; inset: 0; opacity: 0.025; pointer-events: none; z-index: 9990;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
 }
 
 /* ═══════════════════════════════════════
    GLOW SYSTEM
 ═══════════════════════════════════════ */
-.glow-orange      { box-shadow: 0 0 50px rgba(245,158,11,0.3), 0 0 100px rgba(245,158,11,0.12); }
+.glow-orange      { box-shadow: 0 0 60px rgba(245,158,11,0.28), 0 0 120px rgba(245,158,11,0.10); }
 .glow-orange-sm   { box-shadow: 0 0 24px rgba(245,158,11,0.2); }
-.glow-orange-btn  { box-shadow: 0 6px 40px rgba(245,158,11,0.45), 0 2px 8px rgba(0,0,0,0.4); }
-.text-glow        { text-shadow: 0 0 60px rgba(245,158,11,0.55), 0 0 20px rgba(245,158,11,0.3); }
+.glow-orange-btn  { box-shadow: 0 8px 40px rgba(245,158,11,0.5), 0 2px 8px rgba(0,0,0,0.5); }
+.text-glow        { text-shadow: 0 0 60px rgba(245,158,11,0.6), 0 0 20px rgba(245,158,11,0.35); }
 
 /* ═══════════════════════════════════════
    GRADIENT TEXT
 ═══════════════════════════════════════ */
 .gradient-text {
-  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 45%, #D97706 100%);
+  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -92,7 +131,7 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 ═══════════════════════════════════════ */
 .divider-orange {
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.5) 35%, rgba(245,158,11,0.5) 65%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.6) 35%, rgba(245,158,11,0.6) 65%, transparent 100%);
 }
 .divider-subtle {
   height: 1px;
@@ -103,26 +142,37 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
    SECTION LABEL
 ═══════════════════════════════════════ */
 .section-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   color: #F59E0B;
+}
+.section-label::before,
+.section-label::after {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: rgba(245,158,11,0.5);
 }
 
 /* ═══════════════════════════════════════
    GLASS CARDS
 ═══════════════════════════════════════ */
 .glass-card {
-  background: rgba(255,255,255,0.025);
-  border: 1px solid rgba(255,255,255,0.07);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.065);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 .glass-card-orange {
   background: rgba(245,158,11,0.06);
-  border: 1px solid rgba(245,158,11,0.22);
+  border: 1px solid rgba(245,158,11,0.2);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -133,8 +183,8 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 .border-gradient {
   border: 1px solid transparent;
   background:
-    linear-gradient(#121212, #121212) padding-box,
-    linear-gradient(145deg, rgba(245,158,11,0.6), rgba(245,158,11,0.05) 50%, rgba(217,119,6,0.4)) border-box;
+    linear-gradient(#0E0E0E, #0E0E0E) padding-box,
+    linear-gradient(145deg, rgba(245,158,11,0.55), rgba(245,158,11,0.03) 50%, rgba(217,119,6,0.35)) border-box;
 }
 
 /* ═══════════════════════════════════════
@@ -142,10 +192,10 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 ═══════════════════════════════════════ */
 .btn-primary {
   background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease;
   position: relative;
   overflow: hidden;
-  cursor: pointer;
+  cursor: none;
 }
 .btn-primary::before {
   content: '';
@@ -153,149 +203,121 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
   inset: 0;
   background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%);
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.28s ease;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
 }
 .btn-primary:hover::before  { opacity: 1; }
-.btn-primary:hover          { transform: translateY(-3px); box-shadow: 0 10px 50px rgba(245,158,11,0.55), 0 0 0 1px rgba(245,158,11,0.35); }
+.btn-primary:hover::after   { transform: translateX(100%); }
+.btn-primary:hover          { transform: translateY(-4px); box-shadow: 0 14px 55px rgba(245,158,11,0.55), 0 0 0 1px rgba(245,158,11,0.3); }
 .btn-primary:active         { transform: translateY(-1px); }
-.btn-primary span           { position: relative; z-index: 1; }
-.btn-primary svg            { position: relative; z-index: 1; }
+.btn-primary span, .btn-primary svg { position: relative; z-index: 1; }
 
 /* ═══════════════════════════════════════
    NAV
 ═══════════════════════════════════════ */
 .nav-bar {
-  background: rgba(10,10,10,0.88);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  transition: border-color 0.3s ease, background 0.3s ease;
+  background: rgba(8,8,8,0.82);
+  backdrop-filter: blur(28px) saturate(1.4);
+  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  border-bottom: 1px solid rgba(255,255,255,0.035);
+  transition: all 0.4s ease;
 }
 .nav-bar.scrolled {
-  border-bottom-color: rgba(245,158,11,0.18);
-  background: rgba(8,8,8,0.96);
+  border-bottom-color: rgba(245,158,11,0.15);
+  background: rgba(5,5,5,0.96);
+  box-shadow: 0 1px 40px rgba(0,0,0,0.6);
 }
 
 /* ═══════════════════════════════════════
-   HERO BACKGROUND
+   NAV PROGRESS BAR
 ═══════════════════════════════════════ */
-.hero-bg {
-  background:
-    radial-gradient(ellipse 55% 70% at 15% 60%, rgba(245,158,11,0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 45% 50% at 85% 20%, rgba(245,158,11,0.05) 0%, transparent 60%),
-    linear-gradient(170deg, #0A0A0A 0%, #0F0F0D 50%, #0D0D0D 100%);
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #F59E0B, #FDE68A);
+  z-index: 9999;
+  width: 0%;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(245,158,11,0.7);
 }
 
 /* ═══════════════════════════════════════
-   HERO PORTRAIT PANEL
+   HERO SECTION
 ═══════════════════════════════════════ */
-.hero-panel {
-  background: linear-gradient(145deg, #F59E0B 0%, #E08A00 55%, #92400E 100%);
+.hero-section {
+  background: #080808;
   position: relative;
   overflow: hidden;
 }
-.hero-panel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.55) 100%);
-  z-index: 1;
-}
-.hero-panel-chevron {
-  position: absolute;
-  right: -20px;
-  top: 20%;
-  bottom: 20%;
-  width: 60px;
-  background: #0D0D0D;
-  clip-path: polygon(100% 0, 100% 100%, 0% 50%);
-  z-index: 5;
-}
 
 /* ═══════════════════════════════════════
-   PORTRAIT (About section)
+   FLOATING PARTICLES
 ═══════════════════════════════════════ */
-.portrait-outer {
-  position: relative;
-}
-.portrait-outer::before {
-  content: '';
+.particle {
   position: absolute;
-  inset: -3px;
-  background: linear-gradient(145deg, #F59E0B 0%, transparent 50%, #D97706 100%);
-  border-radius: 24px;
-  z-index: 0;
-}
-.portrait-inner {
-  position: relative;
-  z-index: 1;
-  border-radius: 22px;
-  overflow: hidden;
-  background: linear-gradient(145deg, #B45309 0%, #F59E0B 50%, #78350F 100%);
-}
-
-/* ═══════════════════════════════════════
-   CHECK ITEM HOVER
-═══════════════════════════════════════ */
-.check-item {
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-  border-left: 2px solid transparent;
-}
-.check-item:hover {
-  border-left-color: rgba(245,158,11,0.7);
-  background: rgba(245,158,11,0.04);
-  transform: translateX(5px);
-}
-
-/* ═══════════════════════════════════════
-   TRANSFORMATION CARDS
-═══════════════════════════════════════ */
-.transform-before {
-  background: linear-gradient(145deg, #101010, #0C0C0C);
-  border: 1px solid rgba(255,255,255,0.055);
-}
-.transform-after {
-  background: linear-gradient(145deg, #1A1100, #121000);
-  border: 1px solid rgba(245,158,11,0.28);
-}
-
-/* ═══════════════════════════════════════
-   PROCESS CONNECTOR LINE
-═══════════════════════════════════════ */
-.process-step { position: relative; }
-.process-step:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: 23px;
-  top: 56px;
-  bottom: -16px;
-  width: 1px;
-  background: linear-gradient(180deg, rgba(245,158,11,0.35), rgba(245,158,11,0.03));
+  width: 2px;
+  height: 2px;
+  background: rgba(245,158,11,0.6);
+  border-radius: 50%;
   pointer-events: none;
+  animation: float-particle linear infinite;
+}
+@keyframes float-particle {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(30px); opacity: 0; }
 }
 
 /* ═══════════════════════════════════════
    SECTION BACKGROUNDS
 ═══════════════════════════════════════ */
-.section-dark    { background: linear-gradient(180deg, #0D0D0D 0%, #101010 100%); }
-.section-deeper  { background: linear-gradient(180deg, #0A0A0A 0%, #0D0D0D 100%); }
-.section-darkest { background: #080808; }
+.section-dark    { background: linear-gradient(180deg, #0A0A0A 0%, #0D0D0D 100%); }
+.section-deeper  { background: linear-gradient(180deg, #080808 0%, #0A0A0A 100%); }
+.section-darkest { background: #060606; }
 
 /* ═══════════════════════════════════════
    SCROLL ANIMATIONS
 ═══════════════════════════════════════ */
 .fade-up {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-right {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .fade-in {
   opacity: 0;
-  transition: opacity 0.9s ease;
+  transition: opacity 1s ease;
+}
+.scale-in {
+  opacity: 0;
+  transform: scale(0.93);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .fade-up.visible,
-.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-left.visible,
+.fade-right.visible,
+.fade-in.visible,
+.scale-in.visible { opacity: 1; transform: none; }
 
+.d50  { transition-delay: 0.05s; }
 .d100 { transition-delay: 0.1s; }
 .d150 { transition-delay: 0.15s; }
 .d200 { transition-delay: 0.2s; }
@@ -303,142 +325,104 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 .d400 { transition-delay: 0.4s; }
 .d500 { transition-delay: 0.5s; }
 .d600 { transition-delay: 0.6s; }
+.d700 { transition-delay: 0.7s; }
+
+/* ═══════════════════════════════════════
+   HERO CARD FLOAT ANIMATION
+═══════════════════════════════════════ */
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+.float-anim { animation: gentle-float 6s ease-in-out infinite; }
+
+/* ═══════════════════════════════════════
+   STAGGERED HERO TEXT
+═══════════════════════════════════════ */
+@keyframes hero-slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-line-1 { animation: hero-slide-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+.hero-line-2 { animation: hero-slide-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.38s both; }
+.hero-line-3 { animation: hero-slide-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.54s both; }
+.hero-line-4 { animation: hero-slide-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s both; }
+.hero-card-1 { animation: hero-slide-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s both; }
+.hero-card-2 { animation: hero-slide-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.65s both; }
+.hero-cta    { animation: hero-slide-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.82s both; }
+.hero-img    { animation: hero-slide-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.35s both; }
 
 /* ═══════════════════════════════════════
    SLIDER
 ═══════════════════════════════════════ */
-.slider-track { transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.slider-track { transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 
 /* ═══════════════════════════════════════
    STAR RATING
 ═══════════════════════════════════════ */
 .stars { display: flex; gap: 3px; }
-.stars svg { width: 14px; height: 14px; fill: #F59E0B; }
+.stars svg { width: 13px; height: 13px; fill: #F59E0B; }
 
 /* ═══════════════════════════════════════
-   TRUST PILLS (hero)
+   CARD HOVER LIFT
 ═══════════════════════════════════════ */
-.trust-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(245,158,11,0.07);
-  border: 1px solid rgba(245,158,11,0.2);
-  border-radius: 100px;
-  padding: 6px 14px 6px 10px;
+.card-lift {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,158,11,0.1);
 }
 
 /* ═══════════════════════════════════════
-   MOBILE FIXES
+   CHECK ITEM HOVER
 ═══════════════════════════════════════ */
-@media (max-width: 1024px) {
-  .hero-bg { min-height: auto; }
+.check-item {
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-left: 2px solid transparent;
+}
+.check-item:hover {
+  border-left-color: rgba(245,158,11,0.7);
+  background: rgba(245,158,11,0.04);
+  transform: translateX(6px);
 }
 
-@media (max-width: 768px) {
-  .hero-bg {
-    padding-top: 70px;
-    padding-bottom: 60px;
-  }
+/* ═══════════════════════════════════════
+   PULSE DOT
+═══════════════════════════════════════ */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(245,158,11,0.5); }
+  50%       { opacity: 0.7; transform: scale(0.85); box-shadow: 0 0 0 5px rgba(245,158,11,0); }
+}
+.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
 
-  .hero-bg .max-w-7xl {
-    padding-top: 60px !important;
-    padding-bottom: 50px !important;
-  }
-
-  .section-dark,
-  .section-deeper,
-  .section-darkest,
-  .cta-strip,
-  .final-cta-bg {
-    padding-top: 4rem !important;
-    padding-bottom: 4rem !important;
-  }
-
-  .section-head {
-    text-align: center;
-  }
-
-  .section-head h2 {
-    font-size: clamp(2rem, 7vw, 2.8rem);
-    line-height: 1.1;
-  }
-
-  .glass-card,
-  .glass-card-orange,
-  .border-gradient {
-    padding: 1.75rem !important;
-  }
-
-  .grid.grid-cols-2:not(.transform-table) {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-
-  .transform-table p {
-    font-size: clamp(0.7rem, 1.5vw, 0.95rem) !important;
-  }
-
-  .hero-bg .btn-primary,
-  .cta-strip .btn-primary,
-  .final-cta-bg .btn-primary {
-    width: 100%;
-    justify-content: center;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .final-cta-bg .grid.grid-cols-3 {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-
-  .portrait-outer {
-    margin: 0 auto;
-    max-width: 280px;
-  }
-
-  .process-step {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .process-step:not(:last-child)::after {
-    left: 14px;
-    top: 56px;
-    bottom: -16px;
-  }
-
-  .trust-pill {
-    flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .trust-pill span {
-    white-space: nowrap;
-  }
-
-  .hero-panel-chevron,
-  .hero-bg .absolute > div {
-    display: none;
-  }
-
-  .nav-bar {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-
-  .nav-bar .btn-primary {
-    display: inline-flex;
-    padding: 0.75rem 1rem;
-    font-size: 0.85rem;
-  }
+/* ═══════════════════════════════════════
+   BEFORE/AFTER TABLE HIGHLIGHT ROW
+═══════════════════════════════════════ */
+.transform-row {
+  transition: background 0.25s ease;
+}
+.transform-row:hover > div:first-child {
+  background: rgba(255,255,255,0.015);
+}
+.transform-row:hover > div:last-child {
+  background: rgba(245,158,11,0.05);
 }
 
 /* ═══════════════════════════════════════
    MID-CTA STRIP
 ═══════════════════════════════════════ */
 .cta-strip {
-  background: linear-gradient(90deg, #0D0D0D 0%, #141008 50%, #0D0D0D 100%);
+  background: linear-gradient(90deg, #080808 0%, #100F08 50%, #080808 100%);
+  position: relative;
+  overflow: hidden;
+}
+.cta-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 200% at 50% 50%, rgba(245,158,11,0.06), transparent);
+  pointer-events: none;
 }
 
 /* ═══════════════════════════════════════
@@ -448,87 +432,251 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 .section-head h2 {
   font-family: 'Bebas Neue', sans-serif;
   color: #fff;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   line-height: 1;
 }
 
 /* ═══════════════════════════════════════
-   PULSE DOT
-═══════════════════════════════════════ */
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.5; transform: scale(0.8); }
-}
-.pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
-
-/* ═══════════════════════════════════════
-   CARD HOVER LIFT
-═══════════════════════════════════════ */
-.card-lift {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.card-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(245,158,11,0.12);
-}
-
-/* ═══════════════════════════════════════
-   FINAL CTA BG
+   FINAL CTA
 ═══════════════════════════════════════ */
 .final-cta-bg {
   background:
-    radial-gradient(ellipse 65% 65% at 50% 50%, rgba(245,158,11,0.1) 0%, transparent 65%),
-    radial-gradient(ellipse 35% 35% at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 50%),
-    linear-gradient(160deg, #090806 0%, #0F0E0A 30%, #0D0D0D 100%);
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(245,158,11,0.09) 0%, transparent 65%),
+    linear-gradient(160deg, #060504 0%, #0D0C08 30%, #080808 100%);
+}
+
+/* ═══════════════════════════════════════
+   PROCESS STEP LINE
+═══════════════════════════════════════ */
+.step-connector {
+  position: absolute;
+  left: 23px;
+  top: 56px;
+  bottom: -16px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(245,158,11,0.4), rgba(245,158,11,0.02));
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.footer-bg {
+  background: #040404;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* ═══════════════════════════════════════
+   BADGE / PILL
+═══════════════════════════════════════ */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 10px;
+  border-radius: 100px;
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.2);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(253,230,138,0.9);
+}
+
+/* ═══════════════════════════════════════
+   SHIMMER EFFECT ON PORTRAIT
+═══════════════════════════════════════ */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%) rotate(30deg); }
+  100% { transform: translateX(200%) rotate(30deg); }
+}
+.portrait-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.07) 50%, transparent 60%);
+  animation: shimmer-sweep 5s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════
+   COUNTER ANIMATION
+═══════════════════════════════════════ */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.stat-num { animation: count-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* ═══════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .section-head h2 { font-size: clamp(2.4rem, 8vw, 3rem); }
+  .glass-card, .glass-card-orange, .border-gradient { padding: 1.5rem !important; }
+}
+
+/* ═══════════════════════════════════════
+   ABOUT SECTION CREDENTIAL HOVER
+═══════════════════════════════════════ */
+.cred-item {
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.cred-item:hover {
+  background: rgba(245,158,11,0.05) !important;
+  border-color: rgba(245,158,11,0.2) !important;
+  transform: translateX(4px);
+}
+
+/* ═══════════════════════════════════════
+   TOOLTIP HINT ON IMAGE
+═══════════════════════════════════════ */
+.img-hover-label {
+  position: absolute;
+  bottom: 70px;
+  right: 16px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+.portrait-wrap:hover .img-hover-label { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════
+   BACK TO TOP
+═══════════════════════════════════════ */
+#back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 888;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(245,158,11,0.12);
+  border: 1px solid rgba(245,158,11,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.35s ease, transform 0.35s ease, background 0.2s ease;
+  cursor: none;
+  backdrop-filter: blur(12px);
+}
+#back-to-top.visible { opacity: 1; transform: translateY(0); }
+#back-to-top:hover { background: rgba(245,158,11,0.22); }
+
+/* ═══════════════════════════════════════
+   SMOOTH IMAGE LOADING
+═══════════════════════════════════════ */
+img { transition: opacity 0.4s ease; }
+img.loaded { opacity: 1; }
+
+/* ═══════════════════════════════════════
+   STICKY NAV LOGO SHRINK
+═══════════════════════════════════════ */
+.nav-logo { transition: width 0.3s ease; }
+.nav-bar.scrolled .nav-logo { width: 80px; }
+
+/* ═══════════════════════════════════════
+   TESTIMONIAL CARD GLOW ON HOVER
+═══════════════════════════════════════ */
+.testimonial-card {
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,158,11,0.12);
+  border-color: rgba(245,158,11,0.15);
+}
+
+/* ═══════════════════════════════════════
+   EXCLUSION LIST — STRIKETHROUGH ANIM
+═══════════════════════════════════════ */
+.not-for-item {
+  transition: background 0.2s ease;
+}
+.not-for-item:hover {
+  background: rgba(239,68,68,0.03);
+}
+
+/* ═══════════════════════════════════════
+   SMOOTH UNDERLINE ON NAV CTA
+═══════════════════════════════════════ */
+.nav-cta-link {
+  position: relative;
+  text-decoration: none;
 }
 </style>
 </head>
 <body>
+
+<!-- Custom Cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Scroll Progress Bar -->
+<div id="scroll-progress"></div>
+
+<!-- Noise Overlay -->
 <div class="noise-overlay"></div>
+
+<!-- Back to Top -->
+<button id="back-to-top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5">
+    <path d="m18 15-6-6-6 6"/>
+  </svg>
+</button>
 
 <!-- ══════════════════════════════════════════
      NAV
 ══════════════════════════════════════════ -->
 <nav id="mainNav" class="nav-bar fixed top-0 left-0 right-0 z-50">
   <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between">
-
-    <!-- Logo -->
     <div class="flex items-center gap-3">
-      
-
-
-
-<img src="/images/logo white.png" alt="" srcset="" class="w-24">
-
-
-
+      <img src="/images/logo white.png" alt="Strategist AG" class="nav-logo w-24">
     </div>
-
-    <!-- Nav CTA -->
-    <a href="https://forms.gle/yE3mAUyMCp2frUiUA" class="btn-primary hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-black font-heading font-700 text-sm tracking-wide">
-      <span>Secure Your Slot</span>
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
-    </a>
+    <div class="flex items-center gap-4">
+      <!-- Mobile CTA -->
+      <a href="https://forms.gle/yE3mAUyMCp2frUiUA" class="md:hidden btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-black font-body font-700 text-xs tracking-wide">
+        <span>Apply Now</span>
+      </a>
+      <!-- Desktop CTA -->
+      <a href="https://forms.gle/yE3mAUyMCp2frUiUA" class="btn-primary hidden md:inline-flex items-center gap-2 px-6 py-3 rounded-full text-black font-body font-600 text-sm tracking-wide">
+        <span>Secure Your Slot</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </div>
   </div>
 </nav>
 
 
 <!-- ══════════════════════════════════════════
-     SECTION 1 — HERO
-══<!-- HERO SECTION -->
-<<section class="relative overflow-hidden min-h-screen flex items-center bg-[#0D0D0D]">
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero-section relative overflow-hidden min-h-screen flex items-center">
 
-  <!-- Ambient glow blobs -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-[10%] left-[5%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(245,158,11,0.06),transparent_70%)]"></div>
-    <div class="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(245,158,11,0.04),transparent_65%)]"></div>
+  <!-- Ambient blobs -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-[5%] left-[2%] w-[600px] h-[600px] rounded-full" style="background:radial-gradient(circle,rgba(245,158,11,0.07),transparent 70%);filter:blur(30px);"></div>
+    <div class="absolute bottom-0 right-[5%] w-[500px] h-[500px] rounded-full" style="background:radial-gradient(circle,rgba(245,158,11,0.05),transparent 70%);filter:blur(25px);"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full" style="background:radial-gradient(ellipse,rgba(245,158,11,0.03),transparent 60%);"></div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-5 md:px-8 w-full relative z-10 pt-[100px] pb-[80px]">
+  <!-- Floating particles container -->
+  <div id="particles" class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true"></div>
 
+  <!-- Fine grid pattern -->
+  <div class="absolute inset-0 pointer-events-none" style="background-image:linear-gradient(rgba(245,158,11,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(245,158,11,0.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);"></div>
+
+  <div class="max-w-7xl mx-auto px-5 md:px-8 w-full relative z-10 pt-[100px] pb-[80px]">
     <div class="grid lg:grid-cols-12 gap-12 items-center min-h-[calc(100vh-180px)]">
 
-      <!-- LEFT CONTENT -->
+ <!-- LEFT CONTENT -->
       <div class="lg:col-span-7 space-y-10 text-center lg:text-left lg:pr-16">
 
         <!-- HEADLINE -->
@@ -536,20 +684,20 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 
           <h1 class="">
 
-            <span class="block text-white text-[clamp(0.2rem,4.2vw,3.6rem) ] tracking-tighter font-medium">
+            <span class="block text-white text-[clamp(1rem,3.2vw,1.5rem)] tracking-tighter font-medium">
               You Are Not Confused Because
             </span>
 
-            <span class="bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 block text-transparent bg-clip-text text-white text-[clamp(1.5rem,6vw,5.4rem)] leading-[1.05] tracking-tighter font-semibold gradient-text">
+            <span class="bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 block text-transparent bg-clip-text text-white text-[clamp(1.3rem,3.5vw,2.8rem)] leading-[1.05] tracking-tighter font-semibold gradient-text">
               You Lack Potential.
             </span>
             
             
-            <span class="mt-2 block text-white text-[clamp(0.2rem,4.2vw,3.6rem)] font-medium tracking-tighter">
+            <span class="mt-2 block text-white text-[clamp(0.95rem,2.8vw,1.5rem)] font-medium tracking-tighter">
               You are confused because
             </span>
 
-            <span class="block text-transparent bg-clip-text text-white text-[clamp(1.5rem,6vw,5.4rem)] leading-[1.05] tracking-tighter font-semibold gradient-text">
+            <span class="block text-transparent bg-clip-text text-white text-[clamp(1.3rem,3.5vw,2.8rem)] leading-[1.05] tracking-tighter font-semibold gradient-text">
               no one has shown you where to point it.
 
             </span>
@@ -624,55 +772,56 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
       </div>
 
       <!-- RIGHT IMAGE -->
-      <div class="lg:col-span-5 flex justify-center lg:justify-end">
+      <div class="lg:col-span-5 flex justify-center lg:justify-end hero-img">
+        <div class="relative w-full max-w-[480px]">
 
-        <div class="relative w-full max-w-[520px]">
+          <!-- Glow behind image -->
+          <div class="absolute -inset-6 rounded-full" style="background:radial-gradient(ellipse at center,rgba(245,158,11,0.18),transparent 70%);filter:blur(20px);"></div>
 
-          <div class="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl shadow-black/50">
+          <!-- Image wrapper -->
+          <div class="portrait-wrap relative aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.6)] portrait-shimmer float-anim">
 
             <img src="/images/pix.png"
                  alt="Portrait of Abraham George U."
                  class="absolute inset-0 w-full h-full object-cover" />
 
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/70"></div>
+            <!-- Bottom gradient -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/75"></div>
 
-            <!-- NAME BADGE -->
-            <div class="absolute bottom-5 left-5 right-5 flex justify-between items-center">
+            <!-- Side gradient for depth -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent"></div>
 
-              <div class="flex items-center gap-3 bg-amber-400/90 px-4 py-3 rounded-xl">
-
-                <svg class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                  <circle cx="12" cy="7" r="4"/>
-                </svg>
-
+            <!-- Name badge -->
+            <div class="absolute bottom-5 left-5 right-5 flex justify-between items-end">
+              <div class="flex items-center gap-3 px-4 py-3 rounded-xl"
+                style="background:rgba(245,158,11,0.92);backdrop-filter:blur(10px);">
                 <div>
-                  <div class="font-bold text-black text-sm leading-none">
-                    Abraham George U.
-                  </div>
-                  <div class="text-black/70 text-xs mt-1">
-                    Strategist AG | Clarity Architect 
-                  </div>
+                  <div class="font-bold text-black text-sm leading-none">Abraham George U.</div>
+                  <div class="text-black/65 text-[0.7rem] mt-0.5">Strategist AG · Clarity Architect</div>
                 </div>
-
               </div>
+            </div>
 
+            <!-- Corner accent -->
+            <div class="absolute top-4 right-4">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);backdrop-filter:blur(8px);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
             </div>
 
           </div>
 
-          <div class="absolute -inset-8 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.14),transparent_70%)] blur-2xl"></div>
-
+          <!-- Decorative corner lines -->
+          <div class="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-amber-500/40 rounded-tl-xl pointer-events-none"></div>
+          <div class="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-amber-500/40 rounded-br-xl pointer-events-none"></div>
         </div>
-
       </div>
 
     </div>
-
   </div>
 
-  <div class="absolute bottom-0 left-0 right-0 h-[120px] bg-gradient-to-t from-[#0D0D0D] to-transparent"></div>
-
+  <!-- Bottom fade -->
+  <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none"></div>
 </section>
 
 
@@ -680,37 +829,36 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
      SECTION 2 — WHAT THIS REALLY IS
 ══════════════════════════════════════════ -->
 <section class="section-dark relative overflow-hidden" style="padding:7rem 0;">
-  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 55% 45% at 50% 50%,rgba(245,158,11,0.04),transparent 70%);"></div>
+  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 50% 40% at 50% 50%,rgba(245,158,11,0.04),transparent 70%);"></div>
 
   <div class="max-w-3xl mx-auto px-5 md:px-8">
 
     <div class="fade-up section-head mb-14">
-      <div class="section-label mb-4">What Is The Private Premium Clarity Intensive?</div>
-      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">WHAT THIS REALLY IS</h2>
-      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+      <div class="section-label mb-5">What Is The Private Premium Clarity Intensive?</div>
+      <h2 style="font-size:clamp(2.6rem,6vw,4rem);">WHAT THIS REALLY IS</h2>
+      <div class="divider-orange mt-6 max-w-[160px] mx-auto"></div>
     </div>
 
-    <div class="fade-up d200 border-gradient rounded-3xl relative" style="padding:3rem 3rem;">
-      <!-- Top connector line -->
-      <div class="absolute top-0 left-14 w-px" style="height:32px;transform:translateY(-100%);background:linear-gradient(0deg,#F59E0B,transparent);"></div>
+    <div class="fade-up d200 border-gradient rounded-3xl relative" style="padding:3rem;">
+      <div class="absolute top-0 left-14 w-px" style="height:32px;transform:translateY(-100%);background:linear-gradient(0deg,rgba(245,158,11,0.5),transparent);"></div>
 
-      <p class="font-body text-brand-text leading-loose mb-6" style="font-size:1.05rem;">
+      <p class="font-body text-brand-text leading-loose mb-6" style="font-size:1.02rem;">
         The PPCI is an exclusive one-on-one virtual session with Strategist AG designed for people who know they are capable of more but cannot clearly identify what is stopping them from moving forward.
       </p>
       <div class="divider-subtle mb-6"></div>
-      <p class="font-body text-brand-text leading-loose mb-6" style="font-size:1.05rem;">
+      <p class="font-body text-brand-text leading-loose mb-6" style="font-size:1.02rem;">
         During this experience, hidden patterns are uncovered, internal conflicts are named, scattered thoughts become structured, and clarity becomes actionable.
       </p>
       <div class="divider-subtle mb-6"></div>
-      <p class="font-body text-brand-text leading-loose mb-8" style="font-size:1.05rem;">
-        The goal is not simply to make you “feel better.” The goal is to help you see clearly enough to move differently.
+      <p class="font-body text-brand-text leading-loose mb-8" style="font-size:1.02rem;">
+        The goal is not simply to make you "feel better." The goal is to help you see clearly enough to move differently.
       </p>
 
-      <div class="glass-card-orange rounded-2xl p-6">
-        <p class="font-heading font-700 text-white leading-snug" style="font-size:1.2rem;">
+      <div class="glass-card-orange rounded-2xl p-6" style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.18);">
+        <p class="font-heading font-700 text-white leading-snug" style="font-size:1.15rem;letter-spacing:0.02em;">
           "This is strategic clarity work — not generic coaching."
         </p>
-        <p class="font-body text-amber-400/60 mt-2 tracking-widest uppercase" style="font-size:0.7rem;font-weight:600;">— Abraham George U., Clarity Architect</p>
+        <p class="font-body text-amber-400/50 mt-2 tracking-widest uppercase" style="font-size:0.67rem;font-weight:600;">— Abraham George U., Clarity Architect</p>
       </div>
     </div>
   </div>
@@ -724,67 +872,68 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
   <div class="max-w-6xl mx-auto px-5 md:px-8">
 
     <div class="fade-up section-head mb-14">
-      <div class="section-label mb-4">Ideal Profile</div>
-      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">WHO THIS IS FOR</h2>
-      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+      <div class="section-label mb-5">Ideal Profile</div>
+      <h2 style="font-size:clamp(2.6rem,6vw,4rem);">WHO THIS IS FOR</h2>
+      <div class="divider-orange mt-6 max-w-[160px] mx-auto"></div>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
 
       <div class="fade-up d100 glass-card card-lift rounded-2xl p-6 check-item">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4 flex-shrink-0" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.15);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You feel stuck despite your potential.</p>
+        <p class="font-body text-brand-text leading-relaxed text-sm">You feel stuck despite your potential.</p>
+      </div>
+
+      <div class="fade-up d150 glass-card card-lift rounded-2xl p-6 check-item">
+        <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4 flex-shrink-0" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.15);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p class="font-body text-brand-text leading-relaxed text-sm">You have ideas but struggle with execution.</p>
       </div>
 
       <div class="fade-up d200 glass-card card-lift rounded-2xl p-6 check-item">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4 flex-shrink-0" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.15);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You have ideas but struggle with execution.</p>
+        <p class="font-body text-brand-text leading-relaxed text-sm">You are mentally overwhelmed by too many directions.</p>
+      </div>
+
+      <div class="fade-up d250 glass-card card-lift rounded-2xl p-6 check-item">
+        <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4 flex-shrink-0" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.15);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p class="font-body text-brand-text leading-relaxed text-sm">You know you are capable of more but cannot explain why results are inconsistent.</p>
       </div>
 
       <div class="fade-up d300 glass-card card-lift rounded-2xl p-6 check-item">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4 flex-shrink-0" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.15);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You are mentally overwhelmed by too many directions.</p>
+        <p class="font-body text-brand-text leading-relaxed text-sm">You struggle with positioning yourself properly.</p>
       </div>
 
-      <div class="fade-up d100 glass-card card-lift rounded-2xl p-6 check-item">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      <div class="fade-up d350 glass-card card-lift rounded-2xl p-6 check-item">
+        <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4 flex-shrink-0" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.15);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You know you are capable of more but cannot explain why results are inconsistent.</p>
-      </div>
-
-      <div class="fade-up d200 glass-card card-lift rounded-2xl p-6 check-item">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You struggle with positioning yourself properly.</p>
-      </div>
-
-      <div class="fade-up d300 glass-card card-lift rounded-2xl p-6 check-item">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You feel unclear about your next move in life, business, leadership, visibility, or personal growth.</p>
+        <p class="font-body text-brand-text leading-relaxed text-sm">You feel unclear about your next move in life, business, leadership, or personal growth.</p>
       </div>
 
       <div class="fade-up d400 glass-card card-lift rounded-2xl p-6 check-item">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,0.12);">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4 flex-shrink-0" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.15);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <p class="font-body text-brand-text leading-relaxed" style="font-size:0.95rem;">You are tired of surface-level advice that changes nothing.</p>
+        <p class="font-body text-brand-text leading-relaxed text-sm">You are tired of surface-level advice that changes nothing.</p>
       </div>
 
-      <!-- YOU card -->
-      <div class="fade-up d500 glass-card-orange card-lift rounded-2xl p-6 flex items-center justify-center">
+      <!-- YOU CARD -->
+      <div class="fade-up d500 glass-card-orange card-lift rounded-2xl p-6 flex items-center justify-center col-span-1 md:col-span-1 lg:col-span-2"
+        style="background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(245,158,11,0.03));border:1px solid rgba(245,158,11,0.22);">
         <div class="text-center">
-          <div class="gradient-text text-glow font-display mb-2" style="font-size:3.5rem;">YOU.</div>
-          <p class="font-heading font-600 text-white tracking-widest uppercase" style="font-size:0.72rem;">This is for you.</p>
+          <div class="gradient-text text-glow font-display" style="font-size:clamp(2.8rem,5vw,4.5rem);line-height:1;">YOU.</div>
+          <p class="font-body font-500 text-white/60 tracking-[0.3em] uppercase mt-2" style="font-size:0.65rem;">This is for you.</p>
         </div>
       </div>
 
@@ -797,68 +946,73 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
      SECTION 4 — WHO THIS IS NOT FOR
 ══════════════════════════════════════════ -->
 <section class="section-darkest relative overflow-hidden" style="padding:7rem 0;">
-  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 50% 40% at 50% 100%,rgba(245,158,11,0.03),transparent);"></div>
+  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 50% 35% at 50% 100%,rgba(245,158,11,0.03),transparent);"></div>
 
   <div class="max-w-4xl mx-auto px-5 md:px-8">
 
     <div class="fade-up section-head mb-14">
-      <div class="section-label mb-4">Exclusivity Filter</div>
-      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">WHO THIS IS <span class="gradient-text">NOT</span> FOR</h2>
-      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+      <div class="section-label mb-5">Exclusivity Filter</div>
+      <h2 style="font-size:clamp(2.6rem,6vw,4rem);">WHO THIS IS <span class="gradient-text">NOT</span> FOR</h2>
+      <div class="divider-orange mt-6 max-w-[160px] mx-auto"></div>
     </div>
 
     <div class="fade-up d200 space-y-3 max-w-2xl mx-auto">
 
-      <div class="flex items-start gap-5 rounded-2xl px-6 py-5" style="background:rgba(255,255,255,0.018);border:1px solid rgba(255,255,255,0.04);">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <div class="not-for-item flex items-start gap-5 rounded-2xl px-6 py-5 cursor-default"
+        style="background:rgba(255,255,255,0.016);border:1px solid rgba(255,255,255,0.038);">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.09);border:1px solid rgba(239,68,68,0.18);">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </div>
-        <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">Window shoppers.</p>
+        <p class="font-body text-gray-400 leading-relaxed text-sm">Window shoppers.</p>
       </div>
 
-      <div class="flex items-start gap-5 rounded-2xl px-6 py-5" style="background:rgba(255,255,255,0.018);border:1px solid rgba(255,255,255,0.04);">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <div class="not-for-item flex items-start gap-5 rounded-2xl px-6 py-5 cursor-default"
+        style="background:rgba(255,255,255,0.016);border:1px solid rgba(255,255,255,0.038);">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.09);border:1px solid rgba(239,68,68,0.18);">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </div>
-        <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">People looking for quick motivation.</p>
+        <p class="font-body text-gray-400 leading-relaxed text-sm">People looking for quick motivation.</p>
       </div>
 
-      <div class="flex items-start gap-5 rounded-2xl px-6 py-5" style="background:rgba(255,255,255,0.018);border:1px solid rgba(255,255,255,0.04);">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <div class="not-for-item flex items-start gap-5 rounded-2xl px-6 py-5 cursor-default"
+        style="background:rgba(255,255,255,0.016);border:1px solid rgba(255,255,255,0.038);">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.09);border:1px solid rgba(239,68,68,0.18);">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </div>
-        <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">Individuals unwilling to execute.</p>
+        <p class="font-body text-gray-400 leading-relaxed text-sm">Individuals unwilling to execute.</p>
       </div>
 
-      <div class="flex items-start gap-5 rounded-2xl px-6 py-5" style="background:rgba(255,255,255,0.018);border:1px solid rgba(255,255,255,0.04);">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <div class="not-for-item flex items-start gap-5 rounded-2xl px-6 py-5 cursor-default"
+        style="background:rgba(255,255,255,0.016);border:1px solid rgba(255,255,255,0.038);">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.09);border:1px solid rgba(239,68,68,0.18);">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </div>
-        <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">People comfortable remaining where they are.</p>
+        <p class="font-body text-gray-400 leading-relaxed text-sm">People comfortable remaining where they are.</p>
       </div>
 
-      <div class="flex items-start gap-5 rounded-2xl px-6 py-5" style="background:rgba(255,255,255,0.018);border:1px solid rgba(255,255,255,0.04);">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <div class="not-for-item flex items-start gap-5 rounded-2xl px-6 py-5 cursor-default"
+        style="background:rgba(255,255,255,0.016);border:1px solid rgba(255,255,255,0.038);">
+        <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(239,68,68,0.09);border:1px solid rgba(239,68,68,0.18);">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </div>
-        <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">Those unwilling to confront uncomfortable truths.</p>
+        <p class="font-body text-gray-400 leading-relaxed text-sm">Those unwilling to confront uncomfortable truths.</p>
       </div>
-
     </div>
   </div>
 </section>
 
 
 <!-- ══════════════════════════════════════════
-     MID-PAGE CTA STRIP
+     MID-CTA STRIP
 ══════════════════════════════════════════ -->
-<div class="cta-strip" style="padding:4rem 0;">
+<div class="cta-strip" style="padding:4.5rem 0;">
   <div class="divider-orange mb-10"></div>
-  <div class="text-center px-5">
-    <p class="font-heading font-700 text-white mb-6" style="font-size:1.15rem;">Slots fill fast. There is no waitlist.</p>
-    <a href="#apply" class="btn-primary inline-flex items-center gap-3 px-9 py-5 rounded-2xl text-black font-heading font-800 tracking-wide" style="font-size:1.15rem;">
+  <div class="fade-up text-center px-5">
+    <p class="font-heading text-white mb-2 tracking-wide" style="font-size:0.78rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(245,158,11,0.6);">Slots fill fast. There is no waitlist.</p>
+    <p class="font-display text-white mb-7" style="font-size:clamp(1.8rem,4vw,2.8rem);">THE NEXT SLOT COULD BE YOURS.</p>
+    <a href="#apply" class="btn-primary inline-flex items-center gap-3 px-9 py-4 rounded-2xl text-black font-body font-700 tracking-wide" style="font-size:1rem;">
       <span>Claim Your Private Slot</span>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
     </a>
   </div>
   <div class="divider-orange mt-10"></div>
@@ -868,167 +1022,91 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 <!-- ══════════════════════════════════════════
      SECTION 5 — WHAT HAPPENS INSIDE
 ══════════════════════════════════════════ -->
-<section class="relative overflow-hidden bg-[#0D0D0D] py-20 lg:py-28">
+<section class="relative overflow-hidden bg-[#090909] py-24 lg:py-32">
+  <div class="absolute pointer-events-none top-0 right-[-80px] w-[420px] h-[420px] rounded-full" style="background:radial-gradient(circle,rgba(245,158,11,0.06),transparent 70%);"></div>
+  <div class="absolute pointer-events-none bottom-0 left-[-80px] w-[360px] h-[360px] rounded-full" style="background:radial-gradient(circle,rgba(245,158,11,0.04),transparent 70%);"></div>
 
-  <!-- ambient glow -->
-  <div class="absolute pointer-events-none top-10 right-[-100px] w-[380px] h-[380px] rounded-full bg-[radial-gradient(circle,rgba(245,158,11,0.06),transparent_70%)]"></div>
+  <div class="max-w-4xl mx-auto px-5 md:px-8">
 
-  <div class="max-w-5xl mx-auto px-5 md:px-8">
-
-    <!-- HEADER -->
-    <div class="text-center mb-16 space-y-4">
-
-      <div class="text-xs md:text-sm uppercase tracking-[0.3em] text-amber-400 font-semibold">
-        The Session Architecture
-      </div>
-
-      <h2 class="text-white font-semibold leading-tight text-[clamp(2.2rem,5vw,3.6rem)]">
+    <div class="text-center mb-16 space-y-4 fade-up">
+      <div class="section-label justify-center mb-5">The Session Architecture</div>
+      <h2 class="font-display text-white leading-tight" style="font-size:clamp(2.6rem,6vw,4rem);letter-spacing:0.03em;">
         WHAT HAPPENS INSIDE THE SESSION
       </h2>
-
-      <p class="text-gray-400 mx-auto max-w-xl leading-relaxed text-sm md:text-base">
+      <p class="text-gray-400 mx-auto max-w-lg leading-loose text-sm">
         A live private virtual call between you and Strategist AG where clarity, direction, and execution are built together.
       </p>
-
-      <div class="w-24 h-px bg-amber-400/60 mx-auto"></div>
-
+      <div class="divider-orange max-w-[160px] mx-auto mt-6"></div>
     </div>
 
-    <!-- STEPS WRAPPER -->
-    <div class="space-y-6 relative">
+    <div class="space-y-4 relative">
 
-      <!-- vertical line (desktop only progression feel) -->
-      <div class="hidden md:block absolute left-6 top-0 bottom-0 w-px bg-white/10"></div>
-
-      <!-- STEP 1 -->
-      <div class="relative flex flex-col md:flex-row gap-5 md:gap-8">
-
-        <div class="flex items-start md:items-center gap-5 md:w-full">
-
-          <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-semibold bg-gradient-to-br from-amber-400 to-amber-600 relative z-10">
-            01
-          </div>
-
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex-1 backdrop-blur-xl">
-
-            <h3 class="text-white font-semibold mb-2 text-base md:text-lg tracking-wide">
-              Live Private Diagnostic Session
-            </h3>
-
-            <p class="text-gray-400 leading-relaxed text-sm md:text-[0.95rem]">
-              The session takes place as a live private virtual call between you and Strategist AG, focused entirely on your real situation — not a script, not a repeatable formula.
-            </p>
-
-          </div>
-
+      <!-- Step 1 -->
+      <div class="fade-up d100 relative flex gap-6 items-start">
+        <div class="flex flex-col items-center flex-shrink-0">
+          <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-black font-bold text-sm flex-shrink-0 relative z-10"
+            style="background:linear-gradient(135deg,#F59E0B,#D97706);box-shadow:0 4px 20px rgba(245,158,11,0.3);">01</div>
+          <div class="w-px flex-1 mt-3" style="background:linear-gradient(180deg,rgba(245,158,11,0.3),rgba(245,158,11,0.03));min-height:24px;"></div>
         </div>
-
+        <div class="bg-white/[0.025] border border-white/[0.07] rounded-2xl p-6 flex-1 mb-4 hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-300">
+          <h3 class="text-white font-semibold mb-2 text-base tracking-wide">Live Private Diagnostic Session</h3>
+          <p class="text-gray-400 leading-loose text-sm">A live private virtual call focused entirely on your real situation — not a script, not a repeatable formula.</p>
+        </div>
       </div>
 
-      <!-- STEP 2 -->
-      <div class="relative flex flex-col md:flex-row gap-5 md:gap-8">
-
-        <div class="flex items-start md:items-center gap-5 md:w-full">
-
-          <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-semibold bg-gradient-to-br from-amber-400 to-amber-600 relative z-10">
-            02
-          </div>
-
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex-1 backdrop-blur-xl">
-
-            <h3 class="text-white font-semibold mb-2 text-base md:text-lg tracking-wide">
-              Hidden Patterns Revealed
-            </h3>
-
-            <p class="text-gray-400 leading-relaxed text-sm md:text-[0.95rem]">
-              Through psychologically grounded conversation and precision questioning, deeper issues beneath the surface are uncovered and named clearly.
-            </p>
-
-          </div>
-
+      <!-- Step 2 -->
+      <div class="fade-up d200 relative flex gap-6 items-start">
+        <div class="flex flex-col items-center flex-shrink-0">
+          <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-black font-bold text-sm flex-shrink-0 relative z-10"
+            style="background:linear-gradient(135deg,#F59E0B,#D97706);box-shadow:0 4px 20px rgba(245,158,11,0.3);">02</div>
+          <div class="w-px flex-1 mt-3" style="background:linear-gradient(180deg,rgba(245,158,11,0.3),rgba(245,158,11,0.03));min-height:24px;"></div>
         </div>
-
+        <div class="bg-white/[0.025] border border-white/[0.07] rounded-2xl p-6 flex-1 mb-4 hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-300">
+          <h3 class="text-white font-semibold mb-2 text-base tracking-wide">Hidden Patterns Revealed</h3>
+          <p class="text-gray-400 leading-loose text-sm">Through psychologically grounded conversation and precision questioning, deeper issues beneath the surface are uncovered and named clearly.</p>
+        </div>
       </div>
 
-      <!-- STEP 3 -->
-      <div class="relative flex flex-col md:flex-row gap-5 md:gap-8">
-
-        <div class="flex items-start md:items-center gap-5 md:w-full">
-
-          <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-semibold bg-gradient-to-br from-amber-400 to-amber-600 relative z-10">
-            03
-          </div>
-
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex-1 backdrop-blur-xl">
-
-            <h3 class="text-white font-semibold mb-2 text-base md:text-lg tracking-wide">
-              Clarity That Becomes Practical
-            </h3>
-
-            <p class="text-gray-400 leading-relaxed text-sm md:text-[0.95rem]">
-              You leave with a clearer understanding of what has truly been holding you back and strategic direction tailored specifically to your situation.
-            </p>
-
-          </div>
-
+      <!-- Step 3 -->
+      <div class="fade-up d300 relative flex gap-6 items-start">
+        <div class="flex flex-col items-center flex-shrink-0">
+          <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-black font-bold text-sm flex-shrink-0 relative z-10"
+            style="background:linear-gradient(135deg,#F59E0B,#D97706);box-shadow:0 4px 20px rgba(245,158,11,0.3);">03</div>
+          <div class="w-px flex-1 mt-3" style="background:linear-gradient(180deg,rgba(245,158,11,0.3),rgba(245,158,11,0.03));min-height:24px;"></div>
         </div>
-
+        <div class="bg-white/[0.025] border border-white/[0.07] rounded-2xl p-6 flex-1 mb-4 hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-300">
+          <h3 class="text-white font-semibold mb-2 text-base tracking-wide">Clarity That Becomes Practical</h3>
+          <p class="text-gray-400 leading-loose text-sm">You leave with a clearer understanding of what has truly been holding you back and strategic direction tailored specifically to your situation.</p>
+        </div>
       </div>
 
-      <!-- STEP 4 -->
-      <div class="relative flex flex-col md:flex-row gap-5 md:gap-8">
-
-        <div class="flex items-start md:items-center gap-5 md:w-full">
-
-          <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-semibold bg-gradient-to-br from-amber-400 to-amber-600 relative z-10">
-            04
-          </div>
-
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex-1 backdrop-blur-xl">
-
-            <h3 class="text-white font-semibold mb-2 text-base md:text-lg tracking-wide">
-              Practical Next Steps
-            </h3>
-
-            <p class="text-gray-400 leading-relaxed text-sm md:text-[0.95rem]">
-              You receive practical next steps you can begin implementing immediately, plus personalised assignments and curated resources designed for your growth.
-            </p>
-
-          </div>
-
+      <!-- Step 4 -->
+      <div class="fade-up d400 relative flex gap-6 items-start">
+        <div class="flex flex-col items-center flex-shrink-0">
+          <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-black font-bold text-sm flex-shrink-0 relative z-10"
+            style="background:linear-gradient(135deg,#F59E0B,#D97706);box-shadow:0 4px 20px rgba(245,158,11,0.3);">04</div>
+          <div class="w-px flex-1 mt-3" style="background:linear-gradient(180deg,rgba(245,158,11,0.3),rgba(245,158,11,0.03));min-height:24px;"></div>
         </div>
-
+        <div class="bg-white/[0.025] border border-white/[0.07] rounded-2xl p-6 flex-1 mb-4 hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-300">
+          <h3 class="text-white font-semibold mb-2 text-base tracking-wide">Practical Next Steps</h3>
+          <p class="text-gray-400 leading-loose text-sm">You receive practical next steps you can begin implementing immediately, plus personalised assignments and curated resources designed for your growth.</p>
+        </div>
       </div>
 
-      <!-- STEP 5 -->
-      <div class="relative flex flex-col md:flex-row gap-5 md:gap-8">
-
-        <div class="flex items-start md:items-center gap-5 md:w-full">
-
-          <div class="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-black font-semibold bg-gradient-to-br from-amber-400 to-amber-600 relative z-10">
-            05
-          </div>
-
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 flex-1 backdrop-blur-xl">
-
-            <h3 class="text-white font-semibold mb-2 text-base md:text-lg tracking-wide">
-              Follow-Up Access
-            </h3>
-
-            <p class="text-gray-400 leading-relaxed text-sm md:text-[0.95rem]">
-              Every session includes follow-up access for interval-based clarity support, so the insights continue to land and the momentum stays active.
-            </p>
-
-          </div>
-
+      <!-- Step 5 -->
+      <div class="fade-up d500 relative flex gap-6 items-start">
+        <div class="flex flex-col items-center flex-shrink-0">
+          <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-black font-bold text-sm flex-shrink-0 relative z-10"
+            style="background:linear-gradient(135deg,#F59E0B,#D97706);box-shadow:0 4px 20px rgba(245,158,11,0.3);">05</div>
         </div>
-
+        <div class="bg-white/[0.025] border border-white/[0.07] rounded-2xl p-6 flex-1 hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-300">
+          <h3 class="text-white font-semibold mb-2 text-base tracking-wide">Follow-Up Access</h3>
+          <p class="text-gray-400 leading-loose text-sm">Every session includes follow-up access for interval-based clarity support, so insights continue to land and momentum stays active.</p>
+        </div>
       </div>
 
     </div>
-
   </div>
-
 </section>
 
 
@@ -1043,7 +1121,7 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
     <div class="fade-up section-head mb-14">
       <div class="section-label mb-4">Before & After</div>
       <h2 style="font-size:clamp(2.8rem,6vw,4rem);">THE TRANSFORMATION</h2>
-      <p class="font-body text-brand-muted mt-4 mx-auto" style="font-size:1rem;max-width:420px;line-height:1.7;">This is what changes when clarity replaces confusion.</p>
+      <p class="font-body text-gray-400 mt-4 mx-auto" style="font-size:1rem;max-width:420px;line-height:1.7;">This is what changes when clarity replaces confusion.</p>
       <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
     </div>
 
@@ -1108,7 +1186,7 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
       <div class="grid grid-cols-2 md:grid-cols-[1fr_auto_1fr] min-h-[100px] transform-table">
 
         <div class="p-3 md:p-7 border-r md:border-r border-white/10 flex items-center">
-          <p class="font-body text-brand-muted leading-relaxed"
+          <p class="font-body text-gray-400 leading-relaxed"
             style="font-size:clamp(0.78rem,1.7vw,0.95rem);">
             Busy but not productive. Moving but not advancing.
           </p>
@@ -1138,7 +1216,7 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
       <div class="grid grid-cols-2 md:grid-cols-[1fr_auto_1fr] min-h-[100px] transform-table">
 
         <div class="p-3 md:p-7 border-r md:border-r border-white/10 flex items-center">
-          <p class="font-body text-brand-muted leading-relaxed"
+          <p class="font-body text-gray-400 leading-relaxed"
             style="font-size:clamp(0.78rem,1.7vw,0.95rem);">
             Mentally crowded, emotionally burdened, strategically unclear.
           </p>
@@ -1167,7 +1245,7 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
       <div class="grid grid-cols-2 md:grid-cols-[1fr_auto_1fr] min-h-[100px] transform-table">
 
         <div class="p-3 md:p-7 border-r md:border-r border-white/10 flex items-center">
-          <p class="font-body text-brand-muted leading-relaxed"
+          <p class="font-body text-gray-400 leading-relaxed"
             style="font-size:clamp(0.78rem,1.7vw,0.95rem);">
             Ideas without execution, direction without discipline.
           </p>
@@ -1196,7 +1274,7 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
       <div class="grid grid-cols-2 md:grid-cols-[1fr_auto_1fr] min-h-[100px] transform-table">
 
         <div class="p-3 md:p-7 border-r md:border-r border-white/10 flex items-center">
-          <p class="font-body text-brand-muted leading-relaxed"
+          <p class="font-body text-gray-400 leading-relaxed"
             style="font-size:clamp(0.78rem,1.7vw,0.95rem);">
             Feeling stuck despite capability and clarity gaps.
           </p>
@@ -1225,7 +1303,7 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
       <div class="grid grid-cols-2 md:grid-cols-[1fr_auto_1fr] min-h-[100px] transform-table">
 
         <div class="p-3 md:p-7 border-r md:border-r border-white/10 flex items-center">
-          <p class="font-body text-brand-muted leading-relaxed"
+          <p class="font-body text-gray-400 leading-relaxed"
             style="font-size:clamp(0.78rem,1.7vw,0.95rem);">
             Confused by too much noise and too little structure.
           </p>
@@ -1254,7 +1332,7 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
       <div class="grid grid-cols-2 md:grid-cols-[1fr_auto_1fr] min-h-[100px] transform-table">
 
         <div class="p-3 md:p-7 border-r md:border-r border-white/10 flex items-center">
-          <p class="font-body text-brand-muted leading-relaxed"
+          <p class="font-body text-gray-400 leading-relaxed"
             style="font-size:clamp(0.78rem,1.7vw,0.95rem);">
             Effort without proportional progress.
           </p>
@@ -1289,323 +1367,133 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 </div>
 </section>
 
+
 <!-- ══════════════════════════════════════════
-     SECTION 7 — ABOUT STRATEGIST AG
+     SECTION 7 — ABOUT
 ══════════════════════════════════════════ -->
 <section class="section-dark relative overflow-hidden" style="padding:8rem 0;">
-
-  <!-- BACKGROUND EFFECTS -->
   <div class="absolute inset-0 pointer-events-none">
-    <div style="position:absolute;top:-120px;left:-120px;width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,0.08),transparent 70%);filter:blur(20px);"></div>
-
-    <div style="position:absolute;bottom:-180px;right:-100px;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,0.03),transparent 70%);filter:blur(30px);"></div>
+    <div style="position:absolute;top:-100px;left:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,0.07),transparent 70%);filter:blur(24px);"></div>
+    <div style="position:absolute;bottom:-150px;right:-60px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,0.025),transparent 70%);filter:blur(30px);"></div>
   </div>
 
   <div class="max-w-7xl mx-auto px-5 md:px-8 relative z-10">
 
-    <!-- SECTION HEADER -->
     <div class="fade-up section-head mb-20 text-center">
-      <div class="section-label mb-5">
-        ABOUT ABRAHAM GEORGE U.
-      </div>
-
-      <h2 class="font-display text-white leading-[0.95]"
-        style="font-size:clamp(3rem,6vw,4.8rem);">
-        Meet The Clarity Architect.
-      </h2>
-
-      <div class="divider-orange mt-8 max-w-[180px] mx-auto"></div>
+      <div class="section-label mb-5 justify-center">About Abraham George U.</div>
+      <h2 class="font-display text-white leading-none" style="font-size:clamp(3rem,6vw,4.8rem);">Meet The Clarity Architect.</h2>
+      <div class="divider-orange mt-8 max-w-[160px] mx-auto"></div>
     </div>
 
-    <!-- MAIN GRID -->
     <div class="grid lg:grid-cols-12 gap-12 xl:gap-16 items-start">
 
       <!-- LEFT -->
-      <div class="lg:col-span-4 fade-in d100">
-
-        <div class="sticky top-24">
-
-          <!-- IMAGE CARD -->
+      <div class="lg:col-span-4 fade-left d100">
+        <div class="sticky top-28">
           <div class="relative group">
-
-            <!-- glow -->
-            <div class="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-amber-500/20 via-orange-400/5 to-transparent blur-2xl opacity-70"></div>
-
-            <!-- border -->
-            <div class="relative rounded-[2rem] p-[1px] bg-gradient-to-b from-white/15 via-white/5 to-white/[0.03]">
-
-              <div class="rounded-[2rem] overflow-hidden bg-white/[0.03] backdrop-blur-xl border border-white/10">
-
-                <div class="relative overflow-hidden">
-
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10"></div>
-
-                  <img 
-                    src="/images/pix.png" 
-                    alt="Portrait of Abraham George U."
-                    class="w-full h-full object-cover transition duration-700 group-hover:scale-105"
-                    style="aspect-ratio:3/4;"
-                  >
-
-                </div>
-
-                <!-- NAME AREA -->
-                <div class="p-7">
-
-                  <h3 class="font-display text-white tracking-wide leading-tight"
-                    style="font-size:clamp(2rem,3vw,2.6rem);">
-                    Abraham George U.
-                  </h3>
-
-                  <p class="gradient-text font-heading font-700 mt-3 tracking-[0.18em]"
-                    style="font-size:0.9rem;">
-                    Strategist AG | The Clarity Architect
-                  </p>
-
-                </div>
-
+            <div class="absolute -inset-3 rounded-[2.2rem] opacity-60" style="background:linear-gradient(135deg,rgba(245,158,11,0.2),transparent 60%);filter:blur(20px);transition:opacity 0.4s ease;"></div>
+            <div class="relative rounded-[2rem] overflow-hidden" style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
+              <div class="portrait-shimmer relative overflow-hidden" style="aspect-ratio:3/4;">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10"></div>
+                <img src="/images/pix.png" alt="Portrait of Abraham George U."
+                  class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+              </div>
+              <div class="p-7 relative" style="background:rgba(0,0,0,0.2);">
+                <div class="absolute top-0 left-7 right-7 h-px" style="background:linear-gradient(90deg,transparent,rgba(245,158,11,0.25),transparent);"></div>
+                <h3 class="font-display text-white" style="font-size:clamp(1.8rem,3vw,2.4rem);">Abraham George U.</h3>
+                <p class="gradient-text font-body font-600 mt-2 tracking-[0.15em]" style="font-size:0.8rem;text-transform:uppercase;">Strategist AG · The Clarity Architect</p>
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
       <!-- RIGHT -->
-      <div class="lg:col-span-8 fade-up d200">
+      <div class="lg:col-span-8 fade-right d200">
 
-        <!-- BIO PANEL -->
-        <div class="relative overflow-hidden rounded-[2.2rem] border border-white/10 bg-white/[0.03] backdrop-blur-2xl p-7 md:p-10">
+        <div class="relative overflow-hidden rounded-[2.2rem]" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);padding:2.5rem 2.5rem;">
+          <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);"></div>
 
-          <div class="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-transparent pointer-events-none"></div>
-
-          <!-- INTRO TEXT -->
-          <div class="space-y-7 relative z-10">
-
-            <p class="font-body text-brand-text leading-loose"
-              style="font-size:1.05rem;">
+          <div class="space-y-6">
+            <p class="font-body text-brand-text leading-loose" style="font-size:1.02rem;">
               Abraham George U. does not deal in inspiration. He deals in clarity, direction, and the power to execute.
             </p>
-
-            <p class="font-body text-brand-text leading-loose"
-              style="font-size:1.05rem;">
-              A Clarity Architect and human development strategist, he works with intentional individuals, brands, institutions, and organisations — moving them from potential to precise execution, uncovering their blind spots, dissolving mental clutter, and building the strategic path that makes their next move undeniable.
+            <p class="font-body text-brand-text leading-loose" style="font-size:1.02rem;">
+              A Clarity Architect and human development strategist, he works with intentional individuals, brands, institutions, and organisations — moving them from potential to precise execution.
             </p>
-
-            <p class="font-body text-brand-muted leading-loose"
-              style="font-size:1rem;">
+            <p class="font-body text-gray-500 leading-loose text-sm">
               Through the Private Premium Clarity Intensive, Abraham does not just give you clarity. He gives you the direction and execution power to act on it immediately.
             </p>
-
           </div>
 
-          <!-- DIVIDER -->
-          <div class="my-12 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+          <div class="my-10 h-px" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent);"></div>
 
-          <!-- SUBHEADING -->
-          <div class="mb-8">
-            <h4 class="font-display text-white tracking-wide"
-              style="font-size:clamp(1.6rem,2.5vw,2.2rem);">
-              The Man Behind The Method
-            </h4>
+          <h4 class="font-display text-white mb-6" style="font-size:clamp(1.6rem,2.5vw,2.2rem);">The Man Behind The Method</h4>
+
+          <div class="grid md:grid-cols-2 gap-3">
+            <!-- Credentials with refined hover -->
+            <div class="cred-item rounded-2xl p-5 cursor-default" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);">
+              <div class="flex items-start gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+                <p class="font-body text-brand-text text-sm leading-relaxed">Certified John C. Maxwell Leadership Practitioner</p>
+              </div>
+            </div>
+            <div class="cred-item rounded-2xl p-5 cursor-default" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);">
+              <div class="flex items-start gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+                <p class="font-body text-brand-text text-sm leading-relaxed">High Ticket Sales Strategist</p>
+              </div>
+            </div>
+            <div class="cred-item rounded-2xl p-5 cursor-default" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);">
+              <div class="flex items-start gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+                <p class="font-body text-brand-text text-sm leading-relaxed">Founding Board Director — Rotaract (Rotary International)</p>
+              </div>
+            </div>
+            <div class="cred-item rounded-2xl p-5 cursor-default" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);">
+              <div class="flex items-start gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+                <p class="font-body text-brand-text text-sm leading-relaxed">Leadership Facilitator — SDG Campus Summit (UN SDGs)</p>
+              </div>
+            </div>
+            <div class="cred-item rounded-2xl p-5 cursor-default" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);">
+              <div class="flex items-start gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+                <p class="font-body text-brand-text text-sm leading-relaxed">Strategic Advisor — Delaws Casual LTD · Afrikaan Creative Space · Smotiva · Ogbonge Designs</p>
+              </div>
+            </div>
+            <div class="cred-item rounded-2xl p-5 cursor-default" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);">
+              <div class="flex items-start gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+                <p class="font-body text-brand-text text-sm leading-relaxed">Convener — LinkedIn Local Lafia</p>
+              </div>
+            </div>
+            <div class="cred-item rounded-2xl p-5 cursor-default" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);">
+              <div class="flex items-start gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+                <p class="font-body text-brand-text text-sm leading-relaxed">Founder — Mindora Limited & Great Minds Hub</p>
+              </div>
+            </div>
+            <div class="cred-item rounded-2xl p-5 cursor-default" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);">
+              <div class="flex items-start gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-2 shrink-0"></div>
+                <p class="font-body text-brand-text text-sm leading-relaxed">Most Inspiring Personality — Federal University of Lafia (SRC)</p>
+              </div>
+            </div>
           </div>
-
-          <!-- CREDENTIALS -->
-          <div class="grid md:grid-cols-2 gap-5">
-
-            <div class="group rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition duration-300 p-5">
-              <div class="flex items-start gap-4">
-                <div class="w-2 h-2 rounded-full bg-amber-400 mt-3 shrink-0"></div>
-
-                <p class="font-body text-brand-text leading-relaxed">
-                  Certified John C. Maxwell Leadership Practitioner
-                </p>
-              </div>
-            </div>
-
-            <div class="group rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition duration-300 p-5">
-              <div class="flex items-start gap-4">
-                <div class="w-2 h-2 rounded-full bg-amber-400 mt-3 shrink-0"></div>
-
-                <p class="font-body text-brand-text leading-relaxed">
-                  High Ticket Sales Strategist
-                </p>
-              </div>
-            </div>
-
-            <div class="group rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition duration-300 p-5">
-              <div class="flex items-start gap-4">
-                <div class="w-2 h-2 rounded-full bg-amber-400 mt-3 shrink-0"></div>
-
-                <p class="font-body text-brand-text leading-relaxed">
-                  Founding Board Director — Rotaract (Rotary International)
-                </p>
-              </div>
-            </div>
-
-            <div class="group rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition duration-300 p-5">
-              <div class="flex items-start gap-4">
-                <div class="w-2 h-2 rounded-full bg-amber-400 mt-3 shrink-0"></div>
-
-                <p class="font-body text-brand-text leading-relaxed">
-                  Leadership Facilitator — SDG Campus Summit (UN SDGs)
-                </p>
-              </div>
-            </div>
-
-            <div class="group rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition duration-300 p-5">
-              <div class="flex items-start gap-4">
-                <div class="w-2 h-2 rounded-full bg-amber-400 mt-3 shrink-0"></div>
-
-                <p class="font-body text-brand-text leading-relaxed">
-                  Strategic Advisor — Delaws Casual LTD | Afrikaan Creative Space | Smotiva | Ogbonge Designs
-                </p>
-              </div>
-            </div>
-
-            <div class="group rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition duration-300 p-5">
-              <div class="flex items-start gap-4">
-                <div class="w-2 h-2 rounded-full bg-amber-400 mt-3 shrink-0"></div>
-
-                <p class="font-body text-brand-text leading-relaxed">
-                  Convener — LinkedIn Local Lafia
-                </p>
-              </div>
-            </div>
-
-            <div class="group rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition duration-300 p-5">
-              <div class="flex items-start gap-4">
-                <div class="w-2 h-2 rounded-full bg-amber-400 mt-3 shrink-0"></div>
-
-                <p class="font-body text-brand-text leading-relaxed">
-                  Founder — Mindora Limited & Great Minds Hub
-                </p>
-              </div>
-            </div>
-
-            <div class="group rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition duration-300 p-5">
-              <div class="flex items-start gap-4">
-                <div class="w-2 h-2 rounded-full bg-amber-400 mt-3 shrink-0"></div>
-
-                <p class="font-body text-brand-text leading-relaxed">
-                  Most Inspiring Personality — Federal University of Lafia (SRC)
-                </p>
-              </div>
-            </div>
-
-          </div>
-
         </div>
-        
-             <!-- QUOTE -->
-          <div class="mt-8 relative overflow-hidden rounded-[2rem] border border-amber-500/15 bg-gradient-to-br from-amber-500/10 to-transparent backdrop-blur-xl p-7">
 
-            <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-amber-400/40 to-transparent"></div>
-
-            <p class="font-heading text-white leading-relaxed"
-              style="font-size:1.08rem;">
-              "Clarity is not a feeling. It's a structure. When you build the right structure inside your mind, everything outside begins to move."
-            </p>
-
-            <p class="font-body mt-4 tracking-[0.15em] uppercase"
-              style="color:rgba(251,191,36,0.7);font-size:0.72rem;">
-              — Abraham George U.
-            </p>
-
-          </div>
-
-        <!-- LOWER CARDS -->
-      <!--  <div class="grid md:grid-cols-2 gap-6 mt-8">
-
-          <!-- CARD -->
-      <!--    <div class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-xl p-7">
-
-            <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-
-            <p class="font-heading font-700 text-white mb-5 tracking-wide">
-              Credentials & Leadership
-            </p>
-
-            <ul class="space-y-4 font-body text-brand-text leading-relaxed"
-              style="font-size:0.95rem; list-style:none; padding-left:0;">
-
-              <li class="flex gap-3">
-                <span class="text-amber-400 mt-1">•</span>
-                <span>Certified Advanced Protégé, John C. Maxwell Leadership</span>
-              </li>
-
-              <li class="flex gap-3">
-                <span class="text-amber-400 mt-1">•</span>
-                <span>Founder, Mindora LTD</span>
-              </li>
-
-              <li class="flex gap-3">
-                <span class="text-amber-400 mt-1">•</span>
-                <span>Convener, LinkedIn Local Lafia</span>
-              </li>
-
-              <li class="flex gap-3">
-                <span class="text-amber-400 mt-1">•</span>
-                <span>Founder, Great Minds Hub</span>
-              </li>
-
-            </ul>
-          </div> -->
-
-          <!-- CARD -->
-       <!--   <div class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-xl p-7">
-
-            <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-
-            <p class="font-heading font-700 text-white mb-5 tracking-wide">
-              Strategic Partnerships
-            </p>
-
-            <ul class="space-y-4 font-body text-brand-text leading-relaxed"
-              style="font-size:0.95rem; list-style:none; padding-left:0;">
-
-              <li class="flex gap-3">
-                <span class="text-amber-400 mt-1">•</span>
-                <span>Strategic Advisor, Delaws Casual LTD</span>
-              </li>
-
-              <li class="flex gap-3">
-                <span class="text-amber-400 mt-1">•</span>
-                <span>Afrikaan Creative Space</span>
-              </li>
-
-              <li class="flex gap-3">
-                <span class="text-amber-400 mt-1">•</span>
-                <span>Ogbonge Designs</span>
-              </li>
-
-              <li class="flex gap-3">
-                <span class="text-amber-400 mt-1">•</span>
-                <span>Smotiva</span>
-              </li>
-
-              <li class="flex gap-3">
-                <span class="text-amber-400 mt-1">•</span>
-                <span>The Thriving Network</span>
-              </li>
-
-              <li class="flex gap-3">
-                <span class="text-amber-400 mt-1">•</span>
-                <span>Former Board Director, Rotaract of Rotary International</span>
-              </li>
-
-              <li class="flex gap-3">
-                <span class="text-amber-400 mt-1">•</span>
-                <span>Most Inspiring Personality, Federal University of Lafia (SRC)</span>
-              </li>
-
-            </ul>
-          </div> -->
-
+        <!-- Quote card -->
+        <div class="mt-6 relative overflow-hidden rounded-[1.8rem] p-7" style="background:linear-gradient(135deg,rgba(245,158,11,0.09),rgba(245,158,11,0.03));border:1px solid rgba(245,158,11,0.18);">
+          <div class="absolute top-0 left-0 w-full h-px" style="background:linear-gradient(90deg,transparent,rgba(245,158,11,0.4),transparent);"></div>
+          <div class="absolute -top-4 -left-4 text-amber-400/10 font-display" style="font-size:8rem;line-height:1;pointer-events:none;">"</div>
+          <p class="font-body text-white leading-loose relative z-10" style="font-size:1.05rem;">
+            "Clarity is not a feeling. It's a structure. When you build the right structure inside your mind, everything outside begins to move."
+          </p>
+          <p class="font-body mt-4 tracking-[0.15em] uppercase relative z-10" style="color:rgba(251,191,36,0.55);font-size:0.68rem;">— Abraham George U.</p>
         </div>
 
       </div>
-
     </div>
   </div>
 </section>
@@ -1619,21 +1507,27 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
   <div class="max-w-7xl mx-auto px-5 md:px-8">
 
     <div class="fade-up section-head mb-14">
-      <div class="section-label mb-4">Real People. Real Transformation.</div>
-      <h2 style="font-size:clamp(2.8rem,6vw,4rem);">SOCIAL PROOF</h2>
-      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+      <div class="section-label mb-5">Real People. Real Transformation.</div>
+      <h2 style="font-size:clamp(2.6rem,6vw,4rem);">SOCIAL PROOF</h2>
+      <div class="divider-orange mt-6 max-w-[160px] mx-auto"></div>
     </div>
 
-    <div class="fade-up d150 glass-card rounded-3xl p-7 mb-10 card-lift">
-      <div class="font-heading font-700 text-white mb-4" style="font-size:1.1rem;">Video Testimonial</div>
-      <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.95rem;">See a short story from a private session that shows the clarity, direction, and execution shift available through the PPCI.</p>
+    <div class="fade-up d150 glass-card rounded-3xl p-7 mb-10"
+      style="border:1px solid rgba(255,255,255,0.06);">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.15);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div class="font-body font-600 text-white text-sm">Video Testimonial</div>
+      </div>
+      <p class="font-body text-gray-400 leading-loose text-sm">See a short story from a private session that shows the clarity, direction, and execution shift available through the PPCI.</p>
     </div>
 
     <div class="relative overflow-hidden" id="testimonialSlider">
       <div class="slider-track flex gap-5" id="sliderTrack">
 
         <!-- Card 1 -->
-        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 glass-card rounded-3xl p-7 card-lift">
+        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 testimonial-card glass-card rounded-3xl p-7" style="border:1px solid rgba(255,255,255,0.06);">
           <div class="stars mb-5">
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -1641,18 +1535,18 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           </div>
-          <p class="font-body text-brand-text italic leading-relaxed mb-6" style="font-size:0.93rem;">"I left that session completely different. In under two hours, Abraham helped me see patterns in my business that I had been blind to for over a year. I had clarity I didn't know was possible."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full flex items-center justify-center font-heading font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">TK</div>
+          <p class="font-body text-gray-300 italic leading-loose mb-6 text-sm">"I left that session completely different. In under two hours, Abraham helped me see patterns in my business that I had been blind to for over a year. I had clarity I didn't know was possible."</p>
+          <div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(255,255,255,0.05);">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-body font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">TK</div>
             <div>
-              <div class="font-heading font-700 text-white" style="font-size:0.85rem;">Tunde K.</div>
-              <div class="font-body text-brand-muted" style="font-size:0.78rem;">Founder & CEO</div>
+              <div class="font-body font-600 text-white text-sm">Tunde K.</div>
+              <div class="font-body text-gray-500 text-xs mt-0.5">Founder & CEO</div>
             </div>
           </div>
         </div>
 
         <!-- Card 2 -->
-        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 glass-card rounded-3xl p-7 card-lift">
+        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 testimonial-card glass-card rounded-3xl p-7" style="border:1px solid rgba(255,255,255,0.06);">
           <div class="stars mb-5">
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -1660,18 +1554,18 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           </div>
-          <p class="font-body text-brand-text italic leading-relaxed mb-6" style="font-size:0.93rem;">"The depth of the conversation is what surprised me most. He doesn't give you surface answers — he pulls you into the real issue. I came in confused and left with a level of strategic certainty I've never experienced before."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full flex items-center justify-center font-heading font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">AO</div>
+          <p class="font-body text-gray-300 italic leading-loose mb-6 text-sm">"The depth of the conversation is what surprised me most. He doesn't give you surface answers — he pulls you into the real issue. I came in confused and left with a level of strategic certainty I've never experienced before."</p>
+          <div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(255,255,255,0.05);">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-body font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">AO</div>
             <div>
-              <div class="font-heading font-700 text-white" style="font-size:0.85rem;">Adaeze O.</div>
-              <div class="font-body text-brand-muted" style="font-size:0.78rem;">Brand Strategist</div>
+              <div class="font-body font-600 text-white text-sm">Adaeze O.</div>
+              <div class="font-body text-gray-500 text-xs mt-0.5">Brand Strategist</div>
             </div>
           </div>
         </div>
 
         <!-- Card 3 -->
-        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 glass-card rounded-3xl p-7 card-lift">
+        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 testimonial-card glass-card rounded-3xl p-7" style="border:1px solid rgba(255,255,255,0.06);">
           <div class="stars mb-5">
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -1679,18 +1573,18 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           </div>
-          <p class="font-body text-brand-text italic leading-relaxed mb-6" style="font-size:0.93rem;">"Straight to the point. No fluff. No filler. He identified in 15 minutes what I had been struggling to understand for months. The session paid for itself ten times over in the first week."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full flex items-center justify-center font-heading font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">KM</div>
+          <p class="font-body text-gray-300 italic leading-loose mb-6 text-sm">"Straight to the point. No fluff. No filler. He identified in 15 minutes what I had been struggling to understand for months. The session paid for itself ten times over in the first week."</p>
+          <div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(255,255,255,0.05);">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-body font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">KM</div>
             <div>
-              <div class="font-heading font-700 text-white" style="font-size:0.85rem;">Kolade M.</div>
-              <div class="font-body text-brand-muted" style="font-size:0.78rem;">Tech Entrepreneur</div>
+              <div class="font-body font-600 text-white text-sm">Kolade M.</div>
+              <div class="font-body text-gray-500 text-xs mt-0.5">Tech Entrepreneur</div>
             </div>
           </div>
         </div>
 
         <!-- Card 4 -->
-        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 glass-card rounded-3xl p-7 card-lift">
+        <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 testimonial-card glass-card rounded-3xl p-7" style="border:1px solid rgba(255,255,255,0.06);">
           <div class="stars mb-5">
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -1698,93 +1592,92 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
             <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
           </div>
-          <p class="font-body text-brand-text italic leading-relaxed mb-6" style="font-size:0.93rem;">"This isn't coaching. This is a different category entirely. Abraham doesn't motivate — he illuminates. After our session, I finally understood the real architecture of my delay. Game-changing."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full flex items-center justify-center font-heading font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">NN</div>
+          <p class="font-body text-gray-300 italic leading-loose mb-6 text-sm">"This isn't coaching. This is a different category entirely. Abraham doesn't motivate — he illuminates. After our session, I finally understood the real architecture of my delay. Game-changing."</p>
+          <div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(255,255,255,0.05);">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center font-body font-700 text-black text-sm flex-shrink-0" style="background:linear-gradient(135deg,#F59E0B,#D97706);">NN</div>
             <div>
-              <div class="font-heading font-700 text-white" style="font-size:0.85rem;">Ngozi N.</div>
-              <div class="font-body text-brand-muted" style="font-size:0.78rem;">Executive Leader</div>
+              <div class="font-body font-600 text-white text-sm">Ngozi N.</div>
+              <div class="font-body text-gray-500 text-xs mt-0.5">Executive Leader</div>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Controls -->
-      <div class="flex items-center justify-center gap-4 mt-8">
-        <button id="prevSlide" class="w-11 h-11 rounded-full glass-card flex items-center justify-center transition-colors hover:border-amber-500/50" style="border:1px solid rgba(255,255,255,0.08);" aria-label="Previous">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+      <!-- Slider Controls -->
+      <div class="flex items-center justify-center gap-5 mt-10">
+        <button id="prevSlide" class="w-11 h-11 rounded-full glass-card flex items-center justify-center transition-all hover:border-amber-500/40 hover:bg-amber-400/[0.06] active:scale-95" style="border:1px solid rgba(255,255,255,0.07);" aria-label="Previous">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
         </button>
         <div id="sliderDots" class="flex gap-2 items-center"></div>
-        <button id="nextSlide" class="w-11 h-11 rounded-full glass-card flex items-center justify-center transition-colors hover:border-amber-500/50" style="border:1px solid rgba(255,255,255,0.08);" aria-label="Next">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+        <button id="nextSlide" class="w-11 h-11 rounded-full glass-card flex items-center justify-center transition-all hover:border-amber-500/40 hover:bg-amber-400/[0.06] active:scale-95" style="border:1px solid rgba(255,255,255,0.07);" aria-label="Next">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
-
     </div>
   </div>
 </section>
 
 
 <!-- ══════════════════════════════════════════
-     SECTION 9 — WHY TRUST THIS PROCESS
+     SECTION 9 — WHY DIFFERENT
 ══════════════════════════════════════════ -->
 <section class="section-dark relative overflow-hidden" style="padding:7rem 0;">
 
   <div class="max-w-3xl mx-auto px-5 md:px-8">
 
     <div class="fade-up section-head mb-14">
-      <div class="section-label mb-4">The Foundation</div>
-      <h2 style="font-size:clamp(2.8rem,6vw,4rem); line-height:1;">WHY THE PPCI IS DIFFERENT</h2>
-      <div class="divider-orange mt-6 max-w-[200px] mx-auto"></div>
+      <div class="section-label mb-5">The Foundation</div>
+      <h2 style="font-size:clamp(2.6rem,6vw,4rem);line-height:1;">WHY THE PPCI IS DIFFERENT</h2>
+      <div class="divider-orange mt-6 max-w-[160px] mx-auto"></div>
     </div>
 
-    <div class="space-y-5 fade-up d200">
+    <div class="space-y-4">
 
-      <div class="border-gradient rounded-2xl p-7">
+      <div class="fade-up d100 border-gradient rounded-2xl p-7">
         <div class="flex items-start gap-5">
-          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.09);border:1px solid rgba(245,158,11,0.18);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.16);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <div>
-            <h4 class="font-heading font-700 text-white mb-2" style="font-size:1.05rem;">Deeply Personal, Not Mass-Produced</h4>
-            <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">Only a limited number of sessions are released monthly because the experience is deeply personal, intentionally immersive, and built around you.</p>
+            <h4 class="font-body font-600 text-white mb-2 text-sm tracking-wide">Deeply Personal, Not Mass-Produced</h4>
+            <p class="font-body text-gray-400 leading-loose text-sm">Only a limited number of sessions are released monthly because the experience is deeply personal, intentionally immersive, and built around you.</p>
           </div>
         </div>
       </div>
 
-      <div class="border-gradient rounded-2xl p-7">
+      <div class="fade-up d200 border-gradient rounded-2xl p-7">
         <div class="flex items-start gap-5">
-          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.09);border:1px solid rgba(245,158,11,0.18);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.16);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           </div>
           <div>
-            <h4 class="font-heading font-700 text-white mb-2" style="font-size:1.05rem;">Focus On Clarity That Changes Movement</h4>
-            <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">The focus is not on access to information. The focus is on unlocking clarity that changes how you move permanently.</p>
+            <h4 class="font-body font-600 text-white mb-2 text-sm tracking-wide">Focus On Clarity That Changes Movement</h4>
+            <p class="font-body text-gray-400 leading-loose text-sm">The focus is not on access to information. The focus is on unlocking clarity that changes how you move permanently.</p>
           </div>
         </div>
       </div>
 
-      <div class="border-gradient rounded-2xl p-7">
+      <div class="fade-up d300 border-gradient rounded-2xl p-7">
         <div class="flex items-start gap-5">
-          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.09);border:1px solid rgba(245,158,11,0.18);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.16);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <div>
-            <h4 class="font-heading font-700 text-white mb-2" style="font-size:1.05rem;">Private. Exclusive. One-on-One.</h4>
-            <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">This is not group coaching. This is private, confidential clarity work designed to give you the space needed to uncover real blocks and move with precision.</p>
+            <h4 class="font-body font-600 text-white mb-2 text-sm tracking-wide">Private. Exclusive. One-on-One.</h4>
+            <p class="font-body text-gray-400 leading-loose text-sm">This is not group coaching. This is private, confidential clarity work designed to give you the space needed to uncover real blocks and move with precision.</p>
           </div>
         </div>
       </div>
 
-      <div class="border-gradient rounded-2xl p-7">
+      <div class="fade-up d400 border-gradient rounded-2xl p-7">
         <div class="flex items-start gap-5">
-          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.09);border:1px solid rgba(245,158,11,0.18);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.16);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
           <div>
-            <h4 class="font-heading font-700 text-white mb-2" style="font-size:1.05rem;">The Transformation Is The Evidence</h4>
-            <p class="font-body text-brand-muted leading-relaxed" style="font-size:0.93rem;">The proof is not in the access or the stories alone — it's in the transformation of thinking, decisions, and execution.</p>
+            <h4 class="font-body font-600 text-white mb-2 text-sm tracking-wide">The Transformation Is The Evidence</h4>
+            <p class="font-body text-gray-400 leading-loose text-sm">The proof is not in the access or the stories alone — it's in the transformation of thinking, decisions, and execution.</p>
           </div>
         </div>
       </div>
@@ -1797,171 +1690,146 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
 <!-- ══════════════════════════════════════════
      SECTION 10 — FINAL CTA
 ══════════════════════════════════════════ -->
-<section id="apply" class="final-cta-bg relative overflow-hidden" style="padding:8rem 0;">  
-  <!-- Top divider -->  
-  <div class="absolute top-0 left-0 right-0"><div class="divider-orange"></div></div>  
-  
-  <!-- Ambient blobs -->  
-  <div class="absolute pointer-events-none" style="top:15%;left:8%;width:200px;height:200px;background:radial-gradient(circle,rgba(245,158,11,0.07),transparent);border-radius:50%;filter:blur(30px);"></div>  
-  <div class="absolute pointer-events-none" style="bottom:15%;right:8%;width:260px;height:260px;background:radial-gradient(circle,rgba(245,158,11,0.05),transparent);border-radius:50%;filter:blur(40px);"></div>  
-  
-  <div class="max-w-4xl mx-auto px-5 md:px-8 relative text-center" style="z-index:1;">  
-    <div class="fade-up space-y-7">  
-  
-      <div class="section-label">This Is The Moment</div>  
-  
-      <h2 class="font-display text-white tracking-wide leading-none" style="font-size:clamp(2rem,6vw,7rem);">  
-        YOU ALREADY KNOW<br/>  
-        <span class="gradient-text text-glow">THERE IS MORE IN YOU.</span>  
-      </h2>  
-  
-      <div class="divider-orange max-w-xs mx-auto"></div>  
-  
-      <p class="font-body text-brand-text leading-loose mx-auto" style="font-size:clamp(1rem,2vw,1.2rem);max-width:560px;">  
-        The question is whether you are finally ready to confront what has been stopping you from wielding it with precision.  
-      </p>  
-      <p class="font-body text-brand-muted leading-relaxed mx-auto" style="font-size:1rem;max-width:460px;">  
-        Apply below only if you are serious about clarity that gives precise direction and execution, that transmutes into success. Limited slots available monthly.  
-      </p>  
-  
-      <div class="pt-3">  
-        <a href="https://forms.gle/yE3mAUyMCp2frUiUA" class="btn-primary inline-flex flex-col sm:flex-row items-center gap-3 px-10 py-6 rounded-2xl text-black font-heading font-800 tracking-wide glow-orange-btn" style="font-size:1.3rem;">  
-          <span>APPLY FOR THE PRIVATE PREMIUM CLARITY INTENSIVE</span>  
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>  
-        </a>  
-        <p class="font-body text-brand-muted mt-4 tracking-widest uppercase" style="font-size:0.68rem;">Limited Monthly Slots · Private Access Only</p>  
-      </div>  
-  
-      <!-- Trust signals -->  
-      <div class="grid grid-cols-3 gap-4 pt-6 max-w-sm mx-auto">  
-        <div class="text-center">  
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2" style="background:rgba(245,158,11,0.1);">  
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>  
-          </div>  
-          <p class="font-body text-brand-muted" style="font-size:0.75rem;">100% Private</p>  
-        </div>  
-        <div class="text-center">  
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2" style="background:rgba(245,158,11,0.1);">  
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>  
-          </div>  
-          <p class="font-body text-brand-muted" style="font-size:0.75rem;">1-on-1 Only</p>  
-        </div>  
-        <div class="text-center">  
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2" style="background:rgba(245,158,11,0.1);">  
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>  
-          </div>  
-          <p class="font-body text-brand-muted" style="font-size:0.75rem;">Results-Driven</p>  
-        </div>  
-      </div>  
-  
-    </div>  
-  </div>  
-  
-  <!-- Bottom divider -->  
-  <div class="absolute bottom-0 left-0 right-0"><div class="divider-orange"></div></div>  
+<section id="apply" class="relative overflow-hidden py-28 md:py-36 final-cta-bg">
+
+  <div class="absolute top-[-5%] left-[8%] w-[300px] h-[300px] rounded-full blur-[130px]" style="background:rgba(245,158,11,0.1);"></div>
+  <div class="absolute bottom-[-10%] right-[8%] w-[350px] h-[350px] rounded-full blur-[150px]" style="background:rgba(245,158,11,0.08);"></div>
+
+  <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,rgba(245,158,11,0.28),transparent);"></div>
+
+  <div class="relative max-w-5xl mx-auto px-5 md:px-8">
+
+    <div class="scale-in relative overflow-hidden rounded-[2.5rem]" style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(24px);">
+
+      <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(circle at 50% 0%,rgba(245,158,11,0.08),transparent 50%);"></div>
+      <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,rgba(245,158,11,0.35),transparent);"></div>
+
+      <div class="relative z-10 px-7 py-16 md:px-14 md:py-22 text-center">
+
+        <div class="pill justify-center mx-auto mb-10">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 pulse-dot flex-shrink-0"></span>
+          This Is The Moment
+        </div>
+
+        <div class="max-w-3xl mx-auto">
+          <h2 class="font-display text-white leading-[0.9]" style="font-size:clamp(2.5rem,5vw,5rem);letter-spacing:0.02em;">
+            YOU ALREADY KNOW
+            <span class="block mt-3 gradient-text text-glow" style="font-size:clamp(2.5rem,5vw,5rem);">THERE IS MORE IN YOU.</span>
+          </h2>
+        </div>
+
+        <div class="w-24 h-px mx-auto my-10" style="background:linear-gradient(90deg,transparent,rgba(245,158,11,0.5),transparent);"></div>
+
+        <div class="max-w-2xl mx-auto space-y-4 mb-12">
+          <p class="text-gray-200 leading-loose" style="font-size:clamp(0.95rem,1.8vw,1.1rem);">
+            The question is whether you are finally ready to confront what has been stopping you from wielding your potential with precision.
+          </p>
+          <p class="text-gray-500 leading-loose text-sm">
+            Apply below only if you are serious about clarity that creates direction, execution, and measurable transformation.
+          </p>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
+          <div class="inline-flex items-center gap-2 rounded-xl px-4 py-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span class="text-gray-300 text-xs font-medium tracking-wide">100% Private</span>
+          </div>
+          <div class="inline-flex items-center gap-2 rounded-xl px-4 py-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span class="text-gray-300 text-xs font-medium tracking-wide">1-on-1 Access</span>
+          </div>
+          <div class="inline-flex items-center gap-2 rounded-xl px-4 py-3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span class="text-gray-300 text-xs font-medium tracking-wide">Results-Driven</span>
+          </div>
+        </div>
+
+        <div>
+          <a href="https://forms.gle/yE3mAUyMCp2frUiUA"
+            class="group inline-flex items-center gap-4 rounded-2xl px-8 py-5 text-black font-bold tracking-wide transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_20px_60px_rgba(245,158,11,0.4)]"
+            style="background:linear-gradient(135deg,#FDE68A,#F59E0B 40%,#D97706);box-shadow:0 10px 40px rgba(245,158,11,0.25);">
+            <span class="text-base font-bold">APPLY FOR THE PPCI</span>
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1" style="background:rgba(0,0,0,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+          </a>
+          <p class="mt-5 text-[0.65rem] uppercase tracking-[0.3em] text-gray-600">Limited Monthly Slots · Private Access Only</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,rgba(245,158,11,0.2),transparent);"></div>
 </section>
 
 
 <!-- ══════════════════════════════════════════
      FOOTER
 ══════════════════════════════════════════ -->
-<footer class="bg-[#070707] border-t border-white/5 relative overflow-hidden">
+<footer class="footer-bg relative overflow-hidden">
+  <div class="absolute pointer-events-none top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] rounded-full" style="background:radial-gradient(circle,rgba(245,158,11,0.05),transparent 70%);filter:blur(30px);"></div>
 
-  <!-- subtle glow -->
-  <div class="absolute pointer-events-none top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-[radial-gradient(circle,rgba(245,158,11,0.06),transparent_70%)] blur-3xl"></div>
-
-  <div class="max-w-7xl mx-auto px-5 md:px-8 py-12">
-
+  <div class="max-w-7xl mx-auto px-5 md:px-8 py-14">
     <div class="flex flex-col lg:flex-row items-center justify-between gap-10">
 
       <!-- BRAND -->
       <div class="flex flex-col items-center lg:items-start gap-4">
-
-        <img src="/images/logo white.png" alt="Strategist AG Logo" class="w-28 opacity-90">
-
-        <p class="text-gray-500 text-xs md:text-sm text-center lg:text-left max-w-xs">
+        <img src="/images/logo g.png" alt="Strategist AG" class="w-28 opacity-80">
+        <p class="text-gray-500 text-xs text-center lg:text-left max-w-xs leading-loose">
           Strategic clarity, execution, and transformation systems designed for intentional individuals.
         </p>
-
       </div>
 
       <!-- SOCIALS -->
-      <div class="flex flex-col items-center gap-4">
+      <div class="flex flex-col items-center gap-5">
+        <p class="text-amber-400/70 uppercase tracking-[0.28em] text-[0.65rem] font-semibold">Connect</p>
+        <div class="flex items-center gap-3">
 
-        <p class="text-amber-400 uppercase tracking-[0.25em] text-[0.7rem] font-semibold">
-          Connect
-        </p>
+          <a href="https://whatsapp.com/channel/0029VbALHPoIiRoyjmvPKE0B" target="_blank"
+             class="group w-11 h-11 flex items-center justify-center rounded-xl transition-all duration-300 hover:border-amber-400/30 hover:-translate-y-1"
+             style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);">
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-amber-300 transition-colors" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4.5C9.65 4.5 4.5 9.52 4.5 15.72C4.5 17.95 5.18 20.03 6.35 21.77L5 27.5L10.92 26.18C12.57 27.08 14.45 27.58 16.44 27.58C22.79 27.58 27.94 22.56 27.94 16.36C27.94 10.16 22.79 4.5 16 4.5Z"/>
+              <path d="M12.3 11.2C12.55 10.95 12.8 10.9 13.08 10.9H13.75C13.96 10.9 14.15 11.02 14.23 11.22L15.45 14.1C15.54 14.31 15.49 14.56 15.32 14.72L14.32 15.68C14.22 15.78 14.19 15.92 14.25 16.05C14.66 16.88 15.79 18.02 16.92 18.65C17.06 18.72 17.23 18.7 17.34 18.59L18.48 17.49C18.64 17.34 18.88 17.29 19.08 17.38L21.8 18.57C22 18.66 22.13 18.86 22.12 19.08L22.08 19.92C22.06 20.25 21.92 20.56 21.67 20.77C20.96 21.36 19.94 21.63 18.95 21.36C16.8 20.77 14.7 19.08 13.1 17.14C11.57 15.29 10.71 13.37 10.86 11.98C10.91 11.67 11.04 11.4 11.25 11.2H12.3Z"/>
+            </svg>
+          </a>
 
-        <div class="flex items-center gap-5">
-
-<!-- WhatsApp Channel -->
-<a href="https://whatsapp.com/channel/0029VbALHPoIiRoyjmvPKE0B"
-   target="_blank"
-   class="w-11 h-11 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:border-amber-400/40 hover:bg-amber-400/10 transition group">
-
-  <svg class="w-5 h-5 text-gray-300 group-hover:text-amber-400 transition"
-       viewBox="0 0 24 24"
-       fill="none"
-       stroke="currentColor"
-       stroke-width="2"
-       stroke-linecap="round"
-       stroke-linejoin="round">
-
-    <!-- WhatsApp bubble -->
-    <path d="M20 11.5a8.5 8.5 0 0 1-13.9 6.2L4 20l2.4-2.1A8.5 8.5 0 1 1 20 11.5Z"/>
-
-    <!-- phone inside bubble -->
-    <path d="M8.5 9c.2 1.6 1.4 3.3 3 4.5 1.6 1.2 3.3 2 4.8 2l1.2-1.2c.3-.3.3-.8 0-1.1l-1.2-1.2c-.3-.3-.7-.3-1 0l-.6.6c-.3.3-.7.3-1.1.1-1-.5-2-1.3-2.6-2.2-.2-.3-.2-.7.1-1l.6-.6c.3-.3.3-.7 0-1L10.3 7c-.3-.3-.8-.3-1.1 0L8 8.2c0 .2.4.6.5.8Z"/>
-
-  </svg>
-
-</a>
-
-          <!-- Instagram -->
-          <a href="https://www.instagram.com/abraham_george_u?igsh=ZGo1bDVhaGsxZWpi"
-             target="_blank"
-             class="w-11 h-11 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:border-amber-400/40 hover:bg-amber-400/10 transition group">
-
-            <svg class="w-5 h-5 text-gray-300 group-hover:text-amber-400 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <a href="https://www.instagram.com/abraham_george_u?igsh=ZGo1bDVhaGsxZWpi" target="_blank"
+             class="group w-11 h-11 flex items-center justify-center rounded-xl transition-all duration-300 hover:border-amber-400/30 hover:-translate-y-1"
+             style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);">
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-amber-300 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="2" y="2" width="20" height="20" rx="5"/>
               <circle cx="12" cy="12" r="4"/>
               <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
             </svg>
-
           </a>
 
-          <!-- X (Twitter) -->
-          <a href="https://x.com/AbrahamGeorgeU?t=2SXE4N42l5DFZ9zcGlzfTw&s=09"
-             target="_blank"
-             class="w-11 h-11 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:border-amber-400/40 hover:bg-amber-400/10 transition group">
-
-            <svg class="w-5 h-5 text-gray-300 group-hover:text-amber-400 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <a href="https://x.com/AbrahamGeorgeU?t=2SXE4N42l5DFZ9zcGlzfTw&s=09" target="_blank"
+             class="group w-11 h-11 flex items-center justify-center rounded-xl transition-all duration-300 hover:border-amber-400/30 hover:-translate-y-1"
+             style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);">
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-amber-300 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 4l16 16M20 4L4 20"/>
             </svg>
-
           </a>
-
         </div>
-
       </div>
 
       <!-- COPYRIGHT -->
       <div class="text-center lg:text-right space-y-2">
-        
-        <p class="text-gray-600 text-[0.7rem] tracking-[0.2em] uppercase">
-          Built with clarity & intention
-        </p>
-
-        <p class="text-gray-500 text-xs md:text-sm">
-          © 2026 Abraham George U. · All Rights Reserved
-        </p>
-
+        <p class="text-gray-600 text-[0.65rem] tracking-[0.22em] uppercase">Built with clarity & intention</p>
+        <p class="text-gray-500 text-xs leading-loose">© 2026 Abraham George U.<br>All Rights Reserved</p>
       </div>
 
     </div>
 
-  </div>
+    <!-- Footer divider line -->
+    <div class="mt-10 pt-8" style="border-top:1px solid rgba(255,255,255,0.04);">
+      <p class="text-center text-gray-700 text-[0.65rem] tracking-widest uppercase">Strategist AG · Clarity Architecture</p>
+    </div>
 
+  </div>
 </footer>
 
 
@@ -1969,100 +1837,195 @@ h1, h2, h3, h4, h5, h6, .font-display, .font-heading {
      JAVASCRIPT
 ══════════════════════════════════════════ -->
 <script>
-/* ── SCROLL REVEAL ── */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+/* ─────────────────────────────────────────
+   CUSTOM CURSOR
+───────────────────────────────────────── */
+(function() {
+  const dot  = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  if (!dot || !ring) return;
+
+  let mx = 0, my = 0;
+  let rx = 0, ry = 0;
+  let raf;
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+    dot.style.left  = mx + 'px';
+    dot.style.top   = my + 'px';
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.fade-up, .fade-in').forEach(el => revealObserver.observe(el));
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function animateRing() {
+    rx = lerp(rx, mx, 0.14);
+    ry = lerp(ry, my, 0.14);
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    raf = requestAnimationFrame(animateRing);
+  }
+  animateRing();
 
-/* ── NAV SCROLL ── */
+  // Hoverable elements
+  const hoverEls = document.querySelectorAll('a, button, [data-cursor]');
+  hoverEls.forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+  });
+})();
+
+/* ─────────────────────────────────────────
+   SCROLL PROGRESS BAR
+───────────────────────────────────────── */
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrolled / maxScroll * 100) + '%';
+}, { passive: true });
+
+/* ─────────────────────────────────────────
+   NAV SCROLL
+───────────────────────────────────────── */
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
-/* ── SMOOTH SCROLL ── */
+/* ─────────────────────────────────────────
+   BACK TO TOP
+───────────────────────────────────────── */
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('visible', window.scrollY > 500);
+}, { passive: true });
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* ─────────────────────────────────────────
+   SCROLL REVEAL
+───────────────────────────────────────── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.07, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-up, .fade-in, .fade-left, .fade-right, .scale-in').forEach(el => revealObserver.observe(el));
+
+/* ─────────────────────────────────────────
+   SMOOTH SCROLL
+───────────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', function(e) {
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      const offset = target.getBoundingClientRect().top + window.scrollY - 72;
-      window.scrollTo({ top: offset, behavior: 'smooth' });
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
     }
   });
 });
 
-/* ── TESTIMONIAL SLIDER ── */
+/* ─────────────────────────────────────────
+   FLOATING PARTICLES
+───────────────────────────────────────── */
+(function() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+  const count = 18;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 2 + 1;
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      bottom: -10px;
+      width: ${size}px;
+      height: ${size}px;
+      animation-duration: ${Math.random() * 12 + 8}s;
+      animation-delay: ${Math.random() * 10}s;
+      opacity: ${Math.random() * 0.5 + 0.2};
+    `;
+    container.appendChild(p);
+  }
+})();
+
+/* ─────────────────────────────────────────
+   TESTIMONIAL SLIDER
+───────────────────────────────────────── */
 (function() {
   const track   = document.getElementById('sliderTrack');
   const dotsEl  = document.getElementById('sliderDots');
+  if (!track || !dotsEl) return;
   const cards   = Array.from(track.children);
   let current   = 0;
   let perView   = 1;
+  let autoTimer;
 
   function calcPerView() {
     return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
   }
-
-  function totalPages() {
-    return Math.ceil(cards.length / perView);
-  }
-
+  function totalPages() { return Math.ceil(cards.length / perView); }
   function setCardWidths() {
     perView = calcPerView();
     const gap = 20;
-    const containerW = track.parentElement.offsetWidth;
-    const cardW = (containerW - gap * (perView - 1)) / perView;
-    cards.forEach(c => { c.style.width = cardW + 'px'; });
+    const w = (track.parentElement.offsetWidth - gap * (perView - 1)) / perView;
+    cards.forEach(c => { c.style.width = w + 'px'; });
   }
-
   function buildDots() {
     dotsEl.innerHTML = '';
     for (let i = 0; i < totalPages(); i++) {
       const d = document.createElement('button');
-      d.style.cssText = `height:6px;border-radius:3px;transition:all 0.3s ease;background:${i===0?'#F59E0B':'rgba(255,255,255,0.18)'};width:${i===0?'20px':'6px'};border:none;cursor:pointer;`;
-      d.addEventListener('click', () => goTo(i));
+      d.style.cssText = `height:5px;border-radius:3px;transition:all 0.35s ease;background:${i===0?'#F59E0B':'rgba(255,255,255,0.15)'};width:${i===0?'22px':'5px'};border:none;cursor:pointer;outline:none;`;
+      d.addEventListener('click', () => { goTo(i); resetAuto(); });
       dotsEl.appendChild(d);
     }
   }
-
   function updateDots() {
     Array.from(dotsEl.children).forEach((d, i) => {
-      d.style.background = i === current ? '#F59E0B' : 'rgba(255,255,255,0.18)';
-      d.style.width      = i === current ? '20px' : '6px';
+      d.style.background = i === current ? '#F59E0B' : 'rgba(255,255,255,0.15)';
+      d.style.width      = i === current ? '22px' : '5px';
     });
   }
-
   function goTo(idx) {
     current = Math.max(0, Math.min(idx, totalPages() - 1));
     const gap = 20;
-    const cardW = cards[0].offsetWidth;
-    track.style.transform = `translateX(-${current * (cardW + gap) * perView}px)`;
+    const w = cards[0].offsetWidth;
+    track.style.transform = `translateX(-${current * (w + gap) * perView}px)`;
     updateDots();
   }
+  function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo((current + 1) % totalPages()), 5000);
+  }
 
-  document.getElementById('prevSlide').addEventListener('click', () => goTo(current - 1));
-  document.getElementById('nextSlide').addEventListener('click', () => goTo(current + 1));
+  document.getElementById('prevSlide').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+  document.getElementById('nextSlide').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+
+  // Touch swipe
+  let startX = 0;
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { diff > 0 ? goTo(current + 1) : goTo(current - 1); resetAuto(); }
+  }, { passive: true });
 
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      setCardWidths();
-      buildDots();
-      goTo(0);
-    }, 120);
+    resizeTimer = setTimeout(() => { setCardWidths(); buildDots(); goTo(0); }, 120);
   });
 
-  setCardWidths();
-  buildDots();
+  setCardWidths(); buildDots(); resetAuto();
 })();
+
+/* ─────────────────────────────────────────
+   D250 & D350 DELAY UTILITIES
+───────────────────────────────────────── */
+document.querySelectorAll('.d250').forEach(el => el.style.transitionDelay = '0.25s');
+document.querySelectorAll('.d350').forEach(el => el.style.transitionDelay = '0.35s');
 </script>
 </body>
 </html>
