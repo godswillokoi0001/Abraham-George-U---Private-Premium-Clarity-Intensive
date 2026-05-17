@@ -1145,6 +1145,15 @@ img.loaded { opacity: 1; }
       align-items: center;
       min-height: 100vh;
     }
+    
+    /* Extra-large screens: keep portrait from getting too dominant */
+    @media (min-width: 1280px) {
+      .portrait-area { max-width: 360px; }
+      .portrait-wrap {
+        max-width: 360px;
+        aspect-ratio: 3/4;
+      }
+    }
 
     .hero-grid-lg {
       display: grid;
@@ -1196,8 +1205,20 @@ img.loaded { opacity: 1; }
     }
 
     .portrait-area {
-      max-width: 480px;
+      max-width: 420px;
       margin: 0;
+    }
+
+    /* Prevent oversized portrait from overlapping hero text */
+    .portrait-wrap {
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 3/4;
+    }
+    .portrait-wrap img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
 
     /* On large screen, portrait area is NOT shown in the mobile slot */
@@ -1259,9 +1280,9 @@ img.loaded { opacity: 1; }
         <!-- Headline block -->
      
 
-          <div class="brand-line-wrap mt-[8rem] md:mt-0 text-center lg:text-left">
+          <div class="brand-line-wrap mt-[6rem] md:mt-0 text-center lg:text-left">
             
-            <div class="brand-label mt-[2rem]">Private Premium
+            <div class="brand-label mt-[1.5rem]">Private Premium
 Clarity Intensive</div>
             <div class="brand-sub">You Are Not Confused Because You Lack Potential.
 You are confused because no one has shown you 
