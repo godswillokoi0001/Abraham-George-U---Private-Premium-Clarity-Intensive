@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Private Premium Clarity Intensive — Strategist AG</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" href="/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet"/>
@@ -655,174 +656,652 @@ img.loaded { opacity: 1; }
 </nav>
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PPCI – Hero</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --amber: #F59E0B;
+    --amber-light: #FCD34D;
+    --amber-dark: #D97706;
+    --bg: #080808;
+  }
+
+  body {
+    background: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #fff;
+    min-height: 100vh;
+  }
+
+  /* ═══════════════════════════════════════
+     HERO SECTION
+  ═══════════════════════════════════════ */
+  .hero-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+  }
+
+  /* Ambient blobs */
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 5%; left: 2%;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,158,11,0.07), transparent 70%);
+    filter: blur(30px);
+    pointer-events: none;
+  }
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 5%;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,158,11,0.05), transparent 70%);
+    filter: blur(25px);
+    pointer-events: none;
+  }
+
+  /* Grid overlay */
+  .hero-grid {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(245,158,11,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,158,11,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  }
+
+  /* Center ellipse glow */
+  .hero-center-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(245,158,11,0.03), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Particles */
+  #particles {
+    position: absolute; inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--amber);
+    opacity: 0;
+    animation: particle-float linear infinite;
+  }
+  @keyframes particle-float {
+    0%   { opacity: 0; transform: translateY(0) scale(0.5); }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.2; }
+    100% { opacity: 0; transform: translateY(-120px) scale(1); }
+  }
+
+  /* Bottom fade */
+  .hero-bottom-fade {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to top, #080808, transparent);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* ═══════════════════════════════════════
+     INNER LAYOUT
+  ═══════════════════════════════════════ */
+  .hero-inner {
+    position: relative;
+    z-index: 10;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── MOBILE: stacked layout ── */
+  /* Headline block */
+  .headline-block {
+    padding-top: 100px;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .headline-block h1 {
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .h1-plain {
+    display: block;
+    color: #fff;
+    font-size: clamp(0.95rem, 3.2vw, 1.5rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+
+  .h1-gradient {
+    display: block;
+    background: linear-gradient(to right, #fcd34d, #f59e0b, #d97706);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+
+  .brand-label {
+    color: var(--amber);
+    letter-spacing: -0.08em;
+    font-size: clamp(2.6rem, 5.3vw, 12.25rem);
+    font-weight: 600;
+    line-height: 1.1;
+    font-family: poppins, sans-serif;
+  }
+
+  .brand-sub {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    letter-spacing: -0.03em;
+    margin-top: 4px;
+    font-family: poppins, sans-serif;
+  }
+
+  /* Portrait area */
+  .portrait-area {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin: 32px auto 36px;
+  }
+
+  /* Glow behind image */
+  .portrait-glow {
+    position: absolute;
+    inset: -24px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(245,158,11,0.18), transparent 70%);
+    filter: blur(20px);
+  }
+
+  /* Image wrapper */
+  .portrait-wrap {
+    position: relative;
+    aspect-ratio: 3/4;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+  }
+
+  .portrait-wrap img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+
+  .portrait-wrap .grad-bottom {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.75));
+  }
+
+  .portrait-wrap .grad-side {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.1), transparent);
+  }
+
+  /* Name badge */
+  .name-badge {
+    position: absolute;
+    bottom: 20px; left: 20px; right: 20px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .name-badge-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(245,158,11,0.92);
+    backdrop-filter: blur(10px);
+  }
+
+  .badge-name {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #000;
+    line-height: 1;
+  }
+
+  .badge-title {
+    font-size: 0.7rem;
+    color: rgba(0,0,0,0.65);
+    margin-top: 3px;
+  }
+
+  /* Corner accent */
+  .portrait-corner-accent {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(245,158,11,0.15);
+    border: 1px solid rgba(245,158,11,0.3);
+    backdrop-filter: blur(8px);
+  }
+
+  /* Decorative corner lines */
+  .deco-tl {
+    position: absolute; top: -8px; left: -8px;
+    width: 32px; height: 32px;
+    border-top: 2px solid rgba(245,158,11,0.4);
+    border-left: 2px solid rgba(245,158,11,0.4);
+    border-radius: 8px 0 0 0;
+    pointer-events: none;
+  }
+  .deco-br {
+    position: absolute; bottom: -8px; right: -8px;
+    width: 32px; height: 32px;
+    border-bottom: 2px solid rgba(245,158,11,0.4);
+    border-right: 2px solid rgba(245,158,11,0.4);
+    border-radius: 0 0 8px 0;
+    pointer-events: none;
+  }
+
+  /* CTA block */
+  .cta-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    border-radius: 16px;
+    background: var(--amber);
+    color: #000;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    box-shadow: 0 8px 32px rgba(245,158,11,0.25);
+    transition: background 0.2s, transform 0.2s;
+    text-transform: uppercase;
+  }
+
+  .cta-btn:hover {
+    background: #fcd34d;
+    transform: translateY(-2px);
+  }
+
+  .cta-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pulse-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .cta-label {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    font-weight: 700;
+    font-size: 0.72rem;
+  }
+
+  .cta-dot { color: #6b7280; }
+
+  .cta-released {
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.8rem;
+  }
+
+  /* ═══════════════════════════════════════
+     INFO CARD (after hero)
+  ═══════════════════════════════════════ */
+  .info-card-section {
+    position: relative;
+    z-index: 10;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+  }
+
+  .info-card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 36px 32px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .info-card-lead {
+    color: #fff;
+    font-weight: 700;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .info-card-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 20px 0;
+  }
+
+  .info-card-body {
+    color: rgba(209,213,219,1);
+    font-size: clamp(0.875rem, 1.8vw, 0.97rem);
+    line-height: 1.75;
+  }
+
+  /* ═══════════════════════════════════════
+     LARGE SCREEN LAYOUT (≥1024px)
+  ═══════════════════════════════════════ */
+  @media (min-width: 1024px) {
+
+    .hero-inner {
+      padding-top: 0;
+      padding-bottom: 100px;
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .hero-grid-lg {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: 64px;
+      align-items: center;
+      width: 100%;
+      padding-top: 80px;
+    }
+
+    /* Left column */
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      text-align: left;
+      padding-right: 40px;
+    }
+
+    .headline-block {
+      padding-top: 0;
+      text-align: left;
+      margin-bottom: 0;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 28px;
+      max-width: 560px;
+    }
+
+    .brand-line-wrap {
+      text-align: left;
+    }
+
+    .cta-block {
+      align-items: flex-start;
+      margin-bottom: 0;
+    }
+
+    .cta-meta {
+      justify-content: flex-start;
+    }
+
+    /* Right column */
+    .hero-right {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .portrait-area {
+      max-width: 480px;
+      margin: 0;
+    }
+
+    /* On large screen, portrait area is NOT shown in the mobile slot */
+    .portrait-area-mobile { display: none; }
+    .portrait-area-desktop { display: block; }
+
+    /* Info card section — full width on desktop, nicely centered */
+    .info-card {
+      max-width: 860px;
+    }
+  }
+
+  /* On mobile, hide desktop portrait slot */
+  @media (max-width: 1023px) {
+    .hero-grid-lg { display: contents; }
+    .hero-left { display: contents; }
+    .hero-right { display: none; }
+    .portrait-area-desktop { display: none; }
+    .portrait-area-mobile { display: block; }
+  }
+
+  /* Shimmer on portrait */
+  .portrait-shimmer::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 40%,
+      rgba(245,158,11,0.06) 50%,
+      transparent 60%
+    );
+    background-size: 200% 200%;
+    animation: shimmer 4s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: -200% -200%; }
+    100% { background-position: 200% 200%; }
+  }
+</style>
+</head>
+<body>
+
 <!-- ══════════════════════════════════════════
-     HERO
+     HERO SECTION
 ══════════════════════════════════════════ -->
-<section class="hero-section relative overflow-hidden min-h-screen flex items-center">
+<section class="hero-section">
 
-  <!-- Ambient blobs -->
-  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-    <div class="absolute top-[5%] left-[2%] w-[600px] h-[600px] rounded-full" style="background:radial-gradient(circle,rgba(245,158,11,0.07),transparent 70%);filter:blur(30px);"></div>
-    <div class="absolute bottom-0 right-[5%] w-[500px] h-[500px] rounded-full" style="background:radial-gradient(circle,rgba(245,158,11,0.05),transparent 70%);filter:blur(25px);"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full" style="background:radial-gradient(ellipse,rgba(245,158,11,0.03),transparent 60%);"></div>
-  </div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-center-glow" aria-hidden="true"></div>
+  <div id="particles" aria-hidden="true"></div>
 
-  <!-- Floating particles container -->
-  <div id="particles" class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-grid-lg">
 
-  <!-- Fine grid pattern -->
-  <div class="absolute inset-0 pointer-events-none" style="background-image:linear-gradient(rgba(245,158,11,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(245,158,11,0.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);"></div>
+      <!-- ── LEFT COLUMN ── -->
+      <div class="hero-left">
 
-  <div class="max-w-7xl mx-auto px-5 md:px-8 w-full relative z-10 pt-[100px] pb-[80px]">
-    <div class="grid lg:grid-cols-12 gap-12 items-center min-h-[calc(100vh-180px)]">
+        <!-- Headline block -->
+     
 
- <!-- LEFT CONTENT -->
-      <div class="lg:col-span-7 space-y-10 text-center lg:text-left lg:pr-16">
-
-        <!-- HEADLINE -->
-        <div class="space-y-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-7 max-w-xl space-y-5 mx-auto lg:mx-0">
-
-          <h1 class="">
-
-            <span class="block text-white text-[clamp(1rem,3.2vw,1.5rem)] tracking-tighter font-medium">
-              You Are Not Confused Because
-            </span>
-
-            <span class="bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 block text-transparent bg-clip-text text-white text-[clamp(1.5rem,3.5vw,2.8rem)] leading-[1.05] tracking-tighter font-semibold gradient-text">
-              You Lack Potential.
-            </span>
+          <div class="brand-line-wrap mt-[8rem] md:mt-0 text-center lg:text-left">
             
-            
-            <span class="mt-2 block text-white text-[clamp(0.95rem,2.8vw,1.5rem)] font-medium tracking-tighter">
-              You are confused because
-            </span>
-
-            <span class="block text-transparent bg-clip-text text-white text-[clamp(1.5rem,3.5vw,2.8rem)] leading-[1.05] tracking-tighter font-semibold gradient-text">
-              no one has shown you where to point it.
-
-            </span>
-            <br/>
-                    <!-- PRIMARY BRAND LINE (more dominant) -->
-        <div class="space-y-2">
-
-<div class="h-px bg-white/10"></div>
-<br />
-        </div>
-                  <div class="text-amber-400 uppercase tracking-tighter text-lg md:text-xl font-semibold leading-tight">
-            PRIVATE PREMIUM CLARITY INTENSIVE
+            <div class="brand-label mt-[2rem]">Private Premium
+Clarity Intensive</div>
+            <div class="brand-sub">You Are Not Confused Because You Lack Potential.
+You are confused because no one has shown you 
+where to point it.</div>
           </div>
+  
 
-          <div class="text-white/80 text-xs md:text-sm tracking-tight">
-            With Abraham George U.
-          </div>
-          </h1>
-        </div>
+        <!-- Mobile portrait (hidden on desktop) -->
+        <div class="portrait-area portrait-area-mobile">
+          <div class="portrait-glow"></div>
+          <div class="portrait-wrap portrait-shimmer">
+            <img src="/images/pix.png" alt="Portrait of Abraham George U." />
+            <div class="grad-bottom"></div>
+            <div class="grad-side"></div>
 
-        <!-- INFO CARD -->
-        <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-7 max-w-xl space-y-5 mx-auto lg:mx-0">
-
-          <p class="text-white font-semibold text-lg">
-            This is not motivational speaking. This is not generic coaching.
-          </p>
-
-          <p class="text-gray-300 leading-relaxed text-sm md:text-[0.97rem]">
-            The Private Premium Clarity Intensive is a deeply personalised one-on-one engagement designed to help intentional individuals uncover blind spots, eliminate mental clutter, gain practical clarity, and move forward with precision.
-          </p>
-
-          <div class="h-px bg-white/10"></div>
-
-          <p class="text-gray-300 leading-relaxed text-sm md:text-[0.97rem]">
-            Most people do not struggle because they are incapable. They struggle because they are mentally crowded, emotionally burdened, strategically unclear, and unable to identify what is truly holding them back.
-          </p>
-
-        </div>
-
-        <!-- CTA -->
-        <div class="space-y-5 flex flex-col items-center lg:items-start">
-
-          <a href="#apply"
-             class="inline-flex items-center gap-3 px-9 py-5 rounded-2xl bg-amber-400 hover:bg-amber-300 transition text-black font-bold tracking-wide text-lg shadow-lg shadow-amber-400/20">
-
-            <span>APPLY FOR THE PPCI</span>
-
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-              <path d="m9 18 6-6-6-6"/>
-            </svg>
-
-          </a>
-
-          <div class="flex items-center gap-3 text-xs md:text-sm flex-wrap justify-center lg:justify-start">
-
-            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-
-            <span class="uppercase tracking-[0.2em] text-amber-400 font-semibold">
-              Limited Private Sessions
-            </span>
-
-            <span class="text-gray-400">·</span>
-
-            <span class="text-white font-medium">
-              Released Monthly
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- RIGHT IMAGE -->
-      <div class="lg:col-span-5 flex justify-center lg:justify-end hero-img">
-        <div class="relative w-full max-w-[480px]">
-
-          <!-- Glow behind image -->
-          <div class="absolute -inset-6 rounded-full" style="background:radial-gradient(ellipse at center,rgba(245,158,11,0.18),transparent 70%);filter:blur(20px);"></div>
-
-          <!-- Image wrapper -->
-          <div class="portrait-wrap relative aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.6)] portrait-shimmer float-anim">
-
-            <img src="/images/pix.png"
-                 alt="Portrait of Abraham George U."
-                 class="absolute inset-0 w-full h-full object-cover" />
-
-            <!-- Bottom gradient -->
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/75"></div>
-
-            <!-- Side gradient for depth -->
-            <div class="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent"></div>
-
-            <!-- Name badge -->
-            <div class="absolute bottom-5 left-5 right-5 flex justify-between items-end">
-              <div class="flex items-center gap-3 px-4 py-3 rounded-xl"
-                style="background:rgba(245,158,11,0.92);backdrop-filter:blur(10px);">
+            <div class="name-badge">
+              <div class="name-badge-inner">
                 <div>
-                  <div class="font-bold text-black text-sm leading-none">Abraham George U.</div>
-                  <div class="text-black/65 text-[0.7rem] mt-0.5">Strategist AG · Clarity Architect</div>
+                  <div class="badge-name">Abraham George U.</div>
+                  <div class="badge-title">Strategist AG · Clarity Architect</div>
                 </div>
               </div>
             </div>
 
-            <!-- Corner accent -->
-            <div class="absolute top-4 right-4">
-              <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);backdrop-filter:blur(8px);">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div class="portrait-corner-accent">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="deco-tl"></div>
+          <div class="deco-br"></div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-block py-32 md:py-6">
+          <a href="#apply" class="cta-btn">
+            <span>APPLY FOR THE PPCI</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </a>
+
+          <div class="cta-meta">
+            <span class="pulse-dot"></span>
+            <span class="cta-label">Limited Private Sessions</span>
+            <span class="cta-dot">·</span>
+            <span class="cta-released">Released Monthly</span>
+          </div>
+        </div>
+
+      </div><!-- /hero-left -->
+
+      <!-- ── RIGHT COLUMN (desktop portrait) ── -->
+      <div class="hero-right">
+        <div class="portrait-area portrait-area-desktop">
+          <div class="portrait-glow"></div>
+          <div class="portrait-wrap portrait-shimmer">
+            <img src="/images/pix.png" alt="Portrait of Abraham George U." />
+            <div class="grad-bottom"></div>
+            <div class="grad-side"></div>
+
+            <div class="name-badge">
+              <div class="name-badge-inner">
+                <div>
+                  <div class="badge-name">Abraham George U.</div>
+                  <div class="badge-title">Strategist AG · Clarity Architect</div>
+                </div>
               </div>
             </div>
 
+            <div class="portrait-corner-accent">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
           </div>
-
-          <!-- Decorative corner lines -->
-          <div class="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-amber-500/40 rounded-tl-xl pointer-events-none"></div>
-          <div class="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-amber-500/40 rounded-br-xl pointer-events-none"></div>
+          <div class="deco-tl"></div>
+          <div class="deco-br"></div>
         </div>
-      </div>
+      </div><!-- /hero-right -->
 
+    </div><!-- /hero-grid-lg -->
+  </div><!-- /hero-inner -->
+
+  <div class="hero-bottom-fade"></div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     INFO CARD SECTION
+══════════════════════════════════════════ -->
+<section id="about" style="position:relative; z-index:10; background: var(--bg);">
+  <div class="info-card-section">
+    <div class="info-card">
+      <p class="info-card-lead">
+        This is not motivational speaking. This is not generic coaching.
+      </p>
+
+      <p class="info-card-body">
+        The Private Premium Clarity Intensive is a deeply personalised one-on-one engagement designed to help intentional individuals uncover blind spots, eliminate mental clutter, gain practical clarity, and move forward with precision.
+      </p>
+
+      <div class="info-card-divider"></div>
+
+      <p class="info-card-body">
+        Most people do not struggle because they are incapable. They struggle because they are mentally crowded, emotionally burdened, strategically unclear, and unable to identify what is truly holding them back.
+      </p>
     </div>
   </div>
-
-  <!-- Bottom fade -->
-  <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none"></div>
 </section>
+
+<!-- Particles script -->
+<script>
+  (function() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.top = (40 + Math.random() * 50) + '%';
+      p.style.animationDuration = (6 + Math.random() * 8) + 's';
+      p.style.animationDelay = (Math.random() * 8) + 's';
+      p.style.opacity = Math.random() * 0.5;
+      p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+      container.appendChild(p);
+    }
+  })();
+</script>
+
+</body>
+</html>
 
 
 <!-- ══════════════════════════════════════════
